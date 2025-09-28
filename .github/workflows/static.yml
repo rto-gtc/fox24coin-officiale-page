@@ -2,7 +2,7 @@ name: Deploy to GitHub Pages
 
 on:
   push:
-    branches: ["main"]
+    branches: [ "main" ]
 
 permissions:
   contents: read
@@ -19,10 +19,9 @@ jobs:
       - name: Upload static files
         uses: actions/upload-pages-artifact@v4
         with:
-          path: ./       # cała zawartość repo
-          artifact_name: static-site  # nadajemy nazwę artefaktowi
+          path: ./
 
       - name: Deploy to GitHub Pages
         uses: actions/deploy-pages@v4
         with:
-          artifact_name: static-site
+          name: github-pages
