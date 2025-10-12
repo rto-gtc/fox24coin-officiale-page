@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Live Crypto Prices</title>
+    <style>
+        body {
+            background-color: #121212;
+            color: #e0e0e0;
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 15px;
+        }
+        .content-wrapper {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .search-container {
+            margin-bottom: 20px;
+        }
+        #search-input {
+            width: 100%;
+            padding: 12px 15px;
+            background-color: #222;
+            border: 1px solid #333;
+            border-radius: 8px;
+            color: #e0e0e0;
+            font-size: 16px;
+            box-sizing: border-box;
+        }
+        .crypto-table {
+            width: 100%;
+            border-collapse: collapse;
+            table-layout: fixed; /* Zapobiega "rozpychaniu" kolumn przez treść */
+        }
+        .crypto-table th, .crypto-table td {
+            padding: 10px 12px;
+            border-bottom: 1px solid #333;
+            text-align: left;
+            vertical-align: middle;
+        }
+        .crypto-table th {
+            color: #ffd700;
+            font-weight: 600;
+        }
+        .coin-info {
+            display: flex;
+            align-items: center;
+        }
+        .coin-icon {
+            width: 24px;
+            height: 24px;
+            margin-right: 10px;
+            flex-shrink: 0; /* Zapobiega kurczeniu się ikony */
+        }
+
+        /* --- NOWE STYLE DO SKRACANIA NAZW --- */
+        .coin-details {
+            overflow: hidden; /* Ukrywa wystający tekst */
+        }
+        .coin-name {
+            white-space: nowrap;         /* Zapobiega łamaniu linii */
+            overflow: hidden;            /* Ukrywa wystający tekst */
+            text-overflow: ellipsis;     /* DODAJe WIELOKROPEK (...) */
+            display: block;              /* Umożliwia działanie ellipsis */
+        }
+
+        .price-up { color: #28a745; }
+        .price-down { color: #dc3545; }
+        .loading-row td {
+            text-align: center;
+            padding: 40px;
+            font-size: 18px;
+        }
+        .sparkline {
+            width: 120px;
+            height: 40px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="content-wrapper">
+
+    <div class="search-container">
+        <input type="search" id="search-input" placeholder="Search for a cryptocurrency...">
+    </div>
+
+    <table class="crypto-table">
+        <thead>
+            <tr>
+                <th>Coin</th>
+                <th>Price</th>
+                <th>24h %</th>
+                <th>Market Cap</th>
+                <th>Last 7 Days</th>
+            </tr>
+        </thead>
+        <tbody id="crypto-table-body">
+            <tr class="loading-row">
+                <td colspan="5">Loading live crypto data...</td>
+            </tr>
+        </tbody>
+    </table>
+
+</div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const tableBody = document.getElementById('crypto-table-body');
+            const searchInput = document.getElementById('search-input');
+            const apiUrl = 'https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=1&sparkline=true';
+
+            let allCoinsData = [];
+
+            function generateSparkline(data, isUp) {
+                const width = 120;
+                const height = 40;
+                const strokeWidth = 2;
+                if (!data || data.length === 0) return '';
+                const min = Math.min(...data);
+                const max = Math.max(...data);
+                const len = data.length;
+
+                const points = data.map((d, i) => {
+                    const x = (i / (len - 1)) * width;
+                    const y = height - ((d - min) / (max - min) || 0) * (height - strokeWidth) - (strokeWidth / 2);
+                    return `${x},${y}`;
+                }).join(' ');
+
+                const color = isUp ? '#28a745' : '#dc3545';
+                return `<svg class="sparkline" viewBox="0 0 ${width} ${height}" preserveAspectRatio="none"><polyline fill="none" stroke="${color}" stroke-width="${strokeWidth}" points="${points}"/></svg>`;
+            }
+            
+            function renderTable(coins) {
+                tableBody.innerHTML = ''; 
+                if (coins.length === 0) {
+                    tableBody.innerHTML = '<tr class="loading-row"><td colspan="5">No coins found.</td></tr>';
+                    return;
+                }
+
+                coins.forEach(coin => {
+                    const change24h = coin.price_change_percentage_24h;
+                    const priceChangeClass = (typeof change24h === 'number' && change24h >= 0) ? 'price-up' : 'price-down';
+                    const changeText = typeof change24h === 'number' ? change24h.toFixed(2) + '%' : 'N/A';
+
+                    const currentPriceText = typeof coin.current_price === 'number'
+                        ? new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', minimumFractionDigits: 2, maximumFractionDigits: 6 }).format(coin.current_price)
+                        : 'N/A';
+                    
+                    const marketCapText = typeof coin.market_cap === 'number'
+                        ? new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', notation: 'compact', compactDisplay: 'short' }).format(coin.market_cap)
+                        : 'N/A';
+
+                    const sparklineData = coin.sparkline_in_7d.price;
+                    const is7dUp = sparklineData && sparklineData.length > 1 && sparklineData[0] < sparklineData[sparklineData.length - 1];
+                    const sparklineSvg = sparklineData ? generateSparkline(sparklineData, is7dUp) : '';
+
+                    const row = document.createElement('tr');
+                    
+                    // ZAKTUALIZOWANA STRUKTURA WIERSZA DLA SKRACANIA NAZW
+                    row.innerHTML = `
+                        <td>
+                            <div class="coin-info">
+                                <img src="${coin.image || ''}" alt="${coin.name || 'Coin'}" class="coin-icon">
+                                <div class="coin-details">
+                                    <strong class="coin-name" title="${coin.name || 'Unknown'}">${coin.name || 'Unknown'}</strong>
+                                    <span style="color:#888;">${coin.symbol ? coin.symbol.toUpperCase() : '---'}</span>
+                                </div>
+                            </div>
+                        </td>
+                        <td>${currentPriceText}</td>
+                        <td class="${priceChangeClass}">${changeText}</td>
+                        <td>${marketCapText}</td>
+                        <td>${sparklineSvg}</td>
+                    `;
+                    tableBody.appendChild(row);
+                });
+            }
+
+            fetch(apiUrl)
+                .then(response => response.json())
+                .then(data => {
+                    allCoinsData = data; 
+                    renderTable(allCoinsData); 
+                })
+                .catch(error => {
+                    console.error('Error fetching crypto data:', error);
+                    tableBody.innerHTML = '<tr class="loading-row"><td colspan="5">Failed to load data.</td></tr>';
+                });
+
+            searchInput.addEventListener('input', (e) => {
+                const searchTerm = e.target.value.toLowerCase();
+                const filteredCoins = allCoinsData.filter(coin =>
+                    coin.name.toLowerCase().includes(searchTerm) ||
+                    coin.symbol.toLowerCase().includes(searchTerm)
+                );
+                renderTable(filteredCoins);
+            });
+        });
+    </script>
+
+</body>
+</html>

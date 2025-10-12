@@ -1,0 +1,22 @@
+[
+    {
+        "nickname": "Matt",
+        "email": "agency.gtc.tech@gmail.com",
+        "rating": 8,
+        "feedback": "As a crypto enthusiast and auditor, here\u2019s my honest opinion about your Fox24Coin website:\r\n\r\nWhat works well:\r\nThe messaging is strong: \u201cBridging Trust and Technology\u201d immediately sets a tone of credibility.\r\nTransparency in showing contract address, tokenomics, and roadmap is a big plus.\r\nVisually, the site is clean \u2014 minimal clutter, good use of whitespace, logical sections (Home, Tokenomics, Roadmap, Team, etc.).\r\nSecurity and protection features, such as references to audits and use of Cloudflare (as you mentioned before), help build trust.\r\nThe responsiveness and layout seem well done \u2014 mobile and desktop likely both work decently.\r\nThe navigation is intuitive and consistent; it\u2019s easy to find token metrics, smart contract, roadmap.",
+        "suggestion": "Load times &amp; performance metrics\r\nSome widgets or live data (e.g. \u201cPrice: Loading\u2026\u201d) may slow down initial load.Consider lazy loading elements, optimizing images, or caching.\r\nMore contextual content &amp; storytelling\r\nWhile technicals are strong, more human stories (why this project, founder journey) could deepen connection.\r\nAdd testimonials or community voices early on.",
+        "custom_field_1": "",
+        "custom_field_2": "",
+        "timestamp": "2025-10-12T06:08:04+02:00"
+    },
+    {
+        "nickname": "Admin",
+        "email": "",
+        "rating": 5,
+        "feedback": "As the creator of Fox24Coin, I\u2019m proud of the transparency and security of our project. Our service is mainly protected through Cloudflare, and additionally by our custom security code.\r\n\r\nRegarding the visual design, there are a few minor elements that still need polishing, but it\u2019s important to emphasize that the site was hand-coded, not based on a template, written entirely in a text editor and developer console. We also have many interesting tools and functions built into the site, which is a big plus.\r\n\r\nOverall, I rate the site 6 stars, but we will continue working to achieve the full score. I encourage everyone to join the audit and share their feedback to help us improve even further!",
+        "suggestion": "Visual Refinements \u2013 There are a few minor visual elements that could be polished for a cleaner and more modern look.\r\n\r\nEnhanced User Experience \u2013 Adding tooltips, guides, or small animations could help new users navigate the site more intuitively.\r\n\r\nPerformance Insights \u2013 While the site is fast and secure, monitoring load times on various devices could help optimize performance further.\r\n\r\nAdditional Features \u2013 Consider integrating small interactive features or dashboards to give users more insight into their activities.\r\n\r\nCommunity Engagement \u2013 Encourage users to leave detailed feedback and suggestions by adding short prompts or hints within the audit form.\r\n\r\nOverall, the site is strong in security and functionality, and these improvements could help elevate it to a perfect score.",
+        "custom_field_1": "",
+        "custom_field_2": "",
+        "timestamp": "2025-10-12T02:31:41+02:00"
+    }
+]

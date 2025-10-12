@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html lang="pl" class="dark-mode">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Strategic Roadmap - Fox24Coin</title>
+    <meta name="description" content="Our mission is to ensure that Fox24Coin evolves into a widely adopted and trusted cryptocurrency, enhancing both its functionality and market presence.">
+    <meta name="keywords" content="Fox24Coin roadmap, crypto strategy, cryptocurrency development, blockchain timeline, FOX24 future, token evolution, market presence, crypto project plan">
+    <meta name="author" content="Michał Rzepczyński">
+    <link rel="canonical" href="https://fox24coin.com/roadmap.html">
+    <link rel="icon" type="image/png" href="https://fox24coin.com/fox24.png">
+    <link rel="apple-touch-icon" href="https://fox24coin.com/fox24.png">
+
+    <meta property="og:title" content="Our Strategic Roadmap - Fox24Coin">
+    <meta property="og:description" content="Our mission is to ensure that Fox24Coin evolves into a widely adopted and trusted cryptocurrency, enhancing both its functionality and market presence.">
+    <meta property="og:image" content="https://fox24coin.com/tlohome.png">
+    <meta property="og:url" content="https://fox24coin.com/roadmap.html">
+    <meta property="og:type" content="website">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "Fox24Coin",
+  "url": "https://fox24coin.com/",
+  "logo": "https://fox24coin.com/tlohome.png",
+  "description": "Fox24Coin (FOX24) is a multi-chain token on the Ethereum and Base networks with a transparent, verifiable smart contract.",
+  "email": "support@fox24coin.com",
+  "founder": { "@type": "Person", "name": "Michał Rzepczyński" },
+  "sameAs": [ "https://t.me/fox24coin", "https://x.com/fox24coin" ]
+}
+</script>
+
+<style>
+/* ===================================
+    1. ZMIENNE I GŁÓWNE STYLE
+=================================== */
+:root {
+    --gold-color: #ffd700;
+    --blue-color: #0d6efd;
+    
+    /* Domyślny motyw to ciemny */
+    --primary-bg: #121212;
+    --secondary-bg: #1a1a1a;
+    --card-bg: #222;
+    --footer-bg: #0a0a0a;
+    --border-color: #333;
+    --primary-text: #e0e0e0;
+    --secondary-text: #b3b3b3;
+    --heading-text: #ffffff;
+    --primary-bg-rgb: 18, 18, 18;
+    --accent-color: var(--gold-color);
+    --accent-color-rgb: 255, 215, 0;
+    --accent-glow: rgba(255, 215, 0, 0.4);
+}
+
+html.light-mode {
+    --primary-bg: #f8f9fa;
+    --secondary-bg: #ffffff;
+    --card-bg: #ffffff;
+    --footer-bg: #e9ecef;
+    --border-color: #dee2e6;
+    --primary-text: #343a40;
+    --secondary-text: #6c757d;
+    --heading-text: #212529;
+    --primary-bg-rgb: 248, 249, 250;
+    --accent-color: var(--blue-color);
+    --accent-color-rgb: 13, 110, 253;
+    --accent-glow: rgba(13, 110, 253, 0.3);
+}
+
+/* --- Style bazowe --- */
+html { 
+    scroll-behavior: smooth; 
+    background-color: var(--primary-bg); /* Tło przeniesione tutaj, aby particles.js było widoczne */
+    transition: background-color 0.3s;
+}
+body {
+    color: var(--primary-text);
+    font-family: 'Poppins', sans-serif;
+    padding-top: 70px;
+    background-color: transparent; /* Body musi być przezroczyste */
+    transition: color 0.3s;
+    overflow-x: hidden;
+}
+#particles-js {
+    position: fixed;
+    width: 100%; height: 100%;
+    top: 0; left: 0;
+    z-index: -1;
+}
+h1, h2, h3, h4, h5, h6 {    
+    font-weight: 700;   
+    color: var(--heading-text); 
+}
+.section { padding: 80px 0; }
+.text-accent { color: var(--accent-color) !important; }
+.text-secondary-custom { color: var(--secondary-text) !important; }
+
+/* ===================================
+    2. KOMPONENTY
+=================================== */
+
+/* --- Preloader --- */
+#page-preloader {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background-color: var(--primary-bg);
+    display: flex; justify-content: center; align-items: center;
+    z-index: 9999;
+    transition: opacity 0.5s ease-out, visibility 0.5s;
+    opacity: 1; visibility: visible;
+}
+#page-preloader.hidden { opacity: 0; visibility: hidden; }
+.preloader-spinner {
+    width: 50px; height: 50px;
+    border: 8px solid var(--card-bg);
+    border-top-color: var(--accent-color);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* --- Nawigacja --- */
+.navbar {   
+    background-color: rgba(var(--primary-bg-rgb), 0.85);   
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--border-color);
+    transition: background-color 0.4s, border-color 0.4s;
+}
+.navbar-brand { font-weight: 700; color: var(--heading-text) !important; }
+.nav-link { color: var(--secondary-text); transition: color 0.2s ease; }
+.nav-link:hover, .nav-link.active { color: var(--accent-color) !important; }
+.navbar-toggler { border-color: rgba(255, 255, 255, 0.1); }
+.navbar-toggler-icon { background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(255, 255, 255, 0.7)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e"); }
+html.light-mode .navbar-toggler-icon { background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(33, 37, 41, 0.7)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e"); }
+html.light-mode .navbar-toggler { border-color: rgba(0, 0, 0, 0.1); }
+@media (max-width: 991.98px) {
+    .navbar-collapse {
+        background-color: var(--secondary-bg);
+        border: 1px solid var(--border-color);
+        border-radius: 0.5rem;
+        padding: 1rem;
+        margin-top: 1rem;
+    }
+}
+.dropdown-menu { background-color: var(--secondary-bg); border-color: var(--border-color); }
+.dropdown-item { color: var(--primary-text); }
+.dropdown-item:hover, .dropdown-item:focus { background-color: var(--card-bg); color: var(--accent-color); }
+
+/* --- Przyciski --- */
+.btn-accent, .btn-outline-accent { font-weight: 600; transition: all 0.2s ease; }
+.btn-accent { background-color: var(--accent-color); color: #111; border: 1px solid var(--accent-color); }
+html.light-mode .btn-accent { color: #fff; }
+.btn-accent:hover { filter: brightness(1.1); transform: translateY(-2px); box-shadow: 0 4px 15px var(--accent-glow); }
+.btn-outline-accent { color: var(--accent-color); border-color: var(--accent-color); }
+.btn-outline-accent:hover { color: #111; background-color: var(--accent-color); border-color: var(--accent-color); transform: translateY(-2px); box-shadow: 0 4px 15px var(--accent-glow); }
+html.light-mode .btn-outline-accent:hover { color: #fff; }
+.btn-outline-accent i { color: var(--gold-color); transition: color 0.2s ease; } /* Złota ikona domyślnie */
+html.light-mode .btn-outline-accent i { color: var(--blue-color); }
+.btn-outline-accent:hover i { color: #111 !important; }
+html.light-mode .btn-outline-accent:hover i { color: #fff !important; }
+
+/* --- Nagłówek (Hero) --- */
+.page-hero { padding: 100px 0; min-height: 60vh; display: flex; align-items: center; }
+
+/* ===================================
+    3. NOWY, STABILNY TIMELINE (FLEXBOX)
+=================================== */
+.timeline-section {
+    position: relative;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 40px 20px;
+}
+/* Linia środkowa */
+.timeline-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 20px;
+    height: 100%;
+    width: 4px;
+    background: rgba(var(--accent-color-rgb), 0.3);
+    border-radius: 2px;
+}
+/* Kropka na linii */
+.timeline-item::before {
+    content: '';
+    position: absolute;
+    top: 10px;
+    left: 8px; /* Pozycja dla widoku mobilnego */
+    width: 25px; height: 25px;
+    background-color: var(--card-bg);
+    border: 4px solid var(--accent-color);
+    border-radius: 50%;
+    z-index: 1;
+}
+.timeline-item {
+    position: relative;
+    margin-bottom: 50px;
+    padding-left: 50px; /* Odstęp od linii na mobilnych */
+}
+.timeline-item:last-child { margin-bottom: 0; }
+
+/* Widok desktopowy (od 992px) */
+@media (min-width: 992px) {
+    .timeline-section::before {
+        left: 50%;
+        transform: translateX(-50%);
+    }
+    .timeline-item {
+        width: 50%;
+        padding-left: 0;
+        padding-right: 50px; /* Domyślny padding dla lewych elementów */
+        text-align: right;
+    }
+    .timeline-item:nth-child(even) {
+        margin-left: 50%; /* Przesunięcie parzystych elementów na prawo */
+        padding-left: 50px;
+        padding-right: 0;
+        text-align: left;
+    }
+    .timeline-item::before {
+        left: auto;
+        right: -14.5px; /* Pozycja kropki dla lewych elementów */
+        transform: translateX(0);
+    }
+    .timeline-item:nth-child(even)::before {
+        right: auto;
+        left: -14.5px; /* Pozycja kropki dla prawych elementów */
+    }
+}
+.timeline-content {
+    opacity: 0; transform: translateY(20px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 1rem;
+    padding: 1.5rem;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+html:not(.light-mode) .timeline-content { box-shadow: 0 4px 20px rgba(0,0,0,0.3); }
+.timeline-item.visible .timeline-content { opacity: 1; transform: translateY(0); }
+.timeline-content h5 { color: var(--accent-color); }
+.timeline-content .badge { font-size: 0.8rem; }
+html.light-mode .badge.bg-warning { background-color: var(--gold-color) !important; color: #111 !important; }
+
+/* ===================================
+    4. POZOSTAŁE SEKCJE I STOPKA
+=================================== */
+.large-icon { font-size: 4rem; color: var(--accent-color); opacity: 0.8; }
+.bg-light-dark { background-color: var(--secondary-bg); }
+.feature-box {
+    background-color: var(--card-bg);
+    padding: 2rem;
+    border-radius: 10px;
+    border: 1px solid var(--border-color);
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+    height: 100%;
+}
+html.light-mode .feature-box { box-shadow: 0 4px 15px rgba(0,0,0,0.08); }
+.feature-box:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+    border-color: var(--accent-color);
+}
+html.light-mode .feature-box:hover { box-shadow: 0 8px 25px rgba(0,0,0,0.12); }
+
+/* --- Stopka --- */
+footer {    
+    background-color: var(--footer-bg);    
+    padding: 4rem 0 2rem;   
+    border-top: 1px solid var(--border-color);  
+}
+footer .footer-heading { color: var(--accent-color); font-weight: 600; }
+footer a { text-decoration: none; color: var(--secondary-text); }
+footer a:hover { color: var(--accent-color) !important; }
+footer .btn-social {
+    width: 40px; height: 40px; border-radius: 50%;
+    display: inline-flex; align-items: center; justify-content: center;
+    border: 1px solid var(--border-color); color: var(--secondary-text);
+    transition: all 0.3s ease;
+}
+footer .btn-social:hover {  
+    background-color: var(--accent-color);  
+    color: #111 !important; 
+    border-color: var(--accent-color);
+    transform: translateY(-3px);
+}
+html.light-mode footer .btn-social:hover { color: #fff !important; }
+
+/* --- Przycisk "Powrót na Górę" --- */
+#scrollTopBtn {
+    position: fixed; right: 25px; bottom: 25px; z-index: 1030;
+    opacity: 0; visibility: hidden;
+    width: 45px; height: 45px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.2rem;
+    background-color: var(--accent-color);
+    color: #111;
+    border: none;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    transition: all 0.3s ease;
+    text-decoration: none;
+}
+html.light-mode #scrollTopBtn { color: #fff; }
+#scrollTopBtn.show { opacity: 1; visibility: visible; }
+#scrollTopBtn:hover {   
+    transform: translateY(-5px);
+    box-shadow: 0 6px 20px var(--accent-glow);
+}
+@media (max-width: 767px) { #scrollTopBtn { right: 15px; bottom: 15px; } }
+
+</style>
+</head>
+<body>
+
+<div id="page-preloader"><div class="preloader-spinner"></div></div>
+<div id="particles-js"></div> 
+
+<<nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+    <div class="container">
+        <a class="navbar-brand" href="index.html">Fox24<span class="text-gold">Coin</span></a>
+
+        <div class="d-flex align-items-center d-lg-none">
+            <button id="theme-toggle-mobile" class="btn btn-sm btn-outline-gold me-2" aria-label="Toggle theme">
+                <i class="fas fa-sun"></i>
+            </button>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        </div>
+
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto align-items-lg-center">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="homeDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Home</a>
+                    <ul class="dropdown-menu" aria-labelledby="homeDropdown">
+                        <li><a class="dropdown-item" href="index.html">Home</a></li>
+                        <li><a class="dropdown-item" href="widget.html">Widget</a></li>
+                        <li><a class="dropdown-item" href="market.html">Crypto Market</a></li>
+                        <li><a class="dropdown-item" href="https://fox24coin.com/scam-protection.html">Scam protection</a></li>
+                        <li><a class="dropdown-item" href="vision.html">Fox24 Vision</a></li>
+                        <li><a class="dropdown-item" href="audit.html">Community audit <span class="badge bg-primary rounded-pill" style="font-size: 0.6em; vertical-align: middle; margin-left: 4px;">NEW</span></a></li>
+                    </ul>
+                </li>
+                <li class="nav-item"><a class="nav-link" href="tokenomics.html">Tokenomics</a></li>
+                <li class="nav-item"><a class="nav-link" href="roadmap.html">Roadmap</a></li>
+                <li class="nav-item"><a class="nav-link" href="team2.html">Team</a></li>
+                <li class="nav-item"><a class="nav-link" href="blog.php">Blog</a></li>
+                <li class="nav-item"><a class="nav-link" href="index.html#contact">Contact</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fox24coin.com/uniswap.html">Price on Uniswap</a></li>
+                
+                <li class="nav-item ms-lg-3">
+                    <a class="nav-link" href="https://github.com/rto-gtc/0xED9114c614aD6b948a1EA21f062F6e1D0b4e8308" target="_blank" aria-label="GitHub Repository" style="padding-top: 0.5rem; padding-bottom: 0.5rem;">
+                        <i class="fab fa-github fa-lg"></i>
+                    </a>
+                </li>
+
+                <li class="nav-item d-none d-lg-flex align-items-center ms-lg-2">
+                    <button id="theme-toggle" class="btn btn-sm btn-outline-gold" aria-label="Toggle theme">
+                        <i class="fas fa-sun"></i>
+                    </button>
+                </li>
+                
+                <li class="nav-item ms-lg-3">
+                    <a class="btn btn-warning" href="whitepaper.pdf" target="_blank">Whitepaper</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<header class="page-hero py-5">
+    <div class="container">
+        <div class="row align-items-center g-5 text-center">
+            <div class="col-12">
+                <img src="https://static.wixstatic.com/media/e0bdea_9b351576bde14a79b35884285b5e9f72~mv2.png" alt="Roadmap Image" class="img-fluid mb-3" style="max-height: 200px;">
+                <h1 class="display-4">Our Strategic <span class="text-accent">Roadmap</span></h1>
+                <p class="lead text-secondary-custom">
+                    A transparent plan for technological growth, ecosystem expansion, and building long-term utility for the Fox24Coin project.
+                </p>
+                <a href="#roadmap" class="btn btn-accent btn-lg mt-3">Explore Our Vision</a>
+            </div>
+        </div>
+    </div>
+</header>
+
+<section class="section" id="roadmap">
+    <div class="container">
+        <div class="row justify-content-center text-center mb-5">
+            <div class="col-lg-8">
+                <h2 class="display-5 fw-bold">Project <span class="text-accent">Roadmap</span></h2>
+                <p class="lead text-secondary-custom">
+                    Our roadmap outlines the key milestones for developing Fox24Coin. Each phase is focused on delivering verifiable progress and tangible results.
+                </p>
+            </div>
+        </div>
+        <div class="timeline-section">
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <h5>Phase 1: Foundation & Launch <span class="badge bg-success">Completed</span></h5>
+                    <p class="text-secondary-custom small">Smart contract development, successful deployment on Ethereum, and third-party security audit with Solidity Scan.</p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <h5>Phase 2: Ecosystem Growth <span class="badge bg-primary">In Progress</span></h5>
+                    <p class="text-secondary-custom small">Expanding social media presence, establishing DEX liquidity, and forging strategic partnerships.</p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <h5>Phase 3: Utility Development <span class="badge bg-warning text-dark">Planned (2026)</span></h5>
+                    <p class="text-secondary-custom small">Launch a staking platform and develop the first dApps that integrate the FOX24 token.</p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <h5>Phase 4: Expansion & Governance <span class="badge bg-secondary">Planned (2026+)</span></h5>
+                    <p class="text-secondary-custom small">Explore integrations with other Layer-2 solutions and research a decentralized governance model for the community.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="section bg-light-dark">
+    <div class="container">
+        <div class="row justify-content-center text-center mb-5">
+            <div class="col-lg-8">
+                <h2 class="display-5 fw-bold">Our <span class="text-accent">Technology</span></h2>
+                <p class="lead text-secondary-custom">Built on a foundation of security, transparency, and interoperability.</p>
+            </div>
+        </div>
+        <div class="row g-4">
+            <div class="col-md-6 col-lg-4">
+                <div class="feature-box text-center">
+                    <i class="fas fa-layer-group large-icon mb-4"></i>
+                    <h4>Multi-Chain Architecture</h4>
+                    <p class="text-secondary-custom">Fox24Coin operates on both the Ethereum and Base networks, ensuring broad accessibility and leveraging the unique strengths of each ecosystem.</p>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+                <div class="feature-box text-center">
+                    <i class="fas fa-shield-alt large-icon mb-4"></i>
+                    <h4>Audited Smart Contract</h4>
+                    <p class="text-secondary-custom">Our ERC-20 smart contract is publicly verifiable and has been analyzed for vulnerabilities, providing a trusted foundation for all token interactions.</p>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+                <div class="feature-box text-center">
+                    <i class="fas fa-expand-arrows-alt large-icon mb-4"></i>
+                    <h4>Scalability-Focused</h4>
+                    <p class="text-secondary-custom">By integrating with Layer-2 solutions like Base, we are prepared for future growth, enabling faster transactions and lower fees for users.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="section">
+    <div class="container">
+        <div class="row align-items-center g-5">
+            <div class="col-lg-6">
+                <h2 class="display-5 fw-bold">Strategic <span class="text-accent">Partnerships</span></h2>
+                <p class="text-secondary-custom lead">Building a strong ecosystem requires collaboration. We are actively seeking and developing partnerships with other projects, platforms, and communities in the Web3 space.</p>
+                <ul class="list-unstyled text-secondary-custom fs-5">
+                    <li class="mb-2"><i class="fas fa-check-circle text-accent me-2"></i> Integration with DeFi protocols.</li>
+                    <li class="mb-2"><i class="fas fa-check-circle text-accent me-2"></i> Collaboration with NFT marketplaces.</li>
+                    <li class="mb-2"><i class="fas fa-check-circle text-accent me-2"></i> Alliances with Web3 gaming projects.</li>
+                    <li><i class="fas fa-check-circle text-accent me-2"></i> Cross-promotion with established communities.</li>
+                </ul>
+            </div>
+            <div class="col-lg-6 text-center">
+                <i class="fas fa-handshake large-icon" style="font-size: 8rem;"></i>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="section bg-light-dark">
+    <div class="container text-center">
+        <i class="fas fa-rocket large-icon mb-4"></i>
+        <h2>Long-Term Vision</h2>
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <p class="lead text-secondary-custom">Beyond the current roadmap, our vision is to establish Fox24Coin as a cornerstone of a decentralized digital economy. We aim to empower users with tools for financial sovereignty, create a robust platform for dApp development, and foster a self-sustaining ecosystem governed by its community.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="section py-5">
+    <div class="container">
+        <div class="row justify-content-center text-center">
+            <div class="col-lg-8">
+                <h2 class="display-5 fw-bold">Community & <span class="text-accent">Contribution</span></h2>
+                <p class="lead text-secondary-custom">
+                    The strength of Fox24Coin lies in its community. Our roadmap is a living document, and we welcome feedback. Join our social channels to help shape the future of the project.
+                </p>
+                <a href="https://t.me/fox24coin" target="_blank" class="btn btn-accent btn-lg mt-3">
+                    <i class="fab fa-telegram-plane me-2"></i> Join the Discussion
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<footer class="text-bg-dark">
+  <div class="container py-5">
+    <div class="row g-5">
+      
+      <div class="col-lg-4 col-md-6">
+        <h4 class="footer-heading mb-4 text-uppercase text-warning">FOX24Coin</h4>
+        <p class="text-secondary mb-3">Bridging Trust and Technology</p>
+        <div class="d-flex pt-2 gap-2">
+          <a href="https://t.me/fox24coin" target="_blank" class="btn btn-social" aria-label="Telegram">
+            <i class="fab fa-telegram"></i>
+          </a>
+          <a href="https://x.com/fox24coin" target="_blank" class="btn btn-social" aria-label="Twitter">
+            <i class="fab fa-twitter"></i>
+          </a>
+          <a href="https://www.facebook.com/profile.php?id=61575920820740" target="_blank" class="btn btn-social" aria-label="Facebook">
+            <i class="fab fa-facebook-f"></i>
+          </a>
+          <a href="https://discord.com/channels/1415882766930677774/1415883138810511451" target="_blank" class="btn btn-social" aria-label="Discord">
+            <i class="fab fa-discord"></i>
+          </a>
+        </div>
+      </div>
+
+      <div class="col-lg-2 col-md-6">
+        <h4 class="footer-heading mb-4 text-uppercase text-warning">Links</h4>
+        <ul class="list-unstyled mb-0">
+          <li><a class="link-secondary d-block mb-2" href="roadmap.html">Roadmap</a></li>
+          <li><a class="link-secondary d-block mb-2" href="team2.html">Our Team</a></li>
+          <li><a class="link-secondary d-block mb-2" href="index.html#contact">Contact Us</a></li>
+          <li><a class="link-secondary d-block mb-2" href="widget.html">Widget</a></li>
+          <li><a class="link-secondary d-block mb-2" href="market.html">Crypto Market</a></li>
+          <li><a class="link-secondary d-block" href="scam-protection.html">Scam Protection</a></li>
+          <li><a class="link-secondary d-block" href="index.html">Home</a></li>
+          <li><a class="link-secondary d-block" href="vision.html">Fox24 Vision</a></li>
+
+        </ul>
+      </div>
+
+      <div class="col-lg-3 col-md-6">
+        <h4 class="footer-heading mb-4 text-uppercase text-warning">Resources</h4>
+        <ul class="list-unstyled mb-0">
+          <li><a class="link-secondary d-block mb-2" href="tokenomics.html">Tokenomics</a></li>
+          <li><a class="link-secondary d-block mb-2" href="whitepaper.pdf" target="_blank">Whitepaper</a></li>
+          <li><a class="link-secondary d-block mb-2" href="index.html#hero">Join Presale</a></li>
+          <li><a class="link-secondary d-block mb-2" href="https://fox24coin-1.dexkit.app/">DEX Exchange</a></li>
+          <li><a class="link-secondary d-block mb-2" href="https://www.coingecko.com">Coingecko</a></li>
+          <li><a class="link-secondary d-block mb-2" href="https://coinmarketcap.com">Coinmarketcap</a></li>
+          <li><a class="link-secondary d-block" href="https://etherscan.io">Etherscan</a></li>
+        </ul>
+      </div>
+
+      <div class="col-lg-3 col-md-6">
+        <h4 class="footer-heading mb-4 text-uppercase text-warning">Contact Info</h4>
+        <ul class="list-unstyled text-secondary mb-0">
+          <li class="d-flex mb-3">
+            <i class="fa fa-map-marker-alt me-3 pt-1 text-warning"></i>
+            Henryka Sienkiewicza 85/87/lok. 1,<br>90-057 Łódź
+          </li>
+          <li class="d-flex mb-3">
+            <i class="fa fa-phone-alt me-3 pt-1 text-warning"></i>+48 698 000 441
+          </li>
+          <li class="d-flex">
+            <i class="fa fa-envelope me-3 pt-1 text-warning"></i>support@fox24coin.com
+          </li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="container border-top border-secondary py-4">
+    <div class="row align-items-center">
+      <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+        &copy; <a class="fw-bold text-warning text-decoration-none" href="#">Fox24Coin</a>, All Rights Reserved.
+      </div>
+      <div class="col-md-6 text-center text-md-end">
+        <a href="Privacy-Policy-and-Cookies-Policy.html" class="link-secondary text-decoration-none">Privacy & Cookies Policy</a>
+      </div>
+    </div>
+  </div>
+</footer>
+<a href="#" id="scrollTopBtn" aria-label="Scroll to top">
+    <i class="fa fa-arrow-up"></i>
+</a>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+<script type="text/javascript" src="https://cdn.weglot.com/weglot.min.js"></script>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    
+    // =========================
+    // STAŁE I SELEKTORY
+    // =========================
+    const preloader = document.getElementById('page-preloader');
+    const scrollTopBtn = document.getElementById('scrollTopBtn');
+    const themeToggles = document.querySelectorAll('#theme-toggle, #theme-toggle-mobile');
+    const htmlEl = document.documentElement;
+    const animatedTimelineItems = document.querySelectorAll('.timeline-item');
+    const particlesContainerId = 'particles-js';
+
+    // =========================
+    // PRELOADER
+    // =========================
+    window.addEventListener('load', () => {
+        if (preloader) {
+            preloader.classList.add('hidden');
+        }
+    });
+
+    // ===================================================
+    // LOGIKA PRZEŁĄCZNIKA MOTYWU (THEME TOGGLE)
+    // ===================================================
+    const applyTheme = (theme) => {
+        htmlEl.classList.toggle('light-mode', theme === 'light');
+        
+        themeToggles.forEach(btn => {
+            const icon = btn.querySelector('i');
+            if (icon) {
+                icon.classList.toggle('fa-sun', theme === 'dark');
+                icon.classList.toggle('fa-moon', theme === 'light');
+            }
+        });
+        
+        // Zaktualizuj kolory cząsteczek po zmianie motywu
+        updateParticleColors();
+    };
+    
+    // Ustaw motyw przy ładowaniu strony
+    const savedTheme = localStorage.getItem('theme') || 'dark';
+    applyTheme(savedTheme);
+
+    // Dodaj event listener do obu przycisków
+    themeToggles.forEach(btn => {
+        btn.addEventListener('click', () => {
+            const newTheme = htmlEl.classList.contains('light-mode') ? 'dark' : 'light';
+            localStorage.setItem('theme', newTheme);
+            applyTheme(newTheme);
+        });
+    });
+
+    // =========================
+    // PRZYCISK "WRÓĆ NA GÓRĘ"
+    // =========================
+    if (scrollTopBtn) {
+        window.addEventListener('scroll', () => {
+            scrollTopBtn.classList.toggle('show', window.scrollY > 300);
+        });
+        scrollTopBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    }
+    
+    // =========================
+    // ANIMACJA TIMELINE PRZY PRZEWIJANIU
+    // =========================
+    if (animatedTimelineItems.length > 0) {
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target); // Animacja tylko raz
+                }
+            });
+        }, { threshold: 0.2 });
+        animatedTimelineItems.forEach(item => observer.observe(item));
+    }
+
+    // =========================
+    // LOGIKA PARTICLES.JS
+    // =========================
+    const initParticles = (particleColor) => {
+        if (document.getElementById(particlesContainerId) && typeof particlesJS !== 'undefined') {
+            particlesJS(particlesContainerId, {
+                "particles": {
+                    "number": { "value": 60, "density": { "enable": true, "value_area": 800 } },
+                    "color": { "value": particleColor },
+                    "shape": { "type": "circle" },
+                    "opacity": { "value": 0.4, "random": true },
+                    "size": { "value": 3, "random": true },
+                    "line_linked": { "enable": true, "distance": 150, "color": particleColor, "opacity": 0.2, "width": 1 },
+                    "move": { "enable": true, "speed": 2, "direction": "none", "out_mode": "out" }
+                },
+                "interactivity": {
+                    "detect_on": "canvas",
+                    "events": { "onhover": { "enable": true, "mode": "grab" }, "onclick": { "enable": false } },
+                    "modes": { "grab": { "distance": 140, "line_linked": { "opacity": 0.5 } } }
+                },
+                "retina_detect": true
+            });
+        }
+    };
+
+    function updateParticleColors() {
+        // Używamy setTimeout, aby dać przeglądarce chwilę na przeliczenie nowych zmiennych CSS po zmianie motywu
+        setTimeout(() => {
+            const accentColor = getComputedStyle(document.documentElement).getPropertyValue('--accent-color').trim();
+            initParticles(accentColor);
+        }, 50);
+    }
+    
+    // =========================
+    // INICJALIZACJA WEGLOT
+    // =========================
+    if (typeof Weglot !== 'undefined') {
+        Weglot.initialize({ api_key: 'wg_132345f3d55989005b2dce0f8d1b79593' });
+    }
+});
+</script>
+</body>
+</html>

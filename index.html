@@ -1,0 +1,1787 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Security Headers -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self' https: data: blob:; script-src 'self' https: 'unsafe-inline' 'unsafe-eval'; style-src 'self' https: 'unsafe-inline'; img-src 'self' https: data: blob:; font-src 'self' https: data:; frame-ancestors 'none';">
+  <meta http-equiv="X-Content-Type-Options" content="nosniff">
+  <meta http-equiv="X-Frame-Options" content="DENY">
+  <meta http-equiv="Referrer-Policy" content="no-referrer-when-downgrade">
+  <meta http-equiv="Permissions-Policy" content="geolocation=(), microphone=(), camera=()">
+
+  <!-- Meta SEO -->
+  <title>Bridging Trust and Technology</title>
+  <meta name="description" content="Fox24Coin addresses a key challenge in the digital currency landscape: the need for assets that combine the technological benefits of blockchain with the conceptual stability of traditional stores of value.">
+  <meta name="keywords" content="Fox24Coin presale, crypto presale, buy FOX24, gold-backed cryptocurrency, new token sale, invest in cryptocurrency, ICO, blockchain investment, digital gold asset">
+  <meta name="author" content="Michał Rzepczyński">
+  <link rel="canonical" href="https://fox24coin.com/index.html">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="https://fox24coin.com/fox24.png">
+  <link rel="apple-touch-icon" href="https://fox24coin.com/fox24.png">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Fox24Coin Cryptocurrency Backed by Gold">
+  <meta property="og:description" content="A modern, stable, and gold-secured crypto asset. Invest safely and profitably today.">
+  <meta property="og:image" content="https://fox24coin.com/Gold-Reserve.png">
+  <meta property="og:url" content="https://fox24coin.com/index.html">
+  <meta property="og:type" content="website">
+
+  <!-- Twitter Meta -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Fox24Coin Cryptocurrency Backed by Gold">
+  <meta name="twitter:description" content="A modern, stable, and gold-secured crypto asset. Invest safely and profitably today.">
+  <meta name="twitter:image" content="https://fox24coin.com/Gold-Reserve.png">
+
+  <!-- Robots -->
+  <meta name="robots" content="index, follow">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Heebo:wght@400;500;600&family=Nunito:wght@600;700;800&family=Pacifico&display=swap" rel="stylesheet">
+
+  <!-- Bootstrap 5.3.3 -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+  <!-- Icons -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
+  <!-- CookieYes -->
+  <script id="cookieyes" type="text/javascript" src="https://cdn-cookieyes.com/client_data/aedd32d83985c8837fb144ce/script.js" async></script>
+
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-BG93KC5MF1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-BG93KC5MF1');
+  </script>
+<style>
+/* --- 1. Variables & Global Styles --- */
+:root {
+    /* Dark Theme (Default) */
+    --gold-color: #ffd700;
+    --primary-bg: #121212;
+    --secondary-bg: #1a1a1a;
+    --card-bg: #222;
+    --border-color: #333;
+    --primary-text: #e0e0e0;
+    --secondary-text: #c0c0c0;
+    --heading-text: #fff;
+    --navbar-bg: rgba(18, 18, 18, 0.85);
+    --footer-bg: #000;
+    --form-control-bg: #333;
+    --form-control-focus-bg: #333;
+    --form-control-border: #444;
+    --form-control-text: #fff;
+    --accordion-button-filter: invert(1);
+    --exchange-card-img-filter: brightness(0) saturate(100%) invert(75%) sepia(0%) saturate(344%) hue-rotate(143deg) brightness(95%) contrast(92%);
+    --modal-bg: #222;
+    --purple-glow: rgba(160, 32, 240, 0.3);
+    --gradient-start: #ffd700;
+    --gradient-end: #a020f0;
+}
+
+body.light-mode {
+    /* Light Theme Variables */
+    --gold-color: #0d6efd; /* Gold changed to blue */
+    --primary-bg: #f8f9fa;
+    --secondary-bg: #ffffff;
+    --card-bg: #ffffff;
+    --border-color: #dee2e6;
+    --primary-text: #212529;
+    --secondary-text: #6c757d;
+    --heading-text: #212529;
+    --navbar-bg: rgba(255, 255, 255, 0.85);
+    --footer-bg: #e9ecef;
+    --form-control-bg: #fff;
+    --form-control-focus-bg: #fff;
+    --form-control-border: #ced4da;
+    --form-control-text: #212529;
+    --accordion-button-filter: none;
+    --exchange-card-img-filter: none;
+    --modal-bg: #fff;
+    --purple-glow: rgba(123, 104, 238, 0.2);
+    --gradient-start: #0d6efd;
+    --gradient-end: #7b68ee;
+}
+
+/* --- Animations --- */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes backgroundGlow {
+    0% { transform: translate(-50%, -50%) scale(1); opacity: 0.2; }
+    50% { transform: translate(-50%, -50%) scale(1.2); opacity: 0.3; }
+    100% { transform: translate(-50%, -50%) scale(1); opacity: 0.2; }
+}
+
+@keyframes animatedGradient {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background-color: var(--primary-bg);
+    color: var(--primary-text);
+    font-family: 'Poppins', sans-serif;
+    padding-top: 70px;
+    line-height: 1.6;
+    transition: background-color 0.3s, color 0.3s;
+    position: relative; /* Upewnia się, że sekcje są prawidłowo umieszczone względem viewportu */
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-weight: 700;
+    color: var(--heading-text);
+}
+
+.section {
+    padding: 80px 0;
+    animation: fadeIn 1s ease-out forwards;
+    position: relative; /* Wymagane, aby z-index działał na sekcji */
+    z-index: 2; /* Ustawia sekcję nad tłem particles-js (z-index: 1) */
+}
+
+.text-gold {
+    color: var(--gold-color) !important;
+}
+
+.section-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 3rem;
+    position: relative;
+    display: inline-block;
+}
+
+.section-title::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 4px;
+    background: var(--gold-color);
+    border-radius: 2px;
+}
+
+.section-dark {
+    background-color: var(--secondary-bg);
+}
+
+/* --- 2. Navigation --- */
+.navbar {
+    background-color: var(--navbar-bg);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--border-color);
+    transition: background-color 0.3s, border-color 0.3s;
+    z-index: 1000; /* Upewniamy się, że navbar jest na wierzchu */
+}
+.navbar-brand {
+    font-weight: 700;
+    color: var(--heading-text) !important;
+}
+.nav-link {
+    color: var(--secondary-text);
+    transition: color 0.3s ease;
+}
+.nav-link:hover, .nav-link:focus, .nav-link.active {
+    color: var(--gold-color);
+}
+.dropdown-menu {
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+}
+.dropdown-item {
+    color: var(--secondary-text);
+}
+.dropdown-item:hover, .dropdown-item:focus {
+    background-color: rgba(13, 110, 253, 0.1);
+    color: var(--gold-color) !important;
+}
+#theme-toggle i, #theme-toggle-mobile i {
+    transition: transform 0.3s ease;
+}
+#theme-toggle:hover i, #theme-toggle-mobile:hover i {
+    transform: scale(1.1) rotate(15deg);
+}
+
+/* --- 3. Hero Section --- */
+.hero-section, #hero2 {
+    background: var(--primary-bg);
+    color: var(--heading-text);
+    padding: 100px 0;
+    position: relative;
+    min-height: calc(100vh - 70px);
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+}
+
+/* POPRAWKA DLA PRZECHWYTYWANIA KLIKNIĘĆ */
+#particles-js {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 1; /* Warstwa tła */
+    pointer-events: none; /* KLUCZOWY FIX: Umożliwia kliknięcie elementów pod spodem */
+}
+
+.hero-section::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 800px;
+    height: 800px;
+    background: radial-gradient(circle, var(--purple-glow) 0%, rgba(18, 18, 18, 0) 70%);
+    transform: translate(-50%, -50%);
+    animation: backgroundGlow 10s infinite ease-in-out;
+    z-index: 1;
+}
+
+.hero-section .container, .container {
+    position: relative;
+    z-index: 3; /* Ustawienie treści na wierzchu particles-js */
+}
+
+body.light-mode .hero-section, body.light-mode #hero2 {
+    background: var(--primary-bg);
+}
+
+.hero-section h1, .hero-title, .display-4 {
+    font-weight: 700;
+    line-height: 1.2;
+}
+
+.hero-section p.lead {
+    font-size: 1.2rem;
+    color: var(--secondary-text);
+    opacity: 0.9;
+}
+
+/* --- 4. Buttons --- */
+.btn-gold {
+    background-color: var(--gold-color);
+    border-color: var(--gold-color);
+    color: #fff;
+    font-weight: 600;
+    transition: all 0.2s ease;
+}
+
+body:not(.light-mode) .btn-gold {
+    color: #111;
+}
+
+.btn-gold:hover {
+    filter: brightness(1.1);
+    color: #fff;
+    border-color: var(--gold-color);
+}
+
+.btn-outline-gold {
+    color: var(--gold-color);
+    border-color: var(--gold-color);
+    border-width: 2px;
+    font-weight: 600; /* Dodane dla spójności */
+    transition: all 0.2s ease;
+}
+
+.btn-outline-gold:hover {
+    color: #fff;
+    background-color: var(--gold-color);
+    border-color: var(--gold-color);
+}
+
+body:not(.light-mode) .btn-outline-gold:hover {
+    color: #111;
+}
+
+.btn-gold:hover, .btn-gold:focus, .btn-outline-gold:hover, .btn-outline-gold:focus {
+    box-shadow: 0 0 12px color-mix(in srgb, var(--gold-color) 70%, transparent), 0 0 25px color-mix(in srgb, var(--gold-color) 50%, transparent);
+    transform: scale(1.05) translateY(-2px);
+    z-index: 4; /* Upewniamy się, że przyciski są zawsze na wierzchu */
+    position: relative; /* Wymagane, aby z-index działał */
+}
+
+/* --- 5. Purchase Widget --- */
+.widget-container {
+    background-color: rgba(88, 81, 120, 0.15);
+    border-radius: 25px;
+    padding: 25px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border: 1px solid rgba(138, 118, 171, 0.2);
+    position: relative;
+    overflow: hidden;
+    z-index: 3; /* Ustawienie na wierzchu tła */
+}
+
+body.light-mode .widget-container {
+    background-color: rgba(225, 220, 240, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    box-shadow: 0 8px 32px 0 rgba(123, 104, 238, 0.25);
+}
+
+.widget-content {
+    padding: 1rem 1.5rem 1.5rem 1.5rem;
+    flex: 1;
+}
+
+#walletInfo {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 10px 15px;
+    border-radius: 10px;
+    font-size: 0.9rem;
+}
+body.light-mode #walletInfo {
+    background: rgba(0, 0, 0, 0.05);
+}
+
+/* --- 6. Countdown Timer --- */
+.countdown-widget-wrapper h4 {
+    font-weight: 600;
+    color: var(--gold-color);
+}
+.countdown-container {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+.countdown-item {
+    background: color-mix(in srgb, var(--gold-color) 10%, transparent);
+    padding: 10px 15px;
+    border-radius: 8px;
+    min-width: 60px;
+    text-align: center;
+}
+.countdown-number {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--gold-color);
+}
+.countdown-label {
+    font-size: 0.75rem;
+    color: var(--secondary-text);
+    text-transform: uppercase;
+}
+
+/* --- 7. Other Components --- */
+.exchange-card, .stat-card {
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 2rem;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+    height: 100%;
+    position: relative;
+    z-index: 3; /* Ustawiamy na wierzchu tła */
+}
+.exchange-card {
+    text-align: center;
+}
+.exchange-card img {
+    max-height: 40px;
+    margin-bottom: 1.5rem;
+    filter: var(--exchange-card-img-filter);
+    transition: filter 0.3s ease;
+}
+.exchange-card:hover img {
+    filter: none;
+}
+.card-form .form-control, .widget-container .form-control {
+    background-color: var(--form-control-bg);
+    border-color: var(--form-control-border);
+    color: var(--form-control-text);
+}
+.card-form .form-control:focus, .widget-container .form-control:focus {
+    background-color: var(--form-control-focus-bg);
+    border-color: var(--gold-color);
+    color: var(--form-control-text);
+    box-shadow: 0 0 10px color-mix(in srgb, var(--gold-color) 40%, transparent);
+}
+.card-form .input-group-text, .widget-container .input-group-text {
+    background-color: var(--card-bg);
+    border-color: var(--border-color);
+    color: var(--secondary-text);
+}
+.modal-content {
+    background-color: var(--modal-bg);
+    color: var(--primary-text);
+    border: 1px solid var(--border-color);
+}
+.modal-header, .modal-footer {
+    border-color: var(--border-color);
+}
+.btn-close {
+    filter: var(--accordion-button-filter);
+}
+
+/* --- 8. Specific Elements --- */
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 20px;
+    margin-top: 50px;
+}
+.stat-card .label {
+    font-size: 0.9rem;
+    color: var(--secondary-text);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 10px;
+}
+.stat-card .value {
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--gold-color);
+}
+.stat-card .currency {
+    font-size: 0.9rem;
+    color: var(--secondary-text);
+}
+.official-block {
+    word-wrap: break-word;
+    margin-bottom: 40px;
+}
+.copy-feedback {
+    font-size: 0.9rem;
+    color: var(--gold-color);
+    margin-left: 10px;
+    display: none;
+}
+#jsonContent {
+    background-color: var(--primary-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 1rem;
+    white-space: pre-wrap;
+    word-break: break-all;
+    max-height: 60vh;
+    overflow-y: auto;
+    font-family: monospace;
+}
+.social-icons {
+    display: flex;
+    gap: 15px;
+    margin-top: 20px;
+}
+.btn-social {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    font-size: 20px;
+    color: #fff !important;
+    transition: all 0.3s ease-in-out;
+    text-decoration: none;
+}
+.btn-social:hover { transform: scale(1.1); }
+.btn-social.twitter { background-color: #1DA1F2; } .btn-social.twitter:hover { background-color: #0d8ae6; }
+.btn-social.telegram { background-color: #0088cc; } .btn-social.telegram:hover { background-color: #007bb5; }
+.btn-social.facebook { background-color: #1877f2; } .btn-social.facebook:hover { background-color: #0f5ec4; }
+.btn-social.medium { background-color: #000000; } .btn-social.medium:hover { background-color: #333333; }
+.btn-social.youtube { background-color: #ff0000; } .btn-social.youtube:hover { background-color: #cc0000; }
+.btn-social.tiktok { background-color: #010101; } .btn-social.tiktok:hover { background-color: #222222; }
+.btn-social.discord { background-color: #5865F2; } .btn-social.discord:hover { background-color: #4752c4; }
+.btn-social.github { background-color: #333; } .btn-social.github:hover { background-color: #444; }
+
+#transakIframe, .creators-embed-wrapper iframe {
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    width: 100%;
+    min-height: 600px;
+}
+
+/* --- Footer --- */
+footer {
+	background-color: var(--footer-bg);
+	padding: 5rem 2rem 2rem;
+	font-size: 0.95rem;
+	border-top: 1px solid var(--border-color);
+}
+.footer-heading {
+	font-weight: 700; color: var(--heading-text); position: relative;
+	padding-bottom: 10px; margin-bottom: 1.5rem; text-transform: uppercase;
+}
+.footer-heading::after {
+	content: ''; position: absolute; bottom: 0; left: 0;
+	width: 40px; height: 3px; background: var(--accent-color); border-radius: 2px;
+}
+footer .list-unstyled .link-secondary {
+	color: var(--secondary-text); text-decoration: none !important;
+	transition: all 0.3s ease; padding: 5px 0; display: inline-block;
+}
+footer .list-unstyled .link-secondary:hover { color: var(--accent-color); transform: translateX(5px); }
+footer .d-flex .fa-solid { color: var(--accent-color); margin-right: 12px; font-size: 1.1rem; width: 20px; text-align: center; }
+footer .border-top { border-color: var(--border-color) !important; }
+footer .py-4 a { color: var(--accent-color); text-decoration: none !important; transition: color 0.3s ease; }
+body.light-mode footer .py-4 a:hover { color: var(--heading-text); }
+footer .btn-social {
+	width: 40px; height: 40px; border-radius: 50%;
+	display: inline-flex; align-items: center; justify-content: center;
+	border: 1px solid var(--border-color); color: var(--secondary-text);
+	background-color: transparent;
+	transition: all 0.3s ease;
+}
+footer .btn-social:hover {
+	transform: scale(1.1);
+	background-color: var(--accent-color);
+	border-color: var(--accent-color);
+}
+body:not(.light-mode) footer .btn-social:hover {
+	color: #111 !important;
+}
+body.light-mode footer .btn-social:hover {
+	color: #fff !important;
+}
+
+/* --- 10. Scroll-to-Top Button --- */
+#scrollTopBtn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1030;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: var(--gold-color);
+    color: #fff;
+    border: none;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 1.2rem;
+    transition: opacity 0.3s, transform 0.3s, background-color 0.3s, box-shadow 0.3s;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+body:not(.light-mode) #scrollTopBtn {
+    color: #111;
+}
+#scrollTopBtn:hover {
+    transform: translateY(-5px);
+    filter: brightness(1.1);
+    box-shadow: 0 6px 20px color-mix(in srgb, var(--gold-color) 40%, transparent);
+}
+
+/* --- 11. Media Queries --- */
+@media (max-width: 991.98px) {
+    .hero-section, #hero2 {
+        padding: 60px 0;
+        text-align: center;
+    }
+    .hero-section .section-title::after, #hero2 .section-title::after {
+        left: 50%;
+        transform: translateX(-50%);
+    }
+}
+@media (max-width: 767.98px) {
+    .hero-title, .display-4 { font-size: 2.2rem; }
+    .stats-grid { gap: 15px; margin-top: 30px; }
+    .stat-card { padding: 20px 15px; }
+    .countdown-container {
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+}
+
+/* --- 12. Awesome Additions & Effects --- */
+
+/* Animated Gradient Text */
+.text-gradient-animated {
+    background: linear-gradient(90deg, var(--gradient-start), var(--gradient-end), var(--gradient-start));
+    background-size: 200% 200%;
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    animation: animatedGradient 4s ease infinite;
+}
+
+/* Enhanced Cards Hover Effect */
+.stat-card::before, .exchange-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: 12px;
+    border: 2px solid transparent;
+    background: linear-gradient(135deg, var(--purple-glow), var(--gold-color)) border-box;
+    -webkit-mask:
+        linear-gradient(#fff 0 0) padding-box,
+        linear-gradient(#fff 0 0);
+    -webkit-mask-composite: destination-out;
+    mask-composite: exclude;
+    opacity: 0;
+    transition: opacity 0.4s ease-in-out;
+}
+
+.stat-card:hover, .exchange-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 25px var(--purple-glow);
+}
+
+.stat-card:hover::before, .exchange-card:hover::before {
+    opacity: 1;
+}
+
+
+/* --- 13. Component Fixes & Enhancements --- */
+
+/* Accordion Fix & Enhancement */
+.accordion-item {
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    transition: border-color 0.3s ease;
+    border-radius: 8px !important;
+    overflow: hidden;
+}
+
+.accordion-header .accordion-button {
+    background-color: transparent !important;
+    color: var(--primary-text) !important;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    border-bottom: 1px solid transparent;
+}
+
+.accordion-header .accordion-button:hover {
+    color: var(--gold-color) !important;
+}
+
+.accordion-button:focus {
+    box-shadow: none;
+}
+
+.accordion-header .accordion-button:not(.collapsed) {
+    color: var(--gold-color) !important;
+    box-shadow: none;
+    border-left: 4px solid var(--gold-color);
+    border-bottom: 1px solid var(--border-color);
+}
+
+.accordion-button::after {
+    filter: var(--accordion-button-filter);
+    transition: transform 0.3s ease;
+}
+</style></head>
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+    <div class="container">
+        <a class="navbar-brand" href="index.html">Fox24<span class="text-gold">Coin</span></a>
+
+        <div class="d-flex align-items-center d-lg-none">
+            <button id="theme-toggle-mobile" class="btn btn-sm btn-outline-gold me-2" aria-label="Toggle theme">
+                <i class="fas fa-sun"></i>
+            </button>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        </div>
+
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto align-items-lg-center">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="homeDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Home</a>
+                    <ul class="dropdown-menu" aria-labelledby="homeDropdown">
+                        <li><a class="dropdown-item" href="index.html">Home</a></li>
+                        <li><a class="dropdown-item" href="widget.html">Widget</a></li>
+                        <li><a class="dropdown-item" href="market.html">Crypto Market</a></li>
+                        <li><a class="dropdown-item" href="https://fox24coin.com/scam-protection.html">Scam protection</a></li>
+                        <li><a class="dropdown-item" href="vision.html">Fox24 Vision</a></li>
+                        <li><a class="dropdown-item" href="audit.html">Community audit <span class="badge bg-primary rounded-pill" style="font-size: 0.6em; vertical-align: middle; margin-left: 4px;">NEW</span></a></li>
+                    </ul>
+                </li>
+                <li class="nav-item"><a class="nav-link" href="tokenomics.html">Tokenomics</a></li>
+                <li class="nav-item"><a class="nav-link" href="roadmap.html">Roadmap</a></li>
+                <li class="nav-item"><a class="nav-link" href="team2.html">Team</a></li>
+                <li class="nav-item"><a class="nav-link" href="blog.php">Blog</a></li>
+                <li class="nav-item"><a class="nav-link" href="index.html#contact">Contact</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fox24coin.com/uniswap.html">Price on Uniswap</a></li>
+                
+                <li class="nav-item ms-lg-3">
+                    <a class="nav-link" href="https://github.com/rto-gtc/0xED9114c614aD6b948a1EA21f062F6e1D0b4e8308" target="_blank" aria-label="GitHub Repository" style="padding-top: 0.5rem; padding-bottom: 0.5rem;">
+                        <i class="fab fa-github fa-lg"></i>
+                    </a>
+                </li>
+                
+                <li class="nav-item">
+                    <a class="nav-link" href="https://fox24coin.com/rss/" target="_blank" aria-label="RSS Feed" style="padding: 0.5rem;">
+                        <i class="fas fa-rss-square fa-lg"></i>
+                    </a>
+                </li>
+                <li class="nav-item d-none d-lg-flex align-items-center ms-lg-2">
+                    <button id="theme-toggle" class="btn btn-sm btn-outline-gold" aria-label="Toggle theme">
+                        <i class="fas fa-sun"></i>
+                    </button>
+                </li>
+                
+                <li class="nav-item ms-lg-3">
+                    <a class="btn btn-warning" href="whitepaper.pdf" target="_blank">Whitepaper</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<section class="hero-section" id="hero">
+    <div id="particles-js"></div>
+    <div class="container">
+        <div class="row align-items-center g-5">
+            
+            <div class="col-lg-7">
+                
+                <h1 class="display-4 mb-3">
+                    Bridging Trust and<br>
+                    <span class="text-gradient-animated">Technology</span>
+                </h1>
+                <p class="lead mb-3">
+                    Fox24Coin addresses a key challenge in the digital currency landscape: the need for assets that combine the technological benefits of blockchain with the conceptual stability of traditional stores of value.
+                </p>
+                <div class="d-flex gap-2 justify-content-center justify-content-md-start flex-wrap">
+                    <a href="#hero2" class="btn btn-outline-gold mb-3">Learn More</a>
+                    <button type="button" class="btn btn-outline-gold mb-3" data-bs-toggle="modal" data-bs-target="#fox24StoryModal">
+                        Fox24coin Story
+                    </button>
+                </div>
+            </div> <div class="col-lg-5">
+                <div class="widget-container text-center p-3 rounded shadow">
+                    
+                    <div class="countdown-widget-wrapper mb-3">
+                        <h4 class="mb-2">Presale Ends In:</h4>
+                        <div class="countdown-container d-flex justify-content-center gap-3">
+                            <div class="countdown-item text-center">
+                                <span id="days" class="countdown-number d-block">--</span>
+                                <span class="countdown-label">Days</span>
+                            </div>
+                            <div class="countdown-item text-center">
+                                <span id="hours" class="countdown-number d-block">--</span>
+                                <span class="countdown-label">Hours</span>
+                            </div>
+                            <div class="countdown-item text-center">
+                                <span id="minutes" class="countdown-number d-block">--</span>
+                                <span class="countdown-label">Minutes</span>
+                            </div>
+                            <div class="countdown-item text-center">
+                                <span id="seconds" class="countdown-number d-block">--</span>
+                                <span class="countdown-label">Seconds</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="widget-content">
+                        <div class="mb-2">
+                            <p class="mb-0">Tokens Available in Presale:</p>
+                            <h4 id="presale-balance" class="text-gold">Loading...</h4>
+                        </div>
+                        
+                        <div id="alert-placeholder"></div>
+
+                        <div id="turnstile-container" class="mt-3">
+                            <div class="cf-turnstile"
+                                data-sitekey="0x4AAAAAAB3u5PpaSJrkixP8" 
+                                data-callback="onTurnstileSuccess"
+                                data-expired-callback="onTurnstileExpired"
+                                data-error-callback="onTurnstileError"
+                                data-theme="dark"
+                                data-language="en">
+                            </div>
+                            <small class="form-text text-center d-block mt-2">Please verify you are human to proceed.</small>
+                        </div>
+                        
+                        <div id="presale-interactive-area" style="display: none;">
+                            <div id="buy-section">
+                                <div class="input-group input-group-sm mb-2">
+                                    <input type="number" id="tokenAmount" class="form-control" value="10" min="1">
+                                    <span class="input-group-text">
+                                        <img src="https://static.wixstatic.com/media/e0bdea_6e79801d3084403d8ca912a1172370f1~mv2.png" alt="FOX24 Coin" style="height: 1.5em; margin-right: 4px;">
+                                        FOX24
+                                    </span>
+                                </div>
+                                <p class="mb-1 small">Price: <span id="priceInfo">Loading...</span></p>
+                                <h6 class="fw-bold mb-2">Total Cost: <span id="totalCost" class="text-gold">0.00</span> ETH</h6>
+                            </div>
+                            
+                            <div class="d-flex flex-wrap justify-content-center gap-2 mt-3">
+                                <button id="connectButton" class="btn btn-primary btn-lg">Connect Wallet</button>
+                                <button id="buyButton" class="btn btn-success btn-lg" style="display:none;">Buy Now</button>
+                                <button type="button" class="btn btn-secondary btn-lg" data-bs-toggle="modal" data-bs-target="#buyEthModal">
+                                    Buy ETH
+                                </button>
+                            </div>
+                            
+                            <div id="walletInfo" class="mt-3" style="display:none;">
+                                <p class="mb-1"><strong>Status:</strong>
+                                    <span class="text-success">Connected</span>
+                                    <span id="networkInfo" class="badge rounded-pill text-bg-secondary ms-2"></span>
+                                </p>
+                                <p class="mb-2"><strong>Address:</strong> <small id="walletAddress"></small></p>
+                                <button id="disconnectButton" class="btn btn-sm btn-outline-danger">Disconnect</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-2 text-center">
+                        <small>Learn more about this widget:
+                            <a href="https://medium.com/@rto.gtc/how-the-fox24coin-presale-widget-guarantees-a-safe-transparent-purchase-fe534a808a67" target="_blank" class="text-decoration-underline">
+                                Read on Medium
+                            </a>
+                        </small>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</section>
+<section id="hero2" class="section">
+    <div class="container">
+        <div class="row align-items-center g-5">
+            <div class="col-lg-6" data-aos="fade-up">
+                <h2 class="hero-title text-gradient-animated">Digital Value,<br>Built on Blockchain</h2>
+                <p class="lead my-4">
+                    Fox24Coin is an ERC-20 token on the Ethereum blockchain, designed to combine the power of decentralized finance with modern digital assets.
+                </p>
+                <div class="d-flex flex-wrap gap-3 align-items-center">
+                    <a href="https://fox24coin.com/whitepaper.pdf" target="_blank" class="btn btn-outline-gold">
+                        <i class="fas fa-file-pdf me-2"></i>Read Whitepaper
+                    </a>
+                    <button class="btn btn-outline-gold" data-bs-toggle="modal" data-bs-target="#qrModal">
+                        <i class="fas fa-qrcode me-2"></i>Scan QR
+                    </button>
+                </div>
+                <div class="mt-4">
+                    <button id="addTokenBtn" class="btn btn-outline-gold btn-lg">
+                        <i class="fas fa-wallet me-2"></i>Add FOX24 to MetaMask
+                    </button>
+                    <div id="tokenInfo" class="mt-3 d-flex align-items-center gap-3">
+                        <img id="tokenLogo" src="" alt="FOX24 Logo" style="width: 50px; height: 50px; border-radius: 12px; display: none;">
+                        <div>
+                            <p id="tokenName" class="mb-0 fw-bold text-gold"></p>
+                            <p id="tokenSymbol" class="mb-0"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6" data-aos="fade-up">
+                <div class="creators-embed-wrapper mt-4">
+                    <iframe allow="camera" width="380" height="380" src="https://v.creators3d.com/index.html?load=%2Fviews%2Fproduction%2Fitem%2F20250516%2F3765945375686166%2F3765945375686166.glb&autorotate=true&tv=172&json-data=1747370176636&decrypt=1" frameborder="0" allow="autoplay; fullscreen; vr" mozallowfullscreen="true" webkitallowfullscreen="true" style="border: none; border-radius: 12px;"></iframe>
+                    <p style="font-size: 13px; font-weight: normal; margin: 5px; color: #aaa;">
+                        <a href="https://v.creators3d.com/index.html?load=%2Fviews%2Fproduction%2Fitem%2F20250516%2F3765945375686166%2F3765945375686166.glb&autorotate=true&tv=172&json-data=1747370176636&decrypt=1" target="_blank" style="font-weight: bold; color: var(--gold-color);">0x965581b4819d0cb810e1ba41eff9a9647c336df0</a> by 
+                        <a target="_blank" style="font-weight: bold; color: var(--gold-color);" href="https://www.creators3d.com/artist/37776/MichalRzepczynski_1">FOX24coin</a>. Buy NFTs on our auction on 
+                        <a href="https://opensea.io/item/base/0x965581b4819d0cb810e1ba41eff9a9647c336df0/15" target="_blank" style="font-weight: bold; color: var(--gold-color);">OpenSea</a>.
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="stats-grid mt-5">
+            <div class="stat-card">
+                <p class="label">Max Total Supply</p>
+                <p class="value">100,000<span class="currency">FOX24</span></p>
+            </div>
+            <div class="stat-card">
+                <p class="label">Holders</p>
+                <p class="value" id="holdersCount">---</p>
+            </div>
+            <div class="stat-card">
+                <p class="label">Total Transfers</p>
+                <p class="value" id="transfersCount">---</p>
+            </div>
+           <div class="stat-card">
+                <p class="label">Audit</p>
+                <p class="value d-flex align-items-center justify-content-center gap-2">
+                    <a href="https://etherscan.io/address/0xED9114c614aD6b948a1EA21f062F6e1D0b4e8308#code" target="_blank" class="text-primary text-decoration-none">
+                       Etherscan
+                    </a>
+                    <span class="badge bg-success d-flex align-items-center gap-1" style="font-size: 0.75rem;">
+                      <i class="fas fa-check-circle"></i> 
+                    </span>
+                </p>
+            </div>
+            <div class="stat-card">
+                <p class="label">Source</p>
+                <p class="value">
+                    <a href="https://github.com/rto-gtc/0xED9114c614aD6b948a1EA21f062F6e1D0b4e8308" target="_blank" class="text-primary text-decoration-none">GitHub</a>
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="section" id="exchanges">
+    <div class="container text-center">
+        <h2 class="hero-title text-gradient-animated">🚀 Market Expansion is Our Goal!</h2>
+        <p class="mb-5 mx-auto" style="max-width: 700px;">
+            Below are the top crypto exchanges where we plan to list FOX24 soon.
+        </p>
+        <div class="row justify-content-center g-4">
+            <div class="col-md-5">
+                <div class="exchange-card p-4 rounded-3 shadow-sm h-100">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/e/e8/Binance_Logo.svg" alt="Binance Logo" class="img-fluid mb-3" style="max-height: 60px;">
+                    <h4 class="mb-2">Binance <span class="badge bg-success">Coming Soon</span></h4>
+                    <p class="mb-0">One of the largest crypto exchanges in the world.</p>
+                    <br><a href="https://www.binance.com/activity/referral-entry/CPA?ref=CPA_00KSFK00PU" target="_blank" class="btn btn-outline-gold mb-3">Visit</a>
+                </div>
+            </div>
+            <div class="col-md-5">
+                <div class="exchange-card p-4 rounded-3 shadow-sm h-100">
+                    <img src="https://fox24coin.com/coinbase-logo.png" alt="Coinbase Logo" class="img-fluid mb-3" style="max-height: 60px;">
+                    <h4 class="mb-2">Coinbase <span class="badge bg-success">Coming Soon</span></h4>
+                    <p class="mb-0">A popular and user-friendly platform for trading.</p>
+                    <br><a href="https://advanced.coinbase.com/join/7KMYR5C" target="_blank" class="btn btn-outline-gold mb-3">Visit</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+.btn-outline-gold {
+    border-color: #d4af37;
+    color: #d4af37;
+    position: relative;
+    z-index: 9999; /* 🔥 przycisk zawsze na wierzchu */
+}
+
+.btn-outline-gold:hover {
+    background-color: #d4af37;
+    color: #fff;
+}
+</style>
+
+<section id="official-info" class="section section-dark py-5">
+    <div class="container text-center" data-aos="fade-up">
+        <h2 class="hero-title text-gradient-animated">Official Fox24Coin Information</h2>
+        
+        <div class="official-block mb-5">
+            <h4 class="mb-3"><i class="fas fa-file-contract me-2 text-gold"></i>Smart Contract</h4>
+            <p class="mb-2 text-break" id="ethAddress">0xED9114c614aD6b948a1EA21f062F6e1D0b4e8308</p>
+            <div class="d-flex justify-content-center align-items-center gap-3 flex-wrap mt-3">
+                <a href="https://etherscan.io/token/0xED9114c614aD6b948a1EA21f062F6e1D0b4e8308" target="_blank" class="btn btn-outline-gold">
+                    <i class="fas fa-external-link-alt me-2"></i>View on Etherscan
+                </a>
+                <button class="btn btn-gold" data-copy-target="ethAddress">
+                    <i class="far fa-copy me-2"></i>Copy Address
+                </button>
+                <span id="copy-feedback-eth" class="copy-feedback" style="display:none;">Copied!</span>
+            </div>
+        </div>
+
+        <div class="official-block mb-5">
+            <h4 class="mb-4"><i class="fas fa-shield-alt me-2 text-gold"></i>Official Logo</h4>
+            <p class="lead mb-4">Download the official Fox24Coin logo for media or promotional use.</p>
+            <img src="https://static.wixstatic.com/media/e0bdea_6e79801d3084403d8ca912a1172370f1~mv2.png" alt="Fox24Coin Official Logo" class="img-fluid mb-4" style="max-width: 220px;">
+            <div>
+                <a href="https://static.wixstatic.com/media/e0bdea_6e79801d3084403d8ca912a1172370f1~mv2.png" download="Fox24Coin_Logo.png" class="btn btn-outline-gold">
+                    <i class="fas fa-download me-2"></i>Download Logo
+                </a>
+            </div>
+        </div>
+
+        <div class="official-block">
+            <h2 class="hero-title text-gradient-animated">Fox24Coin Metadata</h2>
+            <div class="d-flex justify-content-center gap-3 flex-wrap">
+                <a href="fox24coin.json" download class="btn btn-outline-gold">
+                    <i class="fas fa-download me-2"></i>Download JSON
+                </a>
+                <button class="btn btn-outline-gold" id="previewBtn" data-bs-toggle="modal" data-bs-target="#jsonModal">
+                    <i class="fas fa-eye me-2"></i>Preview JSON
+                </button>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<style>
+    /* Ustawia kolor tekstu wewnątrz rozwiniętego akordeonu */
+    .accordion-body {
+        color: var(--primary-text); /* Używa zmiennej, która jest biała w trybie ciemnym i czarna w jasnym */
+        text-align: left; /* Lepsza czytelność dla dłuższych tekstów */
+        font-size: 0.95rem;
+        line-height: 1.7;
+    }
+
+    /* Wyróżnia tagi `code` wewnątrz odpowiedzi, nadając im "przekozacki" wygląd */
+    .accordion-body code {
+        background-color: color-mix(in srgb, var(--gold-color) 15%, transparent);
+        color: var(--gold-color);
+        padding: 0.2em 0.5em;
+        border-radius: 5px;
+        font-weight: 600;
+        font-family: monospace;
+    }
+</style>
+
+<section id="faq" class="section">
+    <div class="container">
+<h2 class=""hero-title text-gradient-animated text-center" style="text-align: center !important;" data-aos="fade-up">Frequently Asked Questions</h2>  
+<br>
+      <div class="row justify-content-center">
+            <div class="col-lg-8" data-aos="fade-up">
+                <div class="accordion" id="faqAccordion">
+                    <div class="accordion-item mb-3">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-1">What is the total supply of FOX24?</button>
+                        </h2>
+                        <div id="faq-1" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body">The total and final supply is fixed at 100,000 FOX24 tokens.</div>
+                        </div>
+                    </div>
+                    <div class="accordion-item mb-3">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-2">
+                                Can more tokens be created (minted)?
+                            </button>
+                        </h2>
+                        <div id="faq-2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body">
+                                No, the minting function has been permanently disabled. No new tokens can be created.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item mb-3">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-3">Is the project legally registered?</button>
+                        </h2>
+                        <div id="faq-3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body">Yes, Fox24Coin is operated and managed by Phoenix-24 sp. z o.o., a company officially registered in Poland (KRS: 0000930448). This provides a transparent and accountable legal framework.</div>
+                        </div>
+                    </div>
+                    <div class="accordion-item mb-3">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-4">How can I check my FOX24 balance?</button>
+                        </h2>
+                        <div id="faq-4" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body">You can check your balance using the <code class="language-plaintext highlighter-rouge">balanceOf</code> function. You only need to provide your wallet address.</div>
+                        </div>
+                    </div>
+                    <div class="accordion-item mb-3">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-5">Can I transfer tokens to another user?</button>
+                        </h2>
+                        <div id="faq-5" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body">Yes, you can transfer tokens to another person using the <code class="language-plaintext highlighter-rouge">transfer</code> function, providing the recipient's address and the amount you want to send.</div>
+                        </div>
+                    </div>
+                    <div class="accordion-item mb-3">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-6">Can I give someone the right to spend my tokens?</button>
+                        </h2>
+                        <div id="faq-6" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body">Yes, you can authorize another address to spend a specific amount of your tokens using the <code class="language-plaintext highlighter-rouge">approve</code> function. This is often used for interactions with decentralized exchanges.</div>
+                        </div>
+                    </div>
+                    <div class="accordion-item mb-3">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-7">What is "delegating" in the context of this token?</button>
+                        </h2>
+                        <div id="faq-7" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body">The <code class="language-plaintext highlighter-rouge">delegate</code> function allows you to delegate the voting rights associated with your tokens to another address. This is crucial in governance systems where token holders can cast their votes without having to transfer the tokens.</div>
+                        </div>
+                    </div>
+                    <div class="accordion-item mb-3">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-8">Can FOX24 tokens be burned?</button>
+                        </h2>
+                        <div id="faq-8" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body">Yes, the contract includes a <code class="language-plaintext highlighter-rouge">burn</code> function that allows tokens to be permanently removed from circulation.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section><section class="section" id="contact">
+    <div class="container my-5 py-5">
+        <div class="row align-items-center g-5">
+            <div class="col-lg-6 text-center text-lg-start">
+                <h1 class="display-3">Get in Touch</h1>
+                <p class="mb-4 pb-2">
+                    Have questions or need support? Our team is here to help. Send us a message and we’ll get back to you shortly.
+                </p>
+                <p class="mb-2">
+                    <strong><i class="fas fa-building me-2 text-gold"></i>Company Name:</strong><br>
+                    Phoenix-24 sp. z o.o.
+                </p>
+                <p class="mb-4">
+                    <strong><i class="fas fa-map-marker-alt me-2 text-gold"></i>Address:</strong><br>
+                    <a href="https://www.google.com/maps/search/?api=1&query=Henryka+Sienkiewicza+85/87,+90-057+Łódź" target="_blank" class="text-decoration-none">
+                        Henryka Sienkiewicza 85/87/lok. 1, 90-057 Łódź
+                    </a>
+                </p>
+                <div class="text-center text-lg-start">
+                    <h3 class="mb-4">Community & Socials</h3>
+                    <div class="social-icons d-flex justify-content-center justify-content-lg-start flex-wrap gap-3">
+                        <a href="https://x.com/fox24coin" target="_blank" class="btn-social twitter" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="https://t.me/fox24coin" target="_blank" class="btn-social telegram" aria-label="Telegram"><i class="fab fa-telegram"></i></a>
+                        <a href="https://www.facebook.com/profile.php?id=61575920820740" target="_blank" class="btn-social facebook" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://medium.com/@rto.gtc" target="_blank" class="btn-social medium" aria-label="Medium"><i class="fab fa-medium"></i></a>
+                        <a href="https://www.youtube.com/@fox24coin" target="_blank" class="btn-social youtube" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                        <a href="https://www.tiktok.com/@fox24coin" target="_blank" class="btn-social tiktok" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="card-form p-4 rounded shadow">
+                    <h2 class="text-center mb-4">Contact Us</h2>
+                    
+                    <div id="contact-form-response" class="mb-3"></div>
+
+
+
+<form id="contactForm" novalidate>
+    <div class="mb-3">
+        <label for="name" class="form-label">Imię</label>
+        <input type="text" class="form-control" id="name" name="name" required>
+    </div>
+    <div class="mb-3">
+        <label for="email" class="form-label">Email</label>
+        <input type="email" class="form-control" id="email" name="email" required>
+    </div>
+    
+    <div style="position: absolute; left: -5000px;" aria-hidden="true">
+        <label for="website">Jeśli jesteś człowiekiem, pozostaw to pole puste:</label>
+        <input type="text" id="website" name="website" tabindex="-1" autocomplete="off">
+    </div>
+    <div class="mb-3">
+        <label for="message" class="form-label">Wiadomość</label>
+        <textarea class="form-control" id="message" name="message" rows="4" required></textarea>
+    </div>
+
+    <br> 
+    <button type="submit" class="btn btn-primary">Wyślij</button>
+
+    <div id="contact-form-response" class="mt-3"></div>
+</form>          </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<footer class="text-bg-dark mt-5">
+  <div class="container py-5">
+    <div class="row g-5">
+
+      <!-- FOX24Coin Info -->
+      <div class="col-lg-4 col-md-6">
+        <h4 class="footer-heading mb-4 text-uppercase text-warning">FOX24Coin</h4>
+        <p class="text-secondary mb-3">Bridging Trust and Technology</p>
+        <div class="d-flex pt-2 gap-2">
+          <a href="https://t.me/fox24coin" target="_blank" class="btn btn-social" aria-label="Telegram">
+            <i class="fab fa-telegram"></i>
+          </a>
+          <a href="https://x.com/fox24coin" target="_blank" class="btn btn-social" aria-label="Twitter">
+            <i class="fab fa-twitter"></i>
+          </a>
+          <a href="https://www.facebook.com/profile.php?id=61575920820740" target="_blank" class="btn btn-social" aria-label="Facebook">
+            <i class="fab fa-facebook-f"></i>
+          </a>
+          <a href="https://discord.com/channels/1415882766930677774/1415883138810511451" target="_blank" class="btn btn-social" aria-label="Discord">
+            <i class="fab fa-discord"></i>
+          </a>
+        </div>
+      </div>
+
+      <!-- Links -->
+      <div class="col-lg-2 col-md-6">
+        <h4 class="footer-heading mb-4 text-uppercase text-warning">Links</h4>
+        <ul class="list-unstyled footer-links mb-0">
+          <li><a href="index.html" class="link-secondary d-block py-1">Home</a></li>
+          <li><a href="roadmap.html" class="link-secondary d-block py-1">Roadmap</a></li>
+          <li><a href="team2.html" class="link-secondary d-block py-1">Our Team</a></li>
+          <li><a href="vision.html" class="link-secondary d-block py-1">Fox24 Vision</a></li>
+          <li><a href="widget.html" class="link-secondary d-block py-1">Widget</a></li>
+          <li><a href="market.html" class="link-secondary d-block py-1">Crypto Market</a></li>
+          <li><a href="scam-protection.html" class="link-secondary d-block py-1">Scam Protection</a></li>
+          <li><a href="audit.html" class="link-secondary d-block py-1">Community Audit</a></li>
+          <li><a href="index.html#contact" class="link-secondary d-block py-1">Contact Us</a></li>
+        </ul>
+      </div>
+
+      <!-- Resources -->
+      <div class="col-lg-3 col-md-6">
+        <h4 class="footer-heading mb-4 text-uppercase text-warning">Resources</h4>
+        <ul class="list-unstyled footer-links mb-0">
+          <li><a href="tokenomics.html" class="link-secondary d-block py-1">Tokenomics</a></li>
+          <li><a href="whitepaper.pdf" target="_blank" class="link-secondary d-block py-1">Whitepaper</a></li>
+          <li><a href="index.html#hero" class="link-secondary d-block py-1">Join Presale</a></li>
+          <li><a href="https://fox24coin-1.dexkit.app/" target="_blank" class="link-secondary d-block py-1">DEX Exchange</a></li>
+          <li><a href="https://www.coingecko.com" target="_blank" class="link-secondary d-block py-1">Coingecko</a></li>
+          <li><a href="https://coinmarketcap.com" target="_blank" class="link-secondary d-block py-1">CoinMarketCap</a></li>
+          <li><a href="https://etherscan.io" target="_blank" class="link-secondary d-block py-1">Etherscan</a></li>
+          <li><a href="https://fox24coin.com/sitemap.html" target="_blank" class="link-secondary d-block py-1">Sitemap</a></li>
+        </ul>
+      </div>
+
+      <!-- Contact Info -->
+      <div class="col-lg-3 col-md-6">
+        <h4 class="footer-heading mb-4 text-uppercase text-warning">Contact Info</h4>
+        <ul class="list-unstyled text-secondary mb-0">
+          <li class="d-flex mb-3">
+            <i class="fa fa-map-marker-alt me-3 pt-1 text-warning"></i>
+            <span>Henryka Sienkiewicza 85/87/lok. 1,<br>90-057 Łódź</span>
+          </li>
+          <li class="d-flex mb-3">
+            <i class="fa fa-phone-alt me-3 pt-1 text-warning"></i>
+            <a href="tel:+48698000441" class="text-secondary text-decoration-none">+48 698 000 441</a>
+          </li>
+          <li class="d-flex">
+            <i class="fa fa-envelope me-3 pt-1 text-warning"></i>
+            <a href="mailto:support@fox24coin.com" class="text-secondary text-decoration-none">support@fox24coin.com</a>
+          </li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Copyright -->
+  <div class="container border-top border-secondary py-4">
+    <div class="row align-items-center">
+      <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+        &copy; <a class="fw-bold text-warning text-decoration-none" href="#">Fox24Coin</a>, All Rights Reserved.
+      </div>
+      <div class="col-md-6 text-center text-md-end">
+        <a href="Privacy-Policy-and-Cookies-Policy.html" class="link-secondary text-decoration-none">Privacy & Cookies Policy</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+<div class="modal fade" id="jsonModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-xl">
+        <div class="modal-content">
+            <div class="modal-header border-0">
+                <h5 class="modal-title">Fox24Coin Metadata Preview</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body p-0">
+                <pre id="jsonContent" class="m-0 p-3" style="max-height: 70vh; overflow-y: auto; white-space: pre-wrap; word-wrap: break-word;"></pre>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="qrModal" tabindex="-1" aria-labelledby="qrModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content text-center">
+            <div class="modal-header border-0">
+                <h5 class="modal-title text-gold" id="qrModalLabel">FOX24 Token QR Code</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <img src="https://static.wixstatic.com/media/e0bdea_a92c4add2c3f4a1ea87604393e9e74c4~mv2.png" alt="FOX24 QR Code" class="img-fluid rounded">
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="fox24StoryModal" tabindex="-1" aria-labelledby="fox24StoryModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header border-0">
+                <h5 class="modal-title fw-bold text-gold" id="fox24StoryModalLabel">The Story Behind FOX24Coin</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="text-center mb-4">
+                    <img src="https://static.wixstatic.com/media/e0bdea_49e3db38087f483fa6df27a1324fea1b~mv2.png" alt="Gold Inspiration" class="img-fluid rounded" style="max-height: 200px;">
+                </div>
+                <p>The world of cryptocurrency is filled with innovation—but trust can often be hard to come by. Our founder, Michał Rzepczyński, knows this all too well. After losing his life savings in a crypto scam, a “rug pull” that left him with nothing, he faced a choice: give up or build something better. He chose the latter.</p>
+                <p>From this experience came a clear vision: the crypto space needed a project grounded in <strong>transparency, security, and real-world value</strong>. FOX24Coin was born to fulfill that mission. It’s not just another token—it’s a testament to resilience and a commitment to protecting investors while building a trustworthy, stable ecosystem.</p>
+                <h6 class="fw-bold text-gold">Our Mission</h6>
+                <p>FOX24Coin aims to combine the excitement of digital finance with the inspiration of a timeless store of value. By bridging the digital and the conceptual reliability of gold, we are creating a cryptocurrency that people can trust.</p>
+                <h6 class="fw-bold text-gold">How We’re Building the Future</h6>
+                <ul>
+                    <li><strong>Gold-Inspired Stability:</strong> FOX24Coin draws inspiration from gold as a timeless store of value. While the project is still in its early stages regarding gold backing and audits, our goal is to build a token that embodies stability and trust, bridging the innovative world of digital finance with the reliability symbolized by gold.</li>
+                    <li><strong>AI-Powered Precision:</strong> We are integrating AI to optimize project management and trading. Live market analysis and intelligent strategies help ensure stability and continuous growth.</li>
+                    <li><strong>Community First:</strong> FOX24Coin is built for the people, not just for profit. Our tokenomics are designed to be fair, and we prioritize transparency and open communication with our community. Your support helps expand our team, enhance AI capabilities, and strengthen the project for everyone.</li>
+                </ul>
+                <p>Join us in ushering in a new era of crypto—where <strong>security, stability, and trust</strong> aren’t just promises, but a reality.</p>
+            </div>
+            <div class="modal-footer border-0">
+                <button type="button" class="btn btn-gold" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<div class="modal fade" id="buyEthModal" tabindex="-1" aria-labelledby="buyEthModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" style="max-width: 400px;">
+        <div class="modal-content" style="border-radius: 16px; overflow: hidden; height: 600px;">
+            <div class="modal-body p-0 position-relative" style="display: flex; flex-direction: column;">
+                <iframe
+                    id="transakIframe"
+                    src="https://global-stg.transak.com/?apiKey=7b47aa0b-ef9d-43b9-b6a3-c1c21dbf22c8"
+                    allow="camera;microphone;payment"
+                    style="height: 100%; width: 100%; border: none;">
+                </iframe>
+                <div style="padding: 1rem; text-align: center; border-top: 1px solid #333;">
+                    <button type="button" class="btn btn-secondary w-100" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<button id="scrollTopBtn" title="Go to top">
+    <i class="fa fa-arrow-up"></i>
+</button>
+
+
+<script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+
+<script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script> 
+
+<script src="https://cdn.jsdelivr.net/npm/ethers@5.7.2/dist/ethers.umd.min.js" defer></script>
+<script src="https://unpkg.com/web3modal@1.9.12/dist/index.js" defer></script>
+<script src="https://unpkg.com/@walletconnect/web3-provider@1.8.0/dist/umd/index.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous" defer></script>
+<script type="text/javascript" src="https://cdn.weglot.com/weglot.min.js" defer></script>
+<script id="cookieyes" type="text/javascript" src="https://cdn-cookieyes.com/client_data/aedd32d83985c8837fb144ce/script.js" defer></script>
+
+<script>
+// --- GLOBALNA LOGIKA CLOUDFLARE TURNSTILE (PRZENIESIONA DLA POPRAWNOŚCI ZASIĘGU) ---
+// Te funkcje MUSZĄ znajdować się w zasięgu window, zanim skrypt Turnstile się załaduje.
+window.turnstileToken = null;
+
+// Funkcja wywoływana przez Turnstile po pomyślnej weryfikacji
+window.onTurnstileSuccess = function(token) {
+    window.turnstileToken = token;
+    const turnstileContainer = document.getElementById('turnstile-container');
+    const presaleInteractiveArea = document.getElementById('presale-interactive-area');
+    
+    // Dodanie małego opóźnienia, aby uniknąć problemów wizualnych/wyścigów.
+    setTimeout(() => {
+        if (turnstileContainer) turnstileContainer.style.display = 'none';
+        if (presaleInteractiveArea) presaleInteractiveArea.style.display = 'block';
+    }, 200); 
+};
+
+// Funkcja wywoływana, gdy token Turnstile wygaśnie
+window.onTurnstileExpired = function() {
+    window.turnstileToken = null;
+    const turnstileContainer = document.getElementById('turnstile-container');
+    const presaleInteractiveArea = document.getElementById('presale-interactive-area');
+    if (turnstileContainer) turnstileContainer.style.display = 'block';
+    if (presaleInteractiveArea) presaleInteractiveArea.style.display = 'none';
+};
+
+// Funkcja wywoływana, gdy wystąpi błąd Turnstile
+window.onTurnstileError = function() {
+    window.turnstileToken = null;
+    console.error("Cloudflare Turnstile Error: Weryfikacja nie powiodła się.");
+};
+
+
+// --- START GŁÓWNEJ LOGIKI PO ZAŁADOWANIU DOM ---
+document.addEventListener("DOMContentLoaded", () => {
+    
+    // --- 1. THEME TOGGLE (LIGHT/DARK MODE) ---
+    const themeToggleDesktop = document.getElementById('theme-toggle');
+    const themeToggleMobile = document.getElementById('theme-toggle-mobile');
+    const allToggleBtns = [themeToggleDesktop, themeToggleMobile].filter(Boolean);
+    const body = document.body;
+
+    function updateThemeIcons() {
+        allToggleBtns.forEach(btn => {
+            if (!btn) return;
+            const icon = btn.querySelector('i');
+            if (body.classList.contains('light-mode')) {
+                icon.classList.remove('fa-sun');
+                icon.classList.add('fa-moon');
+            } else {
+                icon.classList.remove('fa-moon');
+                icon.classList.add('fa-sun');
+            }
+        });
+    }
+
+    function toggleTheme() {
+        body.classList.toggle('light-mode');
+        localStorage.setItem('theme', body.classList.contains('light-mode') ? 'light' : 'dark');
+        updateThemeIcons();
+    }
+
+    allToggleBtns.forEach(btn => {
+        if (btn) btn.addEventListener('click', toggleTheme);
+    });
+
+    if (localStorage.getItem('theme') === 'light') {
+        body.classList.add('light-mode');
+    }
+    updateThemeIcons();
+
+    // --- 2. SCROLL TO TOP BUTTON ---
+    const scrollTopBtn = document.getElementById('scrollTopBtn');
+    if (scrollTopBtn) {
+        window.onscroll = function() {
+            if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
+                scrollTopBtn.style.display = "flex";
+            } else {
+                scrollTopBtn.style.display = "none";
+            }
+        };
+        scrollTopBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    }
+
+    // --- 3. ANIMATED METRIC COUNTERS ---
+    const animateCounter = (counterElement) => {
+        const target = +counterElement.getAttribute('data-target');
+        if (isNaN(target)) return;
+        
+        const update = () => {
+            const count = +counterElement.innerText.replace(/,/g, '');
+            const increment = Math.max(1, target / 200);
+
+            if (count < target) {
+                counterElement.innerText = Math.ceil(count + increment).toLocaleString('en-US');
+                requestAnimationFrame(update);
+            } else {
+                counterElement.innerText = target.toLocaleString('en-US');
+            }
+        };
+        update();
+    };
+
+    document.querySelectorAll('.metric-value').forEach(counter => {
+        const observer = new IntersectionObserver((entries) => {
+            if (entries[0].isIntersecting) {
+                if (counter.getAttribute('data-target')) {
+                    animateCounter(counter);
+                }
+                observer.disconnect();
+            }
+        }, { threshold: 0.1 });
+        observer.observe(counter);
+    });
+
+    // --- 4. COUNTDOWN TIMER ---
+    const countdownEndDate = new Date('2026-06-01T00:00:00Z');
+    const updateCountdown = () => {
+        const ids = ['days', 'hours', 'minutes', 'seconds'];
+        const elements = ids.map(id => document.getElementById(id)).filter(Boolean);
+        if (elements.length < 4) return;
+
+        const diff = countdownEndDate - new Date();
+        if (diff <= 0) {
+            elements.forEach(el => el.innerText = '00');
+            return;
+        }
+
+        elements[0].innerText = String(Math.floor(diff / 86400000)).padStart(2, '0');
+        elements[1].innerText = String(Math.floor((diff % 86400000) / 3600000)).padStart(2, '0');
+        elements[2].innerText = String(Math.floor((diff % 3600000) / 60000)).padStart(2, '0');
+        elements[3].innerText = String(Math.floor((diff % 60000) / 1000)).padStart(2, '0');
+    };
+    setInterval(updateCountdown, 1000);
+    updateCountdown();
+
+    // --- 5. UTILITY FUNCTIONS (COPY) ---
+    document.querySelectorAll('[data-copy-target]').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const targetId = btn.getAttribute('data-copy-target');
+            const targetElement = document.getElementById(targetId);
+            const feedbackElement = document.querySelector(`[data-feedback-for="${targetId}"]`);
+            if (targetElement) {
+                navigator.clipboard.writeText(targetElement.innerText)
+                    .then(() => {
+                        if (feedbackElement) {
+                            feedbackElement.style.display = 'inline';
+                            setTimeout(() => { feedbackElement.style.display = 'none'; }, 2000);
+                        }
+                    }).catch(err => console.error('Failed to copy text: ', err));
+            }
+        });
+    });
+
+// --- 6. CONTACT FORM LOGIC (UŻYWA GLOBALNEGO TOKENA TURNSTILE) ---
+const contactForm = document.getElementById('contactForm');
+
+if (contactForm) {
+    const formResponseDiv = document.getElementById('contact-form-response');
+    const submitButton = contactForm.querySelector('button[type="submit"]');
+    const originalButtonText = submitButton.innerHTML;
+
+    contactForm.addEventListener('submit', function (e) {
+        e.preventDefault();
+        
+        // Zabezpieczenie: Sprawdź globalny token Turnstile
+        if (!window.turnstileToken || typeof window.turnstileToken !== 'string' || window.turnstileToken.length < 10) {
+             formResponseDiv.innerHTML = `<div class="alert alert-danger">Błąd weryfikacji człowieka (Turnstile). Upewnij się, że widżet został pomyślnie ukończony.</div>`;
+             return;
+        }
+
+        const startSubmission = () => {
+            submitButton.disabled = true;
+            submitButton.innerHTML = `<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Wysyłanie...`;
+            formResponseDiv.innerHTML = '';
+        };
+        
+        const finalizeSubmission = () => {
+            submitButton.disabled = false;
+            submitButton.innerHTML = originalButtonText;
+            // Token Turnstile musi zostać zresetowany po każdym wysłaniu
+            if (typeof turnstile !== 'undefined') {
+                 turnstile.reset(); 
+                 window.turnstileToken = null; // Wyczyść token po resecie
+            }
+        };
+
+        startSubmission();
+
+        // Utworzenie obiektu FormData i dodanie tokena
+        const formData = new FormData(contactForm);
+        formData.append('g-recaptcha-response', window.turnstileToken); 
+
+        // Wysłanie danych do form.php
+        fetch('form.php', {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                formResponseDiv.innerHTML = `<div class="alert alert-success">${data.message}</div>`;
+                contactForm.reset();
+            } else {
+                formResponseDiv.innerHTML = `<div class="alert alert-danger">${data.message}</div>`;
+            }
+        })
+        .catch(error => {
+            formResponseDiv.innerHTML = `<div class="alert alert-danger">Wystąpił błąd sieci. Spróbuj ponownie później.</div>`;
+            console.error('Error:', error);
+        })
+        .finally(finalizeSubmission);
+    });
+}
+
+
+    // --- 7. PARTICLES.JS INITIALIZATION ---
+    // Inicjalizacja efektu cząsteczek.
+    // Wymaga elementu HTML: <div id="particles-js"></div>
+    if (typeof particlesJS === 'function') {
+        particlesJS('particles-js', {
+          "particles": { "number": { "value": 80, "density": { "enable": true, "value_area": 800 } }, "color": { "value": "#a020f0" }, "shape": { "type": "circle" }, "opacity": { "value": 0.5, "random": false, "anim": { "enable": false } }, "size": { "value": 3, "random": true, "anim": { "enable": false } }, "line_linked": { "enable": true, "distance": 150, "color": "#ffd700", "opacity": 0.4, "width": 1 }, "move": { "enable": true, "speed": 2, "direction": "none", "random": false, "straight": false, "out_mode": "out", "bounce": false } }, "interactivity": { "detect_on": "canvas", "events": { "onhover": { "enable": true, "mode": "repulse" }, "onclick": { "enable": true, "mode": "push" }, "resize": true }, "modes": { "repulse": { "distance": 100, "duration": 0.4 }, "push": { "particles_nb": 4 } } }, "retina_detect": true
+        });
+    }
+    
+    // --- 8. CLOUDFLARE TURNSTILE LOGIC FOR PRESALE WIDGET (USUNIĘTO/PRZENIESIONO ZASIEG) ---
+    // Zmienne DOM dla Turnstile. Logika Turnstile została przeniesiona do globalnego window.
+    // Pamiętaj: turnstileToken był zmienną lokalną, która teraz nie jest potrzebna,
+    // ponieważ używamy globalnego window.turnstileToken.
+    const presaleInteractiveArea = document.getElementById('presale-interactive-area');
+    const turnstileContainer = document.getElementById('turnstile-container');
+    
+    // --- 9. WEB3 PRESALE WIDGET LOGIC ---
+    if (typeof Web3Modal.default !== 'undefined' && typeof ethers !== 'undefined') {
+        const WIDGET_CONFIG = {
+            presaleContractAddress: '0xdaFd1462df83a158376b7386E2ef256f03f81559',
+            tokenContractAddress: '0xED9114c614aD6b948a1EA21f062F6e1D0b4e8308',
+            alchemyApiKey: 'Ql-zSxh5c1Pw5MCo55qo8adr74nTvEgC',
+            correctNetworkId: 1, // Mainnet
+            correctNetworkName: 'Ethereum Mainnet',
+            tokenDecimals: 18,
+            tokenSymbol: 'FOX24',
+            presaleContractABI: [{"inputs":[{"internalType":"address","name":"tokenAddress","type":"address"},{"internalType":"uint256","name":"_price","type":"uint256"},{"internalType":"address","name":"owner_","type":"address"}],"stateMutability":"nonpayable","type":"constructor"},{"inputs":[{"internalType":"address","name":"owner","type":"address"}],"name":"OwnableInvalidOwner","type":"error"},{"inputs":[{"internalType":"address","name":"account","type":"address"}],"name":"OwnableUnauthorizedAccount","type":"error"},{"anonymous":false,"inputs":[{"indexed":false,"internalType":"address","name":"buyer","type":"address"},{"indexed":false,"internalType":"uint256","name":"amount","type":"uint256"}],"name":"Bought","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"previousOwner","type":"address"},{"indexed":true,"internalType":"address","name":"newOwner","type":"address"}],"name":"OwnershipTransferred","type":"event"},{"inputs":[{"internalType":"uint256","name":"amount","type":"uint256"}],"name":"buy","outputs":[],"stateMutability":"payable","type":"function"},{"inputs":[],"name":"owner","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"price","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"renounceOwnership","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"token","outputs":[{"internalType":"contract IFox24Token","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"newOwner","type":"address"}],"name":"transferOwnership","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"withdraw","outputs":[],"stateMutability":"nonpayable","type":"function"}]
+        };
+        const DOMElements = {
+            connectButton: document.getElementById('connectButton'),
+            disconnectButton: document.getElementById('disconnectButton'),
+            buyButton: document.getElementById('buyButton'),
+            walletInfo: document.getElementById('walletInfo'),
+            walletAddress: document.getElementById('walletAddress'),
+            alertPlaceholder: document.getElementById('alert-placeholder'),
+            tokenAmountInput: document.getElementById('tokenAmount'),
+            networkInfo: document.getElementById('networkInfo'),
+            totalCost: document.getElementById('totalCost'),
+            presaleBalance: document.getElementById('presale-balance'),
+            priceInfo: document.getElementById('priceInfo'),
+        };
+        const Web3ModalInstance = window.Web3Modal.default;
+        const WalletConnectProvider = window.WalletConnectProvider.default;
+        let provider, signer, userAddress, contract, web3Modal, providerInstance, tokenPriceWei;
+        const providerOptions = { walletconnect: { package: WalletConnectProvider, options: { infuraId: "2233ea3d38ae41d7a1378a0143d44387" } } };
+        web3Modal = new Web3ModalInstance({ cacheProvider: true, providerOptions });
+
+        const showAlert = (message, type = 'danger') => {
+            if (DOMElements.alertPlaceholder) {
+                DOMElements.alertPlaceholder.innerHTML = `<div class="alert alert-${type} alert-dismissible fade show" role="alert">${message}<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>`;
+            }
+        };
+
+        const connectWallet = async () => {
+            try {
+                DOMElements.connectButton.disabled = true;
+                DOMElements.connectButton.innerHTML = `<span class="spinner-border spinner-border-sm"></span> Connecting...`;
+                providerInstance = await web3Modal.connect();
+                provider = new ethers.providers.Web3Provider(providerInstance);
+                providerInstance.on("accountsChanged", connectWallet);
+                providerInstance.on("chainChanged", connectWallet);
+                providerInstance.on("disconnect", onDisconnect);
+                await updateUIOnConnect();
+            } catch (err) {
+                showAlert('Wallet connection was cancelled.', 'info');
+                resetUI();
+            }
+        };
+
+        const updateUIOnConnect = async () => {
+            signer = provider.getSigner();
+            userAddress = await signer.getAddress();
+            const network = await provider.getNetwork();
+            DOMElements.walletAddress.innerText = `${userAddress.substring(0,6)}...${userAddress.substring(userAddress.length-4)}`;
+            DOMElements.networkInfo.textContent = network.name;
+            DOMElements.connectButton.style.display = "none";
+            DOMElements.walletInfo.style.display = "block";
+            if (network.chainId !== WIDGET_CONFIG.correctNetworkId) {
+                showAlert(`Please switch to ${WIDGET_CONFIG.correctNetworkName}.`, "warning");
+                DOMElements.buyButton.style.display = "none";
+            } else {
+                DOMElements.alertPlaceholder.innerHTML = '';
+                DOMElements.buyButton.style.display = "block";
+                contract = new ethers.Contract(WIDGET_CONFIG.presaleContractAddress, WIDGET_CONFIG.presaleContractABI, signer);
+            }
+        };
+
+        const onDisconnect = async () => {
+            if (providerInstance && typeof providerInstance.close === 'function') await providerInstance.close();
+            await web3Modal.clearCachedProvider();
+            resetUI();
+        };
+
+        const resetUI = () => {
+            DOMElements.connectButton.style.display = 'block';
+            DOMElements.connectButton.disabled = false;
+            DOMElements.connectButton.innerHTML = 'Connect Wallet';
+            DOMElements.walletInfo.style.display = 'none';
+            DOMElements.buyButton.style.display = 'none';
+        };
+
+        const buyTokens = async () => {
+            // Używamy globalnego turnstileToken
+            if (!window.turnstileToken) return showAlert("Human verification expired. Please refresh the page.", "warning");
+            const amountToBuy = parseInt(DOMElements.tokenAmountInput.value);
+            if (isNaN(amountToBuy) || amountToBuy <= 0) return showAlert("Please enter a valid number of tokens.", "warning");
+            if (!contract) return showAlert("Please connect your wallet first.", "warning");
+            try {
+                const totalCostWei = tokenPriceWei.mul(amountToBuy);
+                DOMElements.buyButton.disabled = true;
+                DOMElements.buyButton.innerText = "Processing...";
+                const tx = await contract.buy(amountToBuy, { value: totalCostWei });
+                showAlert("Transaction sent. Waiting for confirmation...", "info");
+                await tx.wait();
+                showAlert(`Transaction successful! <a href="https://etherscan.io/tx/${tx.hash}" target="_blank" class="alert-link">View on Etherscan</a>`, "success");
+                fetchPresaleData();
+            } catch (error) {
+                showAlert(error?.data?.message || error?.message || "Transaction failed.", "danger");
+            } finally {
+                DOMElements.buyButton.disabled = false;
+                DOMElements.buyButton.innerText = "Buy Now";
+            }
+        };
+
+        const updateTotalCost = () => {
+            if (!DOMElements.tokenAmountInput || !DOMElements.totalCost || !tokenPriceWei) return;
+            const amount = parseInt(DOMElements.tokenAmountInput.value);
+            DOMElements.totalCost.textContent = (isNaN(amount) || amount <= 0) ? '0.00' : ethers.utils.formatEther(tokenPriceWei.mul(amount));
+        };
+
+        async function fetchPresaleData() {
+            const staticProvider = new ethers.providers.JsonRpcProvider(`https://eth-mainnet.g.alchemy.com/v2/${WIDGET_CONFIG.alchemyApiKey}`);
+            try {
+                const presaleContractStatic = new ethers.Contract(WIDGET_CONFIG.presaleContractAddress, WIDGET_CONFIG.presaleContractABI, staticProvider);
+                tokenPriceWei = await presaleContractStatic.price();
+                DOMElements.priceInfo.textContent = `${ethers.utils.formatEther(tokenPriceWei)} ETH per token`;
+                updateTotalCost();
+            } catch (error) { console.error("Error fetching price.", error); }
+            try {
+                const tokenContractStatic = new ethers.Contract(WIDGET_CONFIG.tokenContractAddress, ['function balanceOf(address) view returns (uint256)'], staticProvider);
+                const balanceWei = await tokenContractStatic.balanceOf(WIDGET_CONFIG.presaleContractAddress);
+                const balance = ethers.utils.formatUnits(balanceWei, WIDGET_CONFIG.tokenDecimals);
+                DOMElements.presaleBalance.textContent = `${parseFloat(balance).toLocaleString(undefined, {maximumFractionDigits: 0})} ${WIDGET_CONFIG.tokenSymbol}`;
+            } catch (error) { DOMElements.presaleBalance.textContent = "API Error"; }
+        }
+
+        if (DOMElements.connectButton) DOMElements.connectButton.addEventListener('click', connectWallet);
+        if (DOMElements.disconnectButton) DOMElements.disconnectButton.addEventListener('click', onDisconnect);
+        if (DOMElements.buyButton) DOMElements.buyButton.addEventListener('click', buyTokens);
+        if (DOMElements.tokenAmountInput) DOMElements.tokenAmountInput.addEventListener('input', updateTotalCost);
+        fetchPresaleData();
+        setInterval(fetchPresaleData, 60000);
+        if (web3Modal.cachedProvider) connectWallet();
+    } else {
+        console.error("Web3Modal or Ethers.js not loaded.");
+    }
+
+    // --- 10. ADD TOKEN TO METAMASK LOGIC ---
+    const setupAddToMetaMaskButton = () => {
+        const addTokenBtn = document.getElementById('addTokenBtn');
+        if (!addTokenBtn) return;
+        addTokenBtn.addEventListener('click', async () => {
+            if (typeof window.ethereum === 'undefined') return alert('MetaMask is not installed.');
+            try {
+                await window.ethereum.request({
+                    method: 'wallet_watchAsset',
+                    params: { type: 'ERC20', options: { address: '0xED9114c614aD6b948a1EA21f062F6e1D0b4e8308', symbol: 'FOX24', decimals: 18, image: 'https://fox24coin.com/fox24.png' } },
+                });
+            } catch (error) { console.error('Error adding token to MetaMask:', error); }
+        });
+    };
+    if(typeof window.ethereum !== 'undefined') setupAddToMetaMaskButton();
+
+    // --- 11. FETCH TOKEN STATS (HOLDERS/TRANSFERS) ---
+    const fetchTokenStats = async () => {
+        const holdersEl = document.getElementById('holdersCount');
+        const transfersEl = document.getElementById('transfersCount');
+        if (!holdersEl || !transfersEl) return;
+        try {
+            const response = await fetch('proxy.php?action=getTokenInfo');
+            if (!response.ok) throw new Error(`Proxy error: ${response.status}`);
+            const data = await response.json();
+            if (data.error) throw new Error(`API Error: ${data.error.message}`);
+            if (data.holdersCount) {
+                holdersEl.setAttribute('data-target', data.holdersCount);
+                animateCounter(holdersEl);
+            }
+            if (data.transfersCount) {
+                transfersEl.setAttribute('data-target', data.transfersCount);
+                animateCounter(transfersEl);
+            }
+        } catch (error) {
+            console.error('Failed to fetch token stats:', error);
+            holdersEl.textContent = 'N/A';
+            transfersEl.textContent = 'N/A';
+        }
+    };
+    fetchTokenStats();
+});
+</script>

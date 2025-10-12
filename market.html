@@ -1,0 +1,1454 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Crypto Market | Fox24Coin</title>
+    <meta name="description" content="Browse current market data for various cryptocurrencies and categories.">
+    <meta name="keywords" content="crypto market, cryptocurrency prices, bitcoin, ethereum, quotes, crypto market">
+    <meta name="author" content="Michał Rzepczyński">
+    <link rel="canonical" href="https://fox24coin.com/market.html">
+
+    <link rel="icon" type="image/png" href="https://fox24coin.com/fox24.png">
+    <link rel="apple-touch-icon" href="https://fox24coin.com/fox24.png">
+
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Crypto Market | Fox24Coin">
+    <meta property="og:description" content="Browse current market data for various cryptocurrencies and categories.">
+    <meta property="og:url" content="https://fox24coin.com/market.html">
+    <meta property="og:image" content="https://static.wixstatic.com/media/e0bdea_85b54f8450fd498e82826f233c7545d2~mv2.png">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/style2.css">
+
+<style>
+/* ===================================
+    1. ZMIENNE I GŁÓWNE STYLE
+=================================== */
+:root {
+    /* Kolory bazowe */
+    --gold-color: #ffd700;
+    --blue-color: #0d6efd;
+    --success-color: #21cb69;
+    --danger-color: #ff4458;
+
+    /* Domyślny motyw ciemny */
+    --primary-bg: #121212;
+    --secondary-bg: #1a1a1a;
+    --card-bg: #222;
+    --border-color: #333;
+    --primary-text: #e0e0e0;
+    --secondary-text: #b3b3b3;
+    --heading-text: #ffffff;
+    --primary-bg-rgb: 18, 18, 18;
+    
+    /* Kolor akcentu (domyślnie złoty) */
+    --accent-color: var(--gold-color);
+    --accent-color-rgb: 255, 215, 0;
+    --accent-glow: rgba(255, 215, 0, 0.4);
+}
+
+html.light-mode {
+    --primary-bg: #f8f9fa;
+    --secondary-bg: #ffffff;
+    --card-bg: #ffffff;
+    --border-color: #dee2e6;
+    --primary-text: #343a40;
+    --secondary-text: #6c757d;
+    --heading-text: #212529;
+    --primary-bg-rgb: 248, 249, 250;
+    
+    /* Kolor akcentu (niebieski w trybie jasnym) */
+    --accent-color: var(--blue-color);
+    --accent-color-rgb: 13, 110, 253;
+    --accent-glow: rgba(13, 110, 253, 0.3);
+}
+
+/* --- Style bazowe --- */
+html { 
+    scroll-behavior: smooth; 
+    background-color: var(--primary-bg);
+}
+body {
+    background-color: var(--primary-bg);
+    color: var(--primary-text);
+    font-family: 'Poppins', sans-serif;
+    padding-top: 70px;
+    transition: background-color 0.3s, color 0.3s;
+}
+h1, h2, h3, h4, h5, h6 {    
+    font-weight: 700;   
+    color: var(--heading-text);
+}
+a {
+    color: var(--accent-color);
+    text-decoration: none;
+}
+a:hover {
+    color: var(--accent-color);
+    filter: brightness(0.9);
+}
+.text-accent { color: var(--accent-color) !important; }
+.text-secondary-custom { color: var(--secondary-text) !important; }
+.text-success { color: var(--success-color) !important; }
+.text-danger { color: var(--danger-color) !important; }
+.hidden { display: none !important; }
+
+/* Podświetlenie przy aktualizacji ceny */
+.live-update-changed {
+    transition: background-color 0.1s ease;
+    background-color: rgba(var(--accent-color-rgb), 0.2) !important;
+}
+
+/* ===================================
+    2. KOMPONENTY
+=================================== */
+
+/* --- Preloader --- */
+#page-preloader {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background-color: var(--primary-bg);
+    display: flex; justify-content: center; align-items: center;
+    z-index: 9999;
+    transition: opacity 0.5s ease-out, visibility 0.5s;
+    opacity: 1; visibility: visible;
+}
+#page-preloader.hidden { 
+    opacity: 0; 
+    visibility: hidden; 
+}
+.loader {
+    border: 8px solid var(--card-bg);   
+    border-top-color: var(--accent-color);
+    border-radius: 50%; 
+    width: 50px; height: 50px;
+    animation: spin 1s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* --- Nawigacja --- */
+.navbar {
+    background-color: rgba(var(--primary-bg-rgb), 0.85);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--border-color);
+}
+.navbar-brand { font-weight: 700; color: var(--heading-text) !important; }
+.nav-link { color: var(--secondary-text); }
+.nav-link:hover, .nav-link.active { color: var(--accent-color); }
+.dropdown-menu { background-color: var(--secondary-bg); border-color: var(--border-color); }
+.dropdown-item { color: var(--primary-text); }
+.dropdown-item:hover, .dropdown-item:focus { background-color: var(--card-bg); color: var(--accent-color); }
+.navbar-toggler-icon {
+    background-image: var(--bs-navbar-toggler-icon-bg); /* Use Bootstrap's variable for theme compatibility */
+}
+html.light-mode .navbar-toggler-icon {
+    filter: invert(1);
+}
+
+/* --- Przyciski --- */
+.btn-accent { 
+    background-color: var(--accent-color);   
+    color: #111;
+    border: 1px solid var(--accent-color);   
+    font-weight: 600;
+    transition: all 0.2s ease;
+}
+html.light-mode .btn-accent { color: #fff; }
+.btn-accent:hover { 
+    filter: brightness(1.1); 
+    transform: translateY(-2px);
+}
+.btn-outline-accent { 
+    color: var(--accent-color); 
+    border-color: var(--accent-color); 
+    font-weight: 600;
+    transition: all 0.2s ease;
+}
+.btn-outline-accent:hover { 
+    color: #111; 
+    background-color: var(--accent-color); 
+    border-color: var(--accent-color);
+}
+html.light-mode .btn-outline-accent:hover { color: #fff; }
+
+/* --- Główne Kontenery i Formularze --- */
+.market-header {
+    background-color: var(--secondary-bg);
+    border: 1px solid var(--border-color);
+}
+.market-content-wrapper {
+    background-color: var(--secondary-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 0.75rem;
+    padding: 1.5rem;
+}
+@media (min-width: 768px) { .market-content-wrapper { padding: 2rem; } }
+
+.form-control-dark {    
+    background-color: var(--card-bg);   
+    border: 1px solid var(--border-color);   
+    color: var(--primary-text);    
+}
+.form-control-dark::placeholder { color: var(--secondary-text); opacity: 0.7; }
+.form-control-dark:focus {    
+    background-color: var(--card-bg);   
+    border-color: var(--accent-color);   
+    box-shadow: 0 0 0 0.25rem rgba(var(--accent-color-rgb), 0.25);    
+    color: var(--primary-text);    
+}
+#search-form .btn i { color: var(--secondary-text); }
+
+/* --- Nawigacja Kategorii (Filtry) --- */
+.nav-container {    
+    overflow-x: auto;    
+    -ms-overflow-style: none;    
+    scrollbar-width: none;    
+}
+.nav-container::-webkit-scrollbar { display: none; }
+.nav-container .nav-btn {
+    background: none; border: none; padding: 0.75rem 1rem;    
+    color: var(--secondary-text);
+    font-weight: 600; white-space: nowrap;    
+    border-bottom: 3px solid transparent;
+    transition: color 0.3s, border-color 0.3s;
+}
+.nav-container .nav-btn:hover { color: var(--accent-color); }
+.nav-container .nav-btn.nav-active {    
+    color: var(--accent-color);    
+    border-bottom-color: var(--accent-color);    
+}
+/* --- Navigation --- */
+.navbar.fixed-top {
+    background-color: var(--navbar-bg);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--border-color);
+    transition: background-color 0.3s, border-color 0.3s;
+}
+
+.navbar-brand {
+    font-weight: 700;
+    color: var(--heading-text); /* Usunięto !important na rzecz specyficzności */
+}
+
+.nav-link {
+    color: var(--secondary-text);
+    transition: color 0.2s ease-in-out; /* Dodano płynne przejście */
+}
+
+.nav-link:hover, .nav-link:focus {
+    color: var(--heading-text);
+}
+
+/* NOWOŚĆ: Styl dla aktywnego linku (bieżąca strona) */
+.nav-link.active {
+    color: var(--accent-color) !important;
+    font-weight: 500;
+}
+
+/* NOWOŚĆ: Poprawki dla ikony menu mobilnego */
+.navbar-toggler {
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+.navbar-toggler-icon {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(255, 255, 255, 0.7)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+}
+
+/* Ikona menu mobilnego w trybie jasnym */
+html.light-mode .navbar-toggler-icon {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(33, 37, 41, 0.7)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+}
+html.light-mode .navbar-toggler {
+    border-color: rgba(0, 0, 0, 0.1);
+}
+
+/* --- Tabela Rynku --- */
+.table-dark-custom {
+    --bs-table-bg: transparent; 
+    --bs-table-color: var(--primary-text);
+    --bs-table-border-color: var(--border-color); 
+    --bs-table-hover-bg: var(--card-bg);
+    --bs-table-hover-color: var(--primary-text);    
+    color: var(--primary-text);
+}
+.table-dark-custom th {
+    color: var(--secondary-text);
+    text-transform: uppercase;    
+    font-weight: 600;    
+    font-size: 0.8rem;
+    white-space: nowrap;
+    position: relative;
+    padding-right: 20px;
+    user-select: none;
+}
+.table-dark-custom th.sortable { cursor: pointer; }
+.table-dark-custom th.sortable:hover { color: var(--primary-text); }
+
+.table-dark-custom th.sortable::after {
+    content: '\f0dc'; /* neutral sort icon */
+    font-family: 'Font Awesome 6 Free';
+    font-weight: 900;
+    position: absolute;
+    right: 8px;
+    top: 50%;
+    transform: translateY(-50%);
+    opacity: 0.4;
+    font-size: 0.8rem;
+    transition: opacity 0.2s;
+}
+.table-dark-custom th.sortable.asc::after { content: '\f0de'; opacity: 1; color: var(--success-color); }
+.table-dark-custom th.sortable.desc::after { content: '\f0dd'; opacity: 1; color: var(--danger-color); }
+.loader-container {    
+    display: flex;    
+    justify-content: center;    
+    align-items: center;    
+    min-height: 20rem;    
+}
+
+/* --- Okna Modalne --- */
+.modal-content {
+    background-color: var(--secondary-bg);
+    border: 1px solid var(--border-color);
+    color: var(--primary-text);
+}
+.modal-header, .modal-footer { border-color: var(--border-color); }
+.btn-close {
+    filter: invert(1) grayscale(100%) brightness(200%); /* Make it always white */
+}
+html.light-mode .btn-close { filter: none; }
+#modal-coin-description { color: var(--secondary-text); }
+
+@media (max-width: 768px) {
+    #coinModal .modal-body { max-height: 60vh; overflow-y: auto; }
+}
+.modal-body::-webkit-scrollbar { width: 6px; }
+.modal-body::-webkit-scrollbar-thumb { background-color: var(--accent-color); border-radius: 3px; }
+.modal-body::-webkit-scrollbar-track { background-color: var(--card-bg); }
+
+.chart-filter-btn {
+    background: none;
+    border: 1px solid var(--border-color);
+    color: var(--secondary-text);
+    padding: 3px 10px; font-size: 0.85rem; border-radius: 5px;
+    transition: all 0.2s;
+}
+.chart-filter-btn:hover:not(.active) { color: var(--accent-color); border-color: var(--accent-color); }
+.chart-filter-btn.active {
+    background-color: var(--accent-color);
+    color: #111;
+    border-color: var(--accent-color);
+}
+html.light-mode .chart-filter-btn.active { color: #fff; }
+
+/* --- Stopka --- */
+footer {    
+    background-color: var(--secondary-bg);    
+    padding: 4rem 0 2rem;
+    border-top: 1px solid var(--border-color);
+}
+footer .footer-heading { color: var(--accent-color); font-weight: 600; }
+footer a { color: var(--secondary-text); text-decoration: none; transition: color 0.2s; }
+footer a:hover { color: var(--accent-color); }
+footer .btn-social {
+    width: 40px; height: 40px; border-radius: 50%;
+    display: inline-flex; align-items: center; justify-content: center;
+    border: 1px solid var(--border-color); color: var(--secondary-text);
+    transition: all 0.3s ease;
+}
+footer .btn-social:hover {    
+    background-color: var(--accent-color);    
+    color: #111 !important;    
+    border-color: var(--accent-color);
+    transform: translateY(-3px);
+}
+html.light-mode footer .btn-social:hover { color: #fff !important; }
+
+/* --- Przycisk Powrotu na Górę --- */
+#scrollTopBtn {
+    position: fixed; right: 25px; bottom: 25px; z-index: 1030;
+    opacity: 0; visibility: hidden;
+    width: 45px; height: 45px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.2rem;
+    background-color: var(--accent-color);
+    color: #111;
+    border: none;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    transition: all 0.3s ease;
+    text-decoration: none;
+}
+html.light-mode #scrollTopBtn { color: #fff; }
+#scrollTopBtn.show { opacity: 1; visibility: visible; }
+#scrollTopBtn:hover {    
+    transform: translateY(-5px);
+    box-shadow: 0 6px 20px var(--accent-glow);
+}
+@media (max-width: 767px) { #scrollTopBtn { right: 15px; bottom: 15px; } }
+
+</style>
+</head>
+<body> <div id="page-preloader"><div class="loader"></div></div>
+
+<nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+    <div class="container">
+        <a class="navbar-brand" href="index.html">Fox24<span class="text-gold">Coin</span></a>
+
+        <div class="d-flex align-items-center d-lg-none">
+            <button id="theme-toggle-mobile" class="btn btn-sm btn-outline-gold me-2" aria-label="Toggle theme">
+                <i class="fas fa-sun"></i>
+            </button>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        </div>
+
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto align-items-lg-center">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="homeDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Home</a>
+                    <ul class="dropdown-menu" aria-labelledby="homeDropdown">
+                        <li><a class="dropdown-item" href="index.html">Home</a></li>
+                        <li><a class="dropdown-item" href="widget.html">Widget</a></li>
+                        <li><a class="dropdown-item" href="market.html">Crypto Market</a></li>
+                        <li><a class="dropdown-item" href="https://fox24coin.com/scam-protection.html">Scam protection</a></li>
+                        <li><a class="dropdown-item" href="vision.html">Fox24 Vision</a></li>
+                        <li><a class="dropdown-item" href="audit.html">Community audit <span class="badge bg-primary rounded-pill" style="font-size: 0.6em; vertical-align: middle; margin-left: 4px;">NEW</span></a></li>
+                    </ul>
+                </li>
+                <li class="nav-item"><a class="nav-link" href="tokenomics.html">Tokenomics</a></li>
+                <li class="nav-item"><a class="nav-link" href="roadmap.html">Roadmap</a></li>
+                <li class="nav-item"><a class="nav-link" href="team2.html">Team</a></li>
+                <li class="nav-item"><a class="nav-link" href="blog.php">Blog</a></li>
+                <li class="nav-item"><a class="nav-link" href="index.html#contact">Contact</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fox24coin.com/uniswap.html">Price on Uniswap</a></li>
+                
+                <li class="nav-item ms-lg-3">
+                    <a class="nav-link" href="https://github.com/rto-gtc/0xED9114c614aD6b948a1EA21f062F6e1D0b4e8308" target="_blank" aria-label="GitHub Repository" style="padding-top: 0.5rem; padding-bottom: 0.5rem;">
+                        <i class="fab fa-github fa-lg"></i>
+                    </a>
+                </li>
+
+                <li class="nav-item d-none d-lg-flex align-items-center ms-lg-2">
+                    <button id="theme-toggle" class="btn btn-sm btn-outline-gold" aria-label="Toggle theme">
+                        <i class="fas fa-sun"></i>
+                    </button>
+                </li>
+                
+                <li class="nav-item ms-lg-3">
+                    <a class="btn btn-warning" href="whitepaper.pdf" target="_blank">Whitepaper</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<main class="container my-5">
+    <header class="p-4 p-md-5 mb-5 rounded-3 market-header text-center text-md-start">
+        <h1 class="display-5 fw-bold mb-3">
+            <i class="fas fa-chart-line text-accent me-3"></i>Crypto Market
+        </h1>
+        <p class="fs-5 text-secondary-custom mb-3">
+            Explore real-time cryptocurrency data across global exchanges. Track price movements, analyze trends,
+            and stay ahead of market shifts with accurate, <strong>live pricing powered by Binance API</strong>.
+        </p>
+        <p class="fs-6 text-secondary-custom mb-0">
+            Discover trending tokens, compare top coins like <strong>Bitcoin (BTC)</strong>, <strong>Ethereum (ETH)</strong>,
+            and <strong>Fox24Coin (FOX)</strong>, and access vital information such as market cap, 24h volume, and price change, <strong>using reliable data from CoinGecko</strong>.
+        </p>
+    </header>
+
+    <div class="market-content-wrapper">
+        <div id="search-container" class="mb-4">
+            <form id="search-form" class="position-relative">
+                <input type="text" id="search-input" class="form-control form-control-dark form-control-lg" placeholder="Search for a cryptocurrency (e.g., Bitcoin)...">
+                <button type="submit" class="btn position-absolute top-50 end-0 translate-middle-y me-3" aria-label="Search" disabled>
+                    <i class="fas fa-search"></i>
+                </button>
+            </form>
+        </div>
+
+        <div class="border-bottom border-secondary mb-4">
+            <nav id="category-nav" class="nav-container d-flex"></nav>
+        </div>
+
+        <div id="data-view">
+            <h2 id="view-title" class="mb-4 text-accent">Loading...</h2>
+            <div class="table-responsive">
+                <table class="table table-dark-custom table-hover mb-0">
+                    <thead id="crypto-table-head">
+                        <tr>
+                            <th class="ps-4 sortable" data-sort="market_cap_rank">#</th>
+                            <th class="sortable" data-sort="name">Name</th>
+                            <th class="text-end sortable" data-sort="current_price">Price (USD)</th>
+                            <th class="text-end sortable" data-sort="price_change_percentage_24h">24h Change</th>
+                            <th class="text-end pe-4 d-none d-sm-table-cell sortable" data-sort="market_cap">Market Cap</th>
+                            <th class="text-center">AI Insights</th>
+                        </tr>
+                    </thead>
+                    <tbody id="crypto-list"></tbody>
+                </table>
+            </div>
+            <div id="loader" class="loader-container"><div class="loader"></div></div>
+            <div id="error-message" class="hidden mt-4 p-4 alert alert-danger"></div>
+        </div>
+    </div>
+</main>
+
+<div class="modal fade" id="coinModal" tabindex="-1" aria-labelledby="coinModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title text-accent" id="coinModalLabel"><span id="modal-coin-name-details">Loading...</span></h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div id="modal-content-loader" class="text-center py-5">
+                    <div class="spinner-border text-accent" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                    </div>
+                </div>
+                <div id="modal-coin-data" class="d-none">
+                    <div class="row mb-4 align-items-center">
+                        <div class="col-12 col-md-4 text-center">
+                            <img id="modal-coin-logo" src="" alt="Coin logo" class="img-fluid mb-3" style="max-height: 80px;">
+                        </div>
+                        <div class="col-12 col-md-8 text-md-start text-center">
+                            <p class="fs-4 fw-bold text-accent mb-2" id="modal-coin-price">$0.00</p>
+                            <p class="mb-1 text-secondary-custom">Market Cap: <strong class="text-primary" id="modal-coin-marketcap"></strong></p>
+                            <p class="text-secondary-custom">Volume (24h): <strong class="text-primary" id="modal-coin-volume"></strong></p>
+                        </div>
+                    </div>
+                    
+                    <h6 class="text-accent border-bottom border-secondary pb-2 mt-4">Project Description</h6>
+                    <div id="modal-coin-description" class="mb-4 small"></div>
+
+                    <h6 class="text-accent border-bottom border-secondary pb-2">Price Chart</h6>
+                    <div class="mb-2 d-flex justify-content-end gap-2" id="chart-filters">
+                        <button class="chart-filter-btn" data-days="1">1D</button>
+                        <button class="chart-filter-btn active" data-days="7">7D</button>
+                        <button class="chart-filter-btn" data-days="30">1M</button>
+                        <button class="chart-filter-btn" data-days="365">1Y</button>
+                    </div>
+                    <div class="chart-container" style="height: 300px;">
+                        <canvas id="coinChart"></canvas>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <a id="modal-coin-link" href="#" target="_blank" class="btn btn-accent d-none">Official Website</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="aiInsightsModal" tabindex="-1" aria-labelledby="aiInsightsModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title text-accent" id="aiInsightsModalLabel"><i class="fas fa-robot me-2"></i> AI Insights for <span id="modal-coin-name-ai">Loading...</span></h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div id="ai-prediction-output">
+                    <div class="text-center py-3 text-accent">
+                        <i class="fas fa-spinner fa-spin me-2"></i> Generating AI insights...
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer class="text-bg-dark">
+  <div class="container py-5">
+    <div class="row g-5">
+      
+      <div class="col-lg-4 col-md-6">
+        <h4 class="footer-heading mb-4 text-uppercase text-warning">FOX24Coin</h4>
+        <p class="text-secondary mb-3">Bridging Trust and Technology</p>
+        <div class="d-flex pt-2 gap-2">
+          <a href="https://t.me/fox24coin" target="_blank" class="btn btn-social" aria-label="Telegram">
+            <i class="fab fa-telegram"></i>
+          </a>
+          <a href="https://x.com/fox24coin" target="_blank" class="btn btn-social" aria-label="Twitter">
+            <i class="fab fa-twitter"></i>
+          </a>
+          <a href="https://www.facebook.com/profile.php?id=61575920820740" target="_blank" class="btn btn-social" aria-label="Facebook">
+            <i class="fab fa-facebook-f"></i>
+          </a>
+          <a href="https://discord.com/channels/1415882766930677774/1415883138810511451" target="_blank" class="btn btn-social" aria-label="Discord">
+            <i class="fab fa-discord"></i>
+          </a>
+        </div>
+      </div>
+
+      <div class="col-lg-2 col-md-6">
+        <h4 class="footer-heading mb-4 text-uppercase text-warning">Links</h4>
+        <ul class="list-unstyled mb-0">
+          <li><a class="link-secondary d-block mb-2" href="roadmap.html">Roadmap</a></li>
+          <li><a class="link-secondary d-block mb-2" href="team2.html">Our Team</a></li>
+          <li><a class="link-secondary d-block mb-2" href="index.html#contact">Contact Us</a></li>
+          <li><a class="link-secondary d-block mb-2" href="widget.html">Widget</a></li>
+          <li><a class="link-secondary d-block mb-2" href="market.html">Crypto Market</a></li>
+          <li><a class="link-secondary d-block" href="scam-protection.html">Scam Protection</a></li>
+          <li><a class="link-secondary d-block" href="index.html">Home</a></li>
+          <li><a class="link-secondary d-block" href="vision.html">Fox24 Vision</a></li>
+
+        </ul>
+      </div>
+
+      <div class="col-lg-3 col-md-6">
+        <h4 class="footer-heading mb-4 text-uppercase text-warning">Resources</h4>
+        <ul class="list-unstyled mb-0">
+          <li><a class="link-secondary d-block mb-2" href="tokenomics.html">Tokenomics</a></li>
+          <li><a class="link-secondary d-block mb-2" href="whitepaper.pdf" target="_blank">Whitepaper</a></li>
+          <li><a class="link-secondary d-block mb-2" href="index.html#hero">Join Presale</a></li>
+          <li><a class="link-secondary d-block mb-2" href="https://fox24coin-1.dexkit.app/">DEX Exchange</a></li>
+          <li><a class="link-secondary d-block mb-2" href="https://www.coingecko.com">Coingecko</a></li>
+          <li><a class="link-secondary d-block mb-2" href="https://coinmarketcap.com">Coinmarketcap</a></li>
+          <li><a class="link-secondary d-block" href="https://etherscan.io">Etherscan</a></li>
+        </ul>
+      </div>
+
+      <div class="col-lg-3 col-md-6">
+        <h4 class="footer-heading mb-4 text-uppercase text-warning">Contact Info</h4>
+        <ul class="list-unstyled text-secondary mb-0">
+          <li class="d-flex mb-3">
+            <i class="fa fa-map-marker-alt me-3 pt-1 text-warning"></i>
+            Henryka Sienkiewicza 85/87/lok. 1,<br>90-057 Łódź
+          </li>
+          <li class="d-flex mb-3">
+            <i class="fa fa-phone-alt me-3 pt-1 text-warning"></i>+48 698 000 441
+          </li>
+          <li class="d-flex">
+            <i class="fa fa-envelope me-3 pt-1 text-warning"></i>support@fox24coin.com
+          </li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="container border-top border-secondary py-4">
+    <div class="row align-items-center">
+      <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+        &copy; <a class="fw-bold text-warning text-decoration-none" href="#">Fox24Coin</a>, All Rights Reserved.
+      </div>
+      <div class="col-md-6 text-center text-md-end">
+        <a href="Privacy-Policy-and-Cookies-Policy.html" class="link-secondary text-decoration-none">Privacy & Cookies Policy</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<div class="modal fade" id="buyEthModal" tabindex="-1" aria-labelledby="buyEthModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" style="max-width: 400px;">
+      <div class="modal-content" style="border-radius: 16px; overflow: hidden; height: 600px;">
+          <div class="modal-body p-0" style="height: 100%;">
+              <iframe
+                  id="transakIframe"
+                  src="https://global-stg.transak.com/?apiKey=7b47aa0b-ef9d-43b9-b6a3-c1c21dbf22c8"
+                  allow="camera;microphone;payment"
+                  style="height: 100%; width: 100%; border: none;">
+              </iframe>
+          </div>
+      </div>
+  </div>
+</div>
+
+<a href="#" id="scrollTopBtn" aria-label="Scroll to top"><i class="fa fa-arrow-up"></i></a>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+
+    // === POPRAWIONY I UJEDNOLICONY SKRYPT PRZEŁĄCZNIKA MOTYWU ===
+    const themeToggleButtons = document.querySelectorAll('#theme-toggle, #theme-toggle-mobile');
+    const scrollTopBtn = document.getElementById('scrollTopBtn');
+    const htmlEl = document.documentElement;
+
+    /* -------------------------------
+     * THEME TOGGLE LOGIC
+     * ------------------------------- */
+    if (themeToggleButtons.length > 0) {
+        
+        // Funkcja do aktualizacji ikon na WSZYSTKICH przyciskach
+        const updateIcons = (theme) => {
+            themeToggleButtons.forEach(button => {
+                const icon = button.querySelector('i');
+                if (icon) {
+                    icon.classList.toggle('fa-sun', theme === 'dark');
+                    icon.classList.toggle('fa-moon', theme === 'light');
+                }
+            });
+        };
+
+        // Funkcja do zastosowania motywu na stronie
+        const applyTheme = (theme) => {
+            htmlEl.classList.toggle('light-mode', theme === 'light');
+            updateIcons(theme);
+        };
+
+        // Zastosuj motyw przy ładowaniu strony
+        const currentTheme = localStorage.getItem('theme') || 'dark';
+        applyTheme(currentTheme);
+
+        // Dodaj nasłuchiwanie do KAŻDEGO przycisku
+        themeToggleButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const newTheme = htmlEl.classList.contains('light-mode') ? 'dark' : 'light';
+                localStorage.setItem('theme', newTheme);
+                applyTheme(newTheme);
+            });
+        });
+    }
+
+    /* -------------------------------
+     * BACK TO TOP BUTTON LOGIC
+     * ------------------------------- */
+    if (scrollTopBtn) {
+        window.addEventListener('scroll', () => {
+            scrollTopBtn.classList.toggle('show', window.scrollY > 300);
+        });
+
+        scrollTopBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    }
+});
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
+
+<script>
+// =====================================================================================
+// CONSOLIDATED JAVASCRIPT: Table Logic + Dynamic Modal Logic (Chart.js)
+// =====================================================================================
+
+const COINGECKO_API_URL = "https://api.coingecko.com/api/v3";
+const BINANCE_PRICE_URL = "https://api.binance.com/api/v3/ticker/price";
+const LIVE_UPDATE_INTERVAL = 3000; // Price refresh every 3 seconds
+const API_DELAY_MS = 1500; // Delay before each CoinGecko API call (1.5 seconds)
+
+let priceChart = null; // Chart.js instance for the modal
+let liveUpdateTimer = null; // Binance live update timer ID
+let previousPrices = {}; // Storing previous prices for visual highlighting
+let currentCoinId = null; // Currently selected coin ID for chart filtering
+let isChartLoading = false; // NEW FIX: Flag to prevent multiple concurrent chart loads
+
+// Get Bootstrap modal instances globally once
+const coinModalElement = document.getElementById('coinModal');
+const aiModalElement = document.getElementById('aiInsightsModal');
+// Using native Bootstrap methods for better control:
+const coinModalInstance = bootstrap.Modal.getOrCreateInstance(coinModalElement);
+const aiModalInstance = bootstrap.Modal.getOrCreateInstance(aiModalElement);
+
+let isInitialLoad = true;
+let currentCoinData = [];
+let sortState = { column: 'market_cap_rank', direction: 'asc' };
+const API_LOAD_DELAY = 1000;
+ 
+// DOM Elements
+const navContainer = document.getElementById('category-nav');
+const cryptoList = document.getElementById('crypto-list');
+const loader = document.getElementById('loader');
+const errorDiv = document.getElementById('error-message');
+const viewTitle = document.getElementById('view-title');
+const searchForm = document.getElementById('search-form');
+const searchInput = document.getElementById('search-input');
+const tableHead = document.getElementById('crypto-table-head');
+const pagePreloader = document.getElementById('page-preloader');
+const backToTopButton = document.querySelector(".back-to-top");
+ 
+// Modal Details Elements
+const modalCoinNameDetails = document.getElementById('modal-coin-name-details');
+const modalCoinNameAI = document.getElementById('modal-coin-name-ai');
+const aiPredictionOutput = document.getElementById('ai-prediction-output');
+const chartFiltersContainer = document.getElementById('chart-filters');
+ 
+// Predefined categories
+const predefinedCategories = [
+    { id: 'smart-contract-platform', name: 'Smart Contracts' },
+    { id: 'meme-token', name: 'Meme Coins' },
+    { id: 'gaming', name: 'Gaming (GameFi)' },
+    { id: 'decentralized-finance-defi', name: 'DeFi' },
+    { id: 'layer-1', name: 'Layer 1' }
+];
+
+// --- UTILITY FUNCTIONS ---
+ 
+/**
+ * Promise-based delay function.
+ */
+const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
+
+const hidePreloader = () => {
+    if (isInitialLoad && pagePreloader) {
+        // Apply 1.5s delay to preloader removal
+        setTimeout(() => {
+            pagePreloader.classList.add('hidden');
+            isInitialLoad = false;
+        }, API_DELAY_MS);
+    }
+};
+ 
+/**
+ * Global function for formatting currency.
+ * @param {number} amount - The amount to format.
+ * @returns {string} Formatted currency string.
+ */
+const formatCurrencyGlobal = (amount) => {
+    if (amount === null || amount === undefined) return 'N/A';
+    return new Intl.NumberFormat('en-US', {
+        style: 'currency', currency: 'USD',
+        minimumFractionDigits: 2,
+        maximumFractionDigits: amount < 1 ? 8 : 2
+    }).format(amount);
+};
+
+// Zmieniono nazwę na 'formatCurrencyGlobal', aby uniknąć kolizji nazw, ale zachowano logikę formatowania.
+// Poprawki poniżej, by używały nowej, globalnej nazwy lub oryginalnych (teraz formatCurrency).
+const formatCurrency = formatCurrencyGlobal; // Alias dla spójności
+ 
+const formatBinancePrice = (price, originalPriceHint) => {
+    if (price === null || price === undefined) return 'N/A';
+    // Zachowuje logikę precyzji: 4 dla cen poniżej 100, 2 dla reszty
+    const precision = originalPriceHint < 100 ? 4 : 2; 
+    return new Intl.NumberFormat('en-US', {
+        style: 'currency', currency: 'USD',
+        minimumFractionDigits: 2,
+        maximumFractionDigits: precision
+    }).format(price);
+};
+
+const debounce = (func, delay) => {
+    let timeoutId;
+    return (...args) => {
+        clearTimeout(timeoutId);
+        timeoutId = setTimeout(() => { func.apply(this, args); }, delay);
+    };
+};
+ 
+// --- API FETCH FUNCTIONS (CoinGecko) with Delay ---
+ 
+async function fetchCoinDetails(coinId) {
+    await delay(API_DELAY_MS); // 1.5s delay before fetch
+    const url = `${COINGECKO_API_URL}/coins/${coinId}?localization=false&tickers=false&market_data=true&community_data=false&developer_data=false&sparkline=false`;
+    try {
+        const response = await fetch(url);
+        if (!response.ok) throw new Error("Error fetching details.");
+        return await response.json();
+    } catch (error) {
+        console.error(`CoinGecko API Error (details for ${coinId}):`, error);
+        // Używamy natywnego DOM, by zachować spójność
+        errorDiv.classList.remove('hidden');
+        errorDiv.textContent = 'Failed to load coin details. Please try again later.';
+        return null;
+    }
+}
+
+async function fetchCoinHistory(coinId, days = 7) {
+    await delay(API_DELAY_MS); // 1.5s delay before fetch
+     
+    // FIX: For 1D, we ask for 1 day of data which is hourly (24 points). 
+    // For >1D, CoinGecko samples data, so we don't need 'daily' explicitly for 7/30/365
+    const url = `${COINGECKO_API_URL}/coins/${coinId}/market_chart?vs_currency=usd&days=${days}`;
+     
+    try {
+        const response = await fetch(url);
+        if (!response.ok) throw new Error("Error fetching price history.");
+        return await response.json();
+    } catch (error) {
+        console.error(`CoinGecko API Error (history for ${coinId}):`, error);
+        return null;
+    }
+}
+
+// --- CHART RENDERING (Chart.js) ---
+
+function renderChart(historyData) {
+    const ctx = document.getElementById('coinChart').getContext('2d');
+     
+    if (priceChart) {
+        priceChart.destroy();
+    }
+
+    const prices = historyData.prices.map(p => p[1]);
+    const timestamps = historyData.prices.map(p => p[0]);
+     
+    const startPrice = prices[0];
+    const endPrice = prices[prices.length - 1];
+    const chartColor = endPrice >= startPrice ? 'rgb(33, 203, 105)' : 'rgb(255, 68, 88)';
+
+    priceChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: timestamps.map(ts => {
+                const date = new Date(ts);
+                // Smart formatting based on data point count
+                const days = Math.floor((timestamps[timestamps.length - 1] - timestamps[0]) / (1000 * 60 * 60 * 24));
+
+                if (days < 2) { // Less than 2 days (use hourly data)
+                    return date.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
+                } else if (days < 60) { // Less than 2 months (use day/month)
+                     return date.toLocaleDateString('en-US', { day: 'numeric', month: 'short' });
+                } else { // Longer periods (use month/year)
+                    return date.toLocaleDateString('en-US', { month: 'short', year: 'numeric' });
+                }
+            }),
+            datasets: [{
+                label: 'Price (USD)',
+                data: prices,
+                borderColor: chartColor,
+                backgroundColor: 'rgba(255, 255, 255, 0.05)',
+                borderWidth: 2,
+                pointRadius: 0,
+                tension: 0.2,
+                fill: true
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            interaction: {
+                mode: 'index',
+                intersect: false,
+            },
+            scales: {
+                x: {
+                    display: true,
+                    grid: { color: 'rgba(255, 255, 255, 0.1)' },
+                    ticks: { color: 'white' }
+                },
+                y: {
+                    display: true,
+                    grid: { color: 'rgba(255, 255, 255, 0.1)' },
+                    ticks: { 
+                        color: 'white',
+                        callback: function(value) {
+                            return formatCurrency(value);
+                        }
+                    }
+                }
+            },
+            plugins: {
+                legend: { display: false },
+                tooltip: {
+                    callbacks: {
+                        title: function(context) {
+                            const date = new Date(timestamps[context[0].dataIndex]);
+                            return date.toLocaleString('en-US', { 
+                                year: 'numeric', month: 'short', day: 'numeric', 
+                                hour: '2-digit', minute: '2-digit' 
+                            });
+                        },
+                        label: function(context) {
+                            return `Price: ${formatCurrency(context.parsed.y)}`;
+                        }
+                    }
+                }
+            }
+        }
+    });
+    isChartLoading = false; // FINALLY: Unlock the chart loading flag
+}
+
+// --- DYNAMIC MODAL LOGIC (DETAILS & CHART) ---
+ 
+async function updateChart(coinId, days) {
+    if (isChartLoading) return; // FIX: Prevent re-entry if chart is already loading
+    isChartLoading = true; // Lock the flag
+     
+    // 1. Set active button
+    chartFiltersContainer.querySelectorAll('.chart-filter-btn').forEach(btn => {
+        btn.classList.toggle('active', parseInt(btn.dataset.days) === days);
+    });
+
+    // 2. Show a temporary loader inside the chart area while fetching
+    const chartContainer = document.getElementById('coinChart').parentNode;
+    chartContainer.innerHTML = '<div class="text-center py-5 text-gold"><i class="fas fa-spinner fa-spin me-2"></i> Loading chart data...</div>';
+     
+    const history = await fetchCoinHistory(coinId, days);
+     
+    // 3. Restore canvas element
+    chartContainer.innerHTML = '<canvas id="coinChart"></canvas>';
+     
+    if (history && history.prices.length > 0) {
+        renderChart(history);
+    } else {
+        chartContainer.innerHTML = '<p class="text-center text-muted mt-4">No historical data available for this period.</p>';
+        isChartLoading = false; // Unlock here too if render fails
+    }
+}
+
+async function loadCoinData(coinId) {
+    currentCoinId = coinId;
+     
+    // 1. Reset UI and show main loader
+    errorDiv.classList.add('hidden'); // Używamy globalnego errorDiv dla spójności
+    errorDiv.textContent = ''; // Używamy natywnego DOM
+    document.getElementById('modal-coin-data').classList.add('d-none'); // Używamy natywnego DOM
+    document.getElementById('modal-content-loader').classList.remove('d-none'); // Używamy natywnego DOM
+     
+    // 2. Fetch data
+    const details = await fetchCoinDetails(coinId);
+     
+    if (!details) {
+        modalCoinNameDetails.textContent = "Error loading details.";
+        document.getElementById('modal-content-loader').classList.add('d-none');
+        return;
+    }
+
+    // 3. Populate modal
+    const marketData = details.market_data;
+
+    modalCoinNameDetails.textContent = `${details.name} (${details.symbol.toUpperCase()})`;
+    document.getElementById('modal-coin-logo').setAttribute('src', details.image.large); // Używamy natywnego DOM
+    document.getElementById('modal-coin-price').textContent = formatCurrency(marketData.current_price.usd); // Używamy natywnego DOM
+    document.getElementById('modal-coin-marketcap').textContent = formatCurrency(marketData.market_cap.usd); // Używamy natywnego DOM
+    document.getElementById('modal-coin-volume').textContent = formatCurrency(marketData.total_volume.usd); // Używamy natywnego DOM
+     
+    // Description (Priority: EN, fallback: PL)
+    const description = details.description.en || details.description.pl || 'No description available.';
+    document.getElementById('modal-coin-description').innerHTML = description; // Używamy natywnego DOM
+
+    // Link
+    const homepage = details.links.homepage.find(url => url !== '');
+    const modalLink = document.getElementById('modal-coin-link');
+    modalLink.setAttribute('href', homepage || '#');
+    modalLink.classList.toggle('d-none', !homepage);
+
+    // 4. Load default 7D chart (default filter button is 1D, but initial logic was 7D, so we force 7D here)
+    await updateChart(coinId, 7);
+
+    // 5. Hide loader and show data
+    document.getElementById('modal-content-loader').classList.add('d-none'); // Używamy natywnego DOM
+    document.getElementById('modal-coin-data').classList.remove('d-none'); // Używamy natywnego DOM
+}
+
+// --- MAIN TABLE LOGIC (CoinGecko + Binance Live) ---
+
+const prepareForDataLoad = () => {
+    cryptoList.innerHTML = '';
+    loader.classList.remove('hidden');
+    errorDiv.classList.add('hidden');
+    if (liveUpdateTimer) {
+        clearInterval(liveUpdateTimer);
+    }
+};
+
+const deactivateAllTabs = () => {
+    navContainer.querySelectorAll('button').forEach(button => button.classList.remove('nav-active'));
+};
+
+const showError = (message) => {
+    errorDiv.innerHTML = `<i class="fas fa-exclamation-triangle me-2"></i> ${message}`;
+    errorDiv.classList.remove('hidden');
+    cryptoList.innerHTML = `<tr><td colspan="6" class="text-center py-5 text-silver">Could not load data.</td></tr>`;
+};
+
+const renderMarketData = (coins) => {
+    cryptoList.innerHTML = '';
+    if (!coins || coins.length === 0) {
+        cryptoList.innerHTML = `<tr><td colspan="6" class="text-center py-5 text-silver">No data to display.</td></tr>`;
+        return;
+    }
+     
+    coins.forEach(coin => {
+        const priceChange = coin.price_change_percentage_24h;
+        const priceChangeColor = priceChange >= 0 ? 'text-success' : 'text-danger';
+        const priceChangeIcon = priceChange >= 0 ? 'fas fa-arrow-up' : 'fas fa-arrow-down';
+         
+        const binanceSymbol = (coin.symbol + 'USDT').toUpperCase().replace(/\s/g, ''); 
+         
+        const row = `
+            <tr data-coin-id="${coin.id}" data-coin-name="${coin.name}" data-coin-symbol="${coin.symbol}" style="cursor: pointer;">
+                <td class="ps-4 text-silver">${coin.market_cap_rank || 'N/A'}</td>
+                <td>
+                    <div class="d-flex align-items-center">
+                        <img class="rounded-circle me-3" src="${coin.image}" alt="${coin.name} logo" style="width: 32px; height: 32px;">
+                        <div>
+                            <div class="fw-bold text-white">${coin.name}</div>
+                            <div class="text-uppercase text-silver small">${coin.symbol}</div>
+                        </div>
+                    </div>
+                </td>
+                <td class="text-end fw-bold text-white" 
+                    data-live-price="${binanceSymbol}" 
+                    id="price-${binanceSymbol}">
+                    ${formatCurrency(coin.current_price)}
+                </td>
+                <td class="text-end ${priceChangeColor}">
+                    <i class="${priceChangeIcon} small me-1"></i>
+                    ${priceChange ? priceChange.toFixed(2) : '0.00'}%
+                </td>
+                <td class="text-end pe-4 text-silver d-none d-sm-table-cell">${formatCurrency(coin.market_cap)}</td>
+                <td class="text-center">
+                    <button class="btn btn-sm btn-ai-insights" 
+                            data-bs-toggle="modal" 
+                            data-bs-target="#aiInsightsModal"
+                            data-coin-id="${coin.id}" 
+                            data-coin-name="${coin.name}"
+                            data-coin-data='${JSON.stringify(coin)}'>
+                        <i class="fas fa-robot me-1"></i> AI Insights
+                    </button>
+                </td>
+            </tr>`;
+        cryptoList.innerHTML += row;
+    });
+};
+
+// --- LIVE UPDATE CEN Z BINANCE ---
+
+const updateLivePrices = async () => {
+    const symbols = [...cryptoList.querySelectorAll('[data-live-price]')]
+                            .map(el => el.getAttribute('data-live-price'))
+                            .filter((value, index, self) => self.indexOf(value) === index);
+
+    if (symbols.length === 0) return;
+
+    const fetchPromises = symbols.map(symbol => {
+        return fetch(`${BINANCE_PRICE_URL}?symbol=${symbol}`)
+            .then(res => res.ok ? res.json() : { symbol, price: null })
+            .catch(() => ({ symbol, price: null }));
+    });
+
+    const prices = await Promise.all(fetchPromises);
+
+    prices.forEach(priceData => {
+        const symbol = priceData.symbol;
+        const newPrice = priceData.price ? parseFloat(priceData.price) : null;
+         
+        const priceCell = document.getElementById(`price-${symbol}`);
+         
+        if (priceCell && newPrice !== null) {
+            const oldPriceText = priceCell.textContent;
+            // Pobieranie wartości numerycznej z formatowanego stringa (np. "$1,234.56" -> 1234.56)
+            const originalPriceHint = parseFloat(oldPriceText.replace(/[^0-9.]/g, '')); 
+             
+            const formattedPrice = formatBinancePrice(newPrice, originalPriceHint);
+             
+            if (newPrice !== previousPrices[symbol]) {
+                priceCell.classList.add('live-update-changed');
+                priceCell.textContent = formattedPrice;
+
+                setTimeout(() => {
+                    priceCell.classList.remove('live-update-changed');
+                }, 500);
+            }
+            previousPrices[symbol] = newPrice;
+        }
+    });
+};
+
+const startLivePriceUpdates = () => {
+    if (liveUpdateTimer) {
+        clearInterval(liveUpdateTimer);
+    }
+    updateLivePrices(); 
+    liveUpdateTimer = setInterval(updateLivePrices, LIVE_UPDATE_INTERVAL);
+};
+
+// --- SORTING AND DATA FETCHING ---
+
+const sortData = (column, direction) => {
+    // Sortowanie odbywa się na currentCoinData (globalnej zmiennej przechowującej ostatnio załadowane dane)
+    const sortedData = [...currentCoinData].sort((a, b) => {
+        const valA = a[column];
+        const valB = b[column];
+
+        // Obsługa null/undefined - przenosi na koniec
+        if (valA === null || valA === undefined) return 1;
+        if (valB === null || valB === undefined) return -1;
+
+        if (typeof valA === 'string') {
+            return direction === 'asc' ? valA.localeCompare(valB) : valB.localeCompare(valA);
+        } else {
+            return direction === 'asc' ? valA - valB : valB - valA;
+        }
+    });
+    renderMarketData(sortedData);
+    startLivePriceUpdates();
+};
+
+const updateSortIndicators = () => {
+    tableHead.querySelectorAll('th.sortable').forEach(th => {
+        th.classList.remove('asc', 'desc');
+        if (th.dataset.sort === sortState.column) {
+            th.classList.add(sortState.direction);
+        }
+    });
+};
+
+const fetchCategoryData = async (categoryId) => {
+    await delay(API_DELAY_MS); // 1.5s delay before fetch
+    const url = `${COINGECKO_API_URL}/coins/markets?vs_currency=usd&category=${categoryId}&order=market_cap_desc&per_page=50&page=1&sparkline=false`;
+    try {
+        const response = await fetch(url);
+        if (!response.ok) throw new Error(`HTTP Error: ${response.status}`);
+        currentCoinData = await response.json();
+        sortState = { column: 'market_cap_rank', direction: 'asc' };
+        sortData(sortState.column, sortState.direction);
+        updateSortIndicators();
+    } catch (error) {
+        showError("Failed to fetch data for this category.");
+    } finally {
+        loader.classList.add('hidden');
+        hidePreloader();
+    }
+};
+
+const switchCategoryView = (categoryId, name) => {
+    viewTitle.textContent = name;
+    prepareForDataLoad();
+    searchInput.value = '';
+    navContainer.querySelectorAll('button').forEach(button => {
+        button.classList.toggle('nav-active', button.dataset.categoryId === categoryId);
+    });
+
+    setTimeout(() => {
+        fetchCategoryData(categoryId);
+    }, API_LOAD_DELAY);
+};
+
+const renderCategoryTabs = (categories) => {
+    navContainer.innerHTML = '';
+    categories.forEach((category, index) => {
+        const button = document.createElement('button');
+        button.className = 'nav-btn';
+        button.textContent = category.name;
+        button.dataset.categoryId = category.id;
+        button.onclick = () => switchCategoryView(category.id, category.name);
+        navContainer.appendChild(button);
+        if (index === 0) {
+            switchCategoryView(category.id, category.name);
+        }
+    });
+};
+
+const handleSearch = async (query) => {
+    if (!query) {
+        switchCategoryView(predefinedCategories[0].id, predefinedCategories[0].name);
+        return;
+    }
+    viewTitle.textContent = `Search results for: "${query}"`;
+    prepareForDataLoad();
+    deactivateAllTabs();
+
+    setTimeout(async () => {
+        try {
+            await delay(API_DELAY_MS); // 1.5s delay before fetch (Search)
+            const searchUrl = `${COINGECKO_API_URL}/search?query=${encodeURIComponent(query)}`;
+            let response = await fetch(searchUrl);
+            if (!response.ok) throw new Error('Search API error.');
+            let data = await response.json();
+
+            if (!data.coins || data.coins.length === 0) { renderMarketData([]); return; }
+            const coinIds = data.coins.slice(0, 50).map(coin => coin.id).join(',');
+            if (!coinIds) { renderMarketData([]); return; }
+
+            await delay(API_DELAY_MS); // 1.5s delay before fetch (Market Data)
+            const marketsUrl = `${COINGECKO_API_URL}/coins/markets?vs_currency=usd&ids=${coinIds}`;
+            response = await fetch(marketsUrl);
+            if (!response.ok) throw new Error('Market data API error.');
+            currentCoinData = await response.json();
+            sortState = { column: 'market_cap_rank', direction: 'asc' };
+            sortData(sortState.column, sortState.direction);
+            updateSortIndicators();
+        } catch (error) {
+            showError("The search could not be completed.");
+        } finally {
+            loader.classList.add('hidden');
+        }
+    }, API_LOAD_DELAY);
+};
+
+// --- INITIALIZATION AND EVENT HANDLERS ---
+
+$(document).ready(function() {
+     
+    // 1. Scroll handling (Back-to-top)
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 100) { 
+            backToTopButton.classList.add('show'); 
+        } else { 
+            backToTopButton.classList.remove('show'); 
+        }
+    });
+     
+    // 2. Initialize categories and first view
+    renderCategoryTabs(predefinedCategories);
+
+    // 3. Column sorting handler
+    tableHead.addEventListener('click', (e) => {
+        const header = e.target.closest('th.sortable');
+        if (!header) return;
+
+        const column = header.dataset.sort;
+        let direction = 'desc';
+
+        if (sortState.column === column) {
+            direction = sortState.direction === 'asc' ? 'desc' : 'asc';
+        } else if (column === 'name' || column === 'market_cap_rank') {
+            direction = 'asc';
+        }
+
+        sortState = { column, direction };
+        sortData(column, direction);
+        updateSortIndicators();
+    });
+
+    // 4. Search handling
+    const debouncedSearch = debounce(handleSearch, 1500);
+    searchInput.addEventListener('input', (e) => debouncedSearch(e.target.value.trim()));
+    searchForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        handleSearch(searchInput.value.trim());
+    });
+
+    // 5. Handling table row click -> Open Details Modal
+    // Użyto delegowania zdarzeń jQuery
+    $('#crypto-list').on('click', 'tr[data-coin-id]', function(event) {
+        // Pomija kliknięcie na przycisku AI Insights
+        if ($(event.target).closest('.btn-ai-insights').length) {
+            return; 
+        }
+        const coinId = $(this).data('coin-id'); 
+         
+        if (coinId) {
+            coinModalInstance.show();
+            loadCoinData(coinId); 
+        }
+    });
+
+    // 6. Handling Chart Filter button clicks
+    chartFiltersContainer.addEventListener('click', (e) => {
+        const button = e.target.closest('.chart-filter-btn');
+        if (button && currentCoinId && !isChartLoading) { // Check if chart is NOT loading
+            const days = parseInt(button.dataset.days);
+            updateChart(currentCoinId, days);
+        }
+    });
+     
+    // 7. Handling AI Insights button click - POBIERANIE DANYCH Z AI.PHP
+    $('#crypto-list').on('click', '.btn-ai-insights', async function() {
+        const button = this; // Natywny element DOM
+        const $button = $(this); // Element jQuery do obsługi data-*
+
+        const coinDataAttr = $button.data('coin-data');
+        const coinName = $button.data('coin-name');
+        
+        // --- Zarządzanie stanem: Wyłącz przycisk i pokaż ładowanie ---
+        const originalButtonHtml = button.innerHTML; // Zapisz oryginalny HTML
+        button.disabled = true;
+        button.innerHTML = '<i class="fas fa-sync-alt fa-spin"></i> Analizowanie...'; // Tekst po polsku
+
+        modalCoinNameAI.textContent = coinName;
+
+        // Ładowanie w Modalu (zakładamy, że klasy CSS 'text-gold', 'fade-in' są zdefiniowane)
+        aiPredictionOutput.innerHTML = `
+            <div class="text-center py-4 text-gold fade-in">
+                <i class="fas fa-spinner fa-spin me-2"></i> Generowanie analizy AI...
+                <p class="mt-2 small text-silver">Analizowanie danych historycznych i sentymentu rynkowego...</p>
+            </div>`;
+        aiModalInstance.show();
+
+        try {
+            // --- Walidacja danych (minimalna) ---
+            if (!coinDataAttr || typeof coinDataAttr.current_price === 'undefined') {
+                 throw new Error('Brakujące dane do kalkulacji AI.');
+            }
+
+            await delay(API_DELAY_MS); // Symulacja opóźnienia 1.5s
+
+            // --- WYWOŁANIE FETCH DO AI.PHP ---
+            const response = await fetch('ai.php', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                // Wysłanie całego obiektu danych monety w polu 'token' wymaganym przez PHP
+                body: JSON.stringify({ token: coinDataAttr })
+            });
+
+            if (!response.ok) {
+                const errorText = await response.text();
+                // Sprawdzenie, czy odpowiedź to JSON (np. błąd 400 z PHP)
+                try {
+                    const errorJson = JSON.parse(errorText);
+                    throw new Error(`Błąd serwera HTTP ${response.status}: ${errorJson.error || 'Nieznany błąd.'}`);
+                } catch {
+                    // Jeśli nie jest to JSON, użyj surowego tekstu
+                    throw new Error(`Błąd serwera HTTP ${response.status}. Odpowiedź: ${errorText.substring(0, 100)}...`);
+                }
+            }
+            
+            const result = await response.json();
+            
+            if (result.success && result.prediction) {
+                // PHP zwróciło w pełni sformatowany string HTML w result.prediction
+                aiPredictionOutput.innerHTML = result.prediction;
+            } else {
+                // Serwer zwrócił success: false lub brak pola prediction
+                const errorDetail = result.error || 'Serwer przetworzył żądanie, ale zwrócił nieoczekiwany format lub wynik.';
+                aiPredictionOutput.innerHTML = `
+                    <div class="alert alert-danger p-3 bg-dark-light text-danger-custom fade-in">
+                        <i class="fas fa-exclamation-triangle me-2"></i> **Błąd Analizy AI:**
+                        ${errorDetail}
+                    </div>`;
+            }
+
+        } catch (error) {
+            // --- Obsługa błędów sieci/parsowania/walidacji ---
+            console.error('Błąd pobierania predykcji AI:', error);
+            let errorMessage = error.message;
+            if (error.message.includes('Failed to connect') || error.message.includes('Błąd serwera HTTP')) {
+                // Konkretny błąd sieci/połączenia
+                errorMessage = `Błąd sieci: Nie udało się połączyć z 'ai.php'. Sprawdź połączenie lub URL. Szczegóły: ${error.message}`;
+            } else if (error.message.includes('Brakujące dane')) {
+                // Błąd danych
+                errorMessage = `Błąd danych: ${error.message}. Nie można wykonać kalkulacji.`;
+            } 
+            
+            // Wyświetl błąd po polsku
+            aiPredictionOutput.innerHTML = `
+                <div class="alert alert-danger p-3 bg-dark-light text-danger-custom fade-in">
+                    <i class="fas fa-wifi me-2"></i> **Problem z Połączeniem/Danymi:**
+                    ${errorMessage}
+                </div>`;
+        } finally {
+            // --- Zarządzanie stanem: Reset przycisku ---
+            button.disabled = false;
+            button.innerHTML = originalButtonHtml;
+        }
+    });
+
+    // 8. Cleanup Chart.js resources on modal close
+    coinModalElement.addEventListener('hidden.bs.modal', function () {
+        if (priceChart) {
+            priceChart.destroy();
+            priceChart = null;
+        }
+        const chartContainer = document.getElementById('coinChart').parentNode;
+        chartContainer.innerHTML = '<canvas id="coinChart"></canvas>';
+        currentCoinId = null; // Clear current coin ID
+        isChartLoading = false; // Ensure flag is reset
+        // Reset default chart filter button state
+        chartFiltersContainer.querySelectorAll('.chart-filter-btn').forEach(btn => btn.classList.remove('active'));
+        // Default to 7D on reset for next open
+        chartFiltersContainer.querySelector('[data-days="7"]').classList.add('active'); 
+    });
+});</script>
+
+</body>
+</html>

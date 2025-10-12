@@ -1,0 +1,1046 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Ochrona i Analiza Crypto | Fox24Coin</title>
+    <meta name="description" content="Narzędzia i porady dotyczące identyfikacji oszustw kryptowalutowych, odzyskiwania środków i bezpiecznego poruszania się w świecie cyfrowych aktywów.">
+    <meta name="keywords" content="crypto scam, ochrona, skaner portfela, smart kontrakt, etherscan, fox24coin">
+    <meta name="author" content="Michał Rzepczyński">
+    <link rel="canonical" href="https://fox24coin.com/scam-protection.html">
+
+    <link rel="icon" type="image/png" href="https://fox24coin.com/fox24.png">
+    <link rel="apple-touch-icon" href="https://fox24coin.com/fox24.png">
+
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Ochrona i Analiza Crypto | Fox24Coin">
+    <meta property="og:description" content="Przewodnik po oszustwach kryptowalutowych i najlepsze praktyki bezpieczeństwa.">
+    <meta property="og:url" content="https://fox24coin.com/scam-protection.html">
+    <meta property="og:image" content="https://static.wixstatic.com/media/e0bdea_85b54f8450fd498e82826f233c7545d2~mv2.png">
+    <meta property="og:site_name" content="Fox24Coin">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Ochrona i Analiza Crypto | Fox24Coin">
+    <meta name="twitter:description" content="Przewodnik po oszustwach kryptowalutowych i najlepsze praktyki bezpieczeństwa.">
+    <meta name="twitter:image" content="https://static.wixstatic.com/media/e0bdea_85b54f8450fd498e82826f233c7545d2~mv2.png">
+    <meta name="twitter:site" content="@fox24coin">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+
+<style>
+/* ===================================
+    1. ZMIENNE I GŁÓWNE STYLE
+=================================== */
+:root {
+    /* Kolory bazowe */
+    --gold-color: #ffd700;
+    --blue-color: #0d6efd;
+
+    /* Kolory motywu ciemnego (domyślny) */
+    --primary-bg: #121212;
+    --secondary-bg: #1a1a1a;
+    --card-bg: #222;
+    --footer-bg: #0a0a0a;
+    --border-color: #333;
+    --primary-text: #e0e0e0;
+    --secondary-text: #b3b3b3;
+    --heading-text: #ffffff;
+    --primary-bg-rgb: 18, 18, 18;
+    
+    /* Zmienna dla koloru akcentu (domyślnie złoty) */
+    --accent-color: var(--gold-color);
+    --accent-color-rgb: 255, 215, 0;
+    --accent-glow: rgba(255, 215, 0, 0.4);
+}
+
+html.light-mode {
+    /* Zmienne dla motywu jasnego */
+    --primary-bg: #f8f9fa;
+    --secondary-bg: #ffffff;
+    --card-bg: #ffffff;
+    --footer-bg: #e9ecef;
+    --border-color: #dee2e6;
+    --primary-text: #343a40;
+    --secondary-text: #6c757d;
+    --heading-text: #212529;
+    --primary-bg-rgb: 248, 249, 250;
+
+    /* Zmiana koloru akcentu na niebieski */
+    --accent-color: var(--blue-color);
+    --accent-color-rgb: 13, 110, 253;
+    --accent-glow: rgba(13, 110, 253, 0.3);
+}
+
+/* --- Style bazowe --- */
+html { scroll-behavior: smooth; }
+body {
+    background-color: var(--primary-bg);
+    color: var(--primary-text);
+    font-family: 'Poppins', sans-serif;
+    padding-top: 70px;
+    transition: background-color 0.3s, color 0.3s;
+    overflow-x: hidden;
+}
+h1, h2, h3, h4, h5, h6 {    
+    font-weight: 700;   
+    color: var(--heading-text);
+}
+.text-accent { color: var(--accent-color) !important; }
+html.light-mode .text-white-50 { color: var(--secondary-text) !important; }
+.hidden { display: none !important; }
+
+/* ===================================
+    2. KOMPONENTY
+=================================== */
+
+/* --- Preloader --- */
+#page-preloader {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background-color: var(--primary-bg);
+    display: flex; justify-content: center; align-items: center;
+    z-index: 9999;
+    transition: opacity 0.5s ease-out, visibility 0.5s;
+    opacity: 1;
+    visibility: visible;
+}
+#page-preloader.hidden { 
+    opacity: 0; 
+    visibility: hidden;
+}
+.preloader-spinner {
+    width: 50px; height: 50px;
+    border: 8px solid var(--card-bg);
+    border-top-color: var(--accent-color);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* --- Nawigacja --- */
+.navbar {
+    background-color: rgba(var(--primary-bg-rgb), 0.85);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-bottom: 1px solid transparent;
+    transition: background-color 0.4s, border-color 0.4s;
+}
+html.light-mode .navbar { border-bottom-color: var(--border-color); }
+
+.navbar-brand { font-weight: 700; color: var(--heading-text); }
+html.light-mode .navbar-brand { color: var(--heading-text); }
+.nav-link { color: var(--secondary-text); transition: color 0.2s ease; }
+.nav-link:hover, .nav-link.active { color: var(--accent-color) !important; }
+.navbar-toggler { border-color: rgba(255, 255, 255, 0.1); }
+.navbar-toggler-icon { background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(255, 255, 255, 0.7)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e"); }
+html.light-mode .navbar-toggler-icon { background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(33, 37, 41, 0.7)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e"); }
+html.light-mode .navbar-toggler { border-color: rgba(0, 0, 0, 0.1); }
+
+.dropdown-menu { background-color: var(--secondary-bg); border-color: var(--border-color); }
+.dropdown-item { color: var(--primary-text); }
+.dropdown-item:hover, .dropdown-item:focus { background-color: var(--card-bg); color: var(--accent-color); }
+
+/* --- Przyciski --- */
+.btn-accent {   
+    background-color: var(--accent-color);   
+    color: #111;   
+    border: 1px solid var(--accent-color);   
+    font-weight: 600;
+    transition: all 0.2s ease;
+}
+html.light-mode .btn-accent { color: #fff; }
+
+.btn-accent:hover {   
+    filter: brightness(1.1);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px var(--accent-glow);
+}
+
+.btn-outline-accent {   
+    color: var(--accent-color);   
+    border-color: var(--accent-color);
+    font-weight: 600;
+    transition: all 0.2s ease;
+}
+.btn-outline-accent:hover {   
+    color: #111;   
+    background-color: var(--accent-color);   
+    border-color: var(--accent-color);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px var(--accent-glow);
+}
+html.light-mode .btn-outline-accent:hover { color: #fff; }
+
+/* --- Główne sekcje i content --- */
+.content-wrapper {
+    background-color: var(--secondary-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 0.75rem;
+    padding: 1.5rem;
+}
+@media (min-width: 768px) { .content-wrapper { padding: 2.5rem; } }
+
+.hero-section {
+    background-size: cover;
+    background-position: center;
+    background-image: linear-gradient(rgba(18, 18, 18, 0.8), rgba(18, 18, 18, 0.8)), url('https://fox24coin.com/assets/images/scam-bg.jpg');
+}
+html.light-mode .hero-section {
+    background-image: linear-gradient(rgba(248, 249, 250, 0.8), rgba(248, 249, 250, 0.8)), url('https://fox24coin.com/assets/images/scam-bg.jpg');
+}
+
+.main-section {
+    margin-bottom: 3rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid var(--border-color);
+}
+.main-section:last-child { margin-bottom: 0; padding-bottom: 0; border-bottom: none; }
+.main-section h2 {
+    color: var(--heading-text);
+    margin-bottom: 1.5rem;
+}
+.main-section h2 i { color: var(--accent-color); } /* Ikony w tytułach H2 */
+
+/* --- Formularze --- */
+.form-control {
+    background-color: var(--primary-bg);
+    border-color: var(--border-color);
+    color: var(--primary-text);
+}
+.form-control:focus {
+    background-color: var(--primary-bg);
+    color: var(--primary-text);
+    border-color: var(--accent-color);
+    box-shadow: 0 0 0 0.25rem rgba(var(--accent-color-rgb), 0.25);
+}
+.form-check-input {
+    background-color: var(--primary-bg);
+    border-color: var(--border-color);
+}
+.form-check-input:checked {
+    background-color: var(--accent-color);
+    border-color: var(--accent-color);
+}
+.form-check-input:focus {
+    box-shadow: 0 0 0 0.25rem rgba(var(--accent-color-rgb), 0.25);
+}
+
+/* --- Karty --- */
+.result-card, .info-card {
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 0.75rem;
+    padding: 1.5rem;
+    height: 100%;
+    transition: border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+}
+html.light-mode .result-card, html.light-mode .info-card { box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
+.result-card:hover { border-color: var(--accent-color); }
+.result-card .card-label { font-size: 0.9rem; color: var(--secondary-text); text-transform: uppercase; margin-bottom: 0.5rem; }
+.result-card .card-value { font-size: 1.25rem; font-weight: 600; color: var(--heading-text); word-wrap: break-word; }
+.info-card:hover { transform: translateY(-5px); box-shadow: 0 8px 20px rgba(0,0,0,0.1); }
+html:not(.light-mode) .info-card:hover { box-shadow: 0 8px 20px rgba(0,0,0,0.4); }
+.info-card .icon { font-size: 3rem; color: var(--accent-color); margin-bottom: 1rem; }
+.info-card h4 { color: var(--heading-text); margin-bottom: 0.75rem; }
+
+/* --- Tabs i Tabela --- */
+.nav-tabs { border-bottom-color: var(--border-color); }
+.nav-tabs .nav-link { color: var(--secondary-text); border: 1px solid transparent; }
+.nav-tabs .nav-link.active {  
+    color: var(--accent-color);  
+    background-color: var(--secondary-bg);  
+    border-color: var(--border-color) var(--border-color) var(--secondary-bg);
+}
+.tab-content { padding-top: 1.5rem; }
+.table {    
+    --bs-table-bg: transparent;   
+    --bs-table-color: var(--primary-text);   
+    --bs-table-border-color: var(--border-color);   
+    --bs-table-hover-color: var(--heading-text);   
+    --bs-table-hover-bg: rgba(var(--accent-color-rgb), 0.1);
+}
+.etherscan-link { color: var(--accent-color); text-decoration: none; }
+.etherscan-link:hover { text-decoration: underline; }
+.tx-type-badge { font-size: 0.8em; padding: 0.3em 0.6em; border-radius: 0.375rem; color: white; }
+.badge-in { background-color: #198754; }
+.badge-out { background-color: #dc3545; }
+.badge-contract { background-color: #6c757d; }
+
+/* --- Akordeon --- */
+.accordion-item {
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    margin-bottom: 0.5rem;
+    border-radius: 0.5rem !important;
+    overflow: hidden; /* Poprawka dla border-radius */
+}
+.accordion-button {
+    background-color: var(--card-bg);
+    color: var(--primary-text);
+    font-weight: 600;
+}
+.accordion-button:not(.collapsed) {
+    color: var(--accent-color);
+    background-color: var(--secondary-bg);
+    box-shadow: none;
+}
+.accordion-button:focus { box-shadow: 0 0 0 0.25rem rgba(var(--accent-color-rgb), 0.25); }
+.accordion-button::after { filter: grayscale(1) brightness(2); }
+html.light-mode .accordion-button::after { filter: none; }
+.accordion-button:not(.collapsed)::after { filter: none; }
+.accordion-body { color: var(--secondary-text); }
+
+/* --- Stopka --- */
+footer { 
+    background-color: var(--footer-bg); 
+    border-top: 1px solid var(--border-color); 
+}
+footer a { color: var(--secondary-text); text-decoration: none; transition: color 0.3s ease; }
+footer a:hover { color: var(--accent-color) !important; }
+.footer-heading {
+    color: var(--accent-color);
+    font-weight: 600;
+}
+footer .btn-social {
+    width: 40px; height: 40px; display: inline-flex;   
+    align-items: center; justify-content: center;
+    border: 1px solid var(--border-color);
+    border-radius: 50%; font-size: 1.1rem;
+    color: var(--secondary-text);
+    transition: all 0.3s ease;
+}
+footer .btn-social:hover {
+    background-color: var(--accent-color);
+    border-color: var(--accent-color);
+    color: #111 !important;
+    transform: translateY(-3px);
+}
+html.light-mode footer .btn-social:hover { color: #fff !important; }
+
+/* --- Przycisk "Powrót na górę" --- */
+#scrollTopBtn {
+    position: fixed; right: 25px; bottom: 25px; z-index: 1030;
+    opacity: 0; visibility: hidden;
+    width: 45px; height: 45px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.2rem;
+    background-color: var(--accent-color);
+    color: #111;
+    border: none;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease, background-color 0.3s ease;
+    text-decoration: none;
+}
+html.light-mode #scrollTopBtn { color: #fff; }
+#scrollTopBtn.show { opacity: 1; visibility: visible; }
+#scrollTopBtn:hover { 
+    transform: translateY(-5px);
+    box-shadow: 0 6px 20px var(--accent-glow);
+}
+@media (max-width: 768px) { #scrollTopBtn { right: 15px; bottom: 15px; } }
+</style>
+</head>
+<body>
+
+<div id="page-preloader"><div class="preloader-spinner"></div></div>
+
+<nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+    <div class="container">
+        <a class="navbar-brand" href="index.html">Fox24<span class="text-gold">Coin</span></a>
+
+        <div class="d-flex align-items-center d-lg-none">
+            <button id="theme-toggle-mobile" class="btn btn-sm btn-outline-gold me-2" aria-label="Toggle theme">
+                <i class="fas fa-sun"></i>
+            </button>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        </div>
+
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto align-items-lg-center">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="homeDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Home</a>
+                    <ul class="dropdown-menu" aria-labelledby="homeDropdown">
+                        <li><a class="dropdown-item" href="index.html">Home</a></li>
+                        <li><a class="dropdown-item" href="widget.html">Widget</a></li>
+                        <li><a class="dropdown-item" href="market.html">Crypto Market</a></li>
+                        <li><a class="dropdown-item" href="https://fox24coin.com/scam-protection.html">Scam protection</a></li>
+                        <li><a class="dropdown-item" href="vision.html">Fox24 Vision</a></li>
+                        <li><a class="dropdown-item" href="audit.html">Community audit <span class="badge bg-primary rounded-pill" style="font-size: 0.6em; vertical-align: middle; margin-left: 4px;">NEW</span></a></li>
+                    </ul>
+                </li>
+                <li class="nav-item"><a class="nav-link" href="tokenomics.html">Tokenomics</a></li>
+                <li class="nav-item"><a class="nav-link" href="roadmap.html">Roadmap</a></li>
+                <li class="nav-item"><a class="nav-link" href="team2.html">Team</a></li>
+                <li class="nav-item"><a class="nav-link" href="blog.php">Blog</a></li>
+                <li class="nav-item"><a class="nav-link" href="index.html#contact">Contact</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fox24coin.com/uniswap.html">Price on Uniswap</a></li>
+                
+                <li class="nav-item ms-lg-3">
+                    <a class="nav-link" href="https://github.com/rto-gtc/0xED9114c614aD6b948a1EA21f062F6e1D0b4e8308" target="_blank" aria-label="GitHub Repository" style="padding-top: 0.5rem; padding-bottom: 0.5rem;">
+                        <i class="fab fa-github fa-lg"></i>
+                    </a>
+                </li>
+
+                <li class="nav-item d-none d-lg-flex align-items-center ms-lg-2">
+                    <button id="theme-toggle" class="btn btn-sm btn-outline-gold" aria-label="Toggle theme">
+                        <i class="fas fa-sun"></i>
+                    </button>
+                </li>
+                
+                <li class="nav-item ms-lg-3">
+                    <a class="btn btn-warning" href="whitepaper.pdf" target="_blank">Whitepaper</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<main class="container my-5">
+    <div class="p-5 mb-4 rounded-3 hero-section">
+        <div class="container-fluid py-5">
+            <div class="row align-items-center">
+                <div class="col-md-8">
+                    <h1 class="display-4 fw-bold">Stay Safe in Crypto</h1>
+                    <p class="fs-4 col-md-10">Knowledge is your best defense. Use our resources and tools to navigate the world of digital assets securely and protect yourself from scams.</p>
+                </div>
+                <div class="col-md-4 text-center d-none d-md-block">
+                    <img src="https://fox24coin.com/fox24coin.png" alt="Fox24Coin Logo" class="img-fluid" style="max-width: 250px;">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="content-wrapper">
+        <section class="main-section" id="scanner-section">
+            <h2><i class="fas fa-search-dollar me-2"></i>On-Chain Analysis Report</h2>
+            <p class="text-secondary">Enter any Ethereum wallet or contract address for a deep on-chain analysis.</p>
+            <form id="scan-form">
+                <div class="input-group mb-3">
+                    <input type="text" id="address-input" class="form-control form-control-lg" placeholder="Enter address (e.g., 0x...)" required>
+                    <button class="btn btn-accent" type="submit" id="scan-button">Generate Report</button>
+                </div>
+            </form>
+            
+            <div id="scan-loader" class="text-center my-4 hidden">
+                <div class="spinner-border text-accent" style="width: 4rem; height: 4rem;" role="status"></div>
+                <p class="mt-3 text-accent">Generating Report... This may take a moment.</p>
+            </div>
+            
+            <div id="scan-error" class="alert alert-danger hidden mt-3"></div>
+
+            <div id="scan-results-container" class="hidden mt-4">
+                <ul class="nav nav-tabs" id="myTab" role="tablist">
+                    <li class="nav-item" role="presentation"><button class="nav-link active" id="summary-tab" data-bs-toggle="tab" data-bs-target="#summary-tab-pane" type="button" role="tab"><i class="fas fa-chart-pie me-2"></i>Summary</button></li>
+                    <li class="nav-item" role="presentation"><button class="nav-link" id="approvals-tab" data-bs-toggle="tab" data-bs-target="#approvals-tab-pane" type="button" role="tab"><i class="fas fa-user-check me-2"></i>Token Approvals</button></li>
+                    <li class="nav-item" role="presentation"><button class="nav-link" id="tokens-tab" data-bs-toggle="tab" data-bs-target="#tokens-tab-pane" type="button" role="tab"><i class="fas fa-coins me-2"></i>Token Balances</button></li>
+                    <li class="nav-item" role="presentation"><button class="nav-link" id="txhistory-tab" data-bs-toggle="tab" data-bs-target="#txhistory-tab-pane" type="button" role="tab"><i class="fas fa-history me-2"></i>Transaction History</button></li>
+                    <li class="nav-item" role="presentation"><button class="nav-link" id="internal-tab" data-bs-toggle="tab" data-bs-target="#internal-tab-pane" type="button" role="tab"><i class="fas fa-cogs me-2"></i>Internal TXs</button></li>
+                </ul>
+                <div class="tab-content" id="myTabContent">
+                    <div class="tab-pane fade show active" id="summary-tab-pane" role="tabpanel">
+                        <div class="text-center py-5" id="summary-loader"><div class="spinner-border text-accent" role="status"></div></div>
+                        <div id="summary-content" class="hidden">
+                            <div class="row g-3">
+                                <div class="col-lg-4 col-md-6"><div class="result-card"><div class="card-label">Address Type</div><div id="summary-type" class="card-value"></div></div></div>
+                                <div class="col-lg-4 col-md-6"><div class="result-card"><div class="card-label">ETH Balance</div><div id="summary-eth-balance" class="card-value"></div></div></div>
+                                <div class="col-lg-4 col-md-6"><div class="result-card"><div class="card-label">Nonce</div><div id="summary-nonce" class="card-value"></div></div></div>
+                                <div class="col-lg-4 col-md-6 hidden" id="summary-contract-name-wrapper"><div class="result-card"><div class="card-label">Contract Name</div><div id="summary-contract-name" class="card-value"></div></div></div>
+                                
+                                <div class="col-lg-4 col-md-6 hidden" id="summary-verification-wrapper">
+                                    <div class="result-card">
+                                        <div class="card-label">Verification Status</div>
+                                        <div id="summary-verification" class="card-value"></div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 col-md-6 hidden" id="summary-sanctions-wrapper">
+                                    <div class="result-card">
+                                        <div class="card-label">Sanctions Check</div>
+                                        <div id="summary-sanctions" class="card-value"></div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 col-md-6"><div class="result-card"><div class="card-label">First Transaction</div><div id="summary-first-tx" class="card-value"></div></div></div>
+                                <div class="col-lg-4 col-md-6"><div class="result-card d-flex flex-column justify-content-center"><a id="summary-etherscan-link" href="#" target="_blank" rel="noopener noreferrer" class="btn btn-outline-accent"><i class="fas fa-external-link-alt me-2"></i>View on Etherscan</a></div></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="approvals-tab-pane" role="tabpanel">
+                        <div id="approvals-content">
+                            <div class="p-4 rounded-3" style="background-color: var(--primary-bg);">
+                                <h3>What are Token Approvals?</h3>
+                                <p class="text-secondary">When you use a decentralized application (DApp) like Uniswap, you grant it permission to spend your tokens. These permissions, called "approvals," remain active until you revoke them. Malicious or old contracts with unlimited approvals can be used to drain your wallet.</p>
+                                <p class="text-secondary">It's crucial to regularly review and revoke any suspicious or unnecessary approvals.</p>
+                                <a id="etherscan-approval-link" href="#" target="_blank" rel="noopener noreferrer" class="btn btn-accent mt-2"><i class="fas fa-shield-alt me-2"></i>Check Approvals on Etherscan</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="tokens-tab-pane" role="tabpanel">
+                        <div class="text-center py-5" id="tokens-loader"><div class="spinner-border text-accent" role="status"></div></div>
+                        <div id="tokens-content" class="hidden">
+                            <div class="table-responsive"><table class="table table-hover"><thead><tr><th>Token</th><th>Symbol</th><th>Balance</th></tr></thead><tbody id="token-balances-table-body"></tbody></table></div>
+                            <div id="tokens-empty" class="text-center py-4 text-secondary hidden">This address holds no ERC-20 tokens.</div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="txhistory-tab-pane" role="tabpanel">
+                        <div class="text-center py-5" id="txhistory-loader"><div class="spinner-border text-accent" role="status"></div></div>
+                        <div id="txhistory-content" class="hidden">
+                            <div class="table-responsive"><table class="table table-hover align-middle"><thead><tr><th>Hash</th><th>Type</th><th>From</th><th>To</th><th>Value</th><th>Time</th></tr></thead><tbody id="txhistory-table-body"></tbody></table></div>
+                            <div id="txhistory-empty" class="text-center py-4 text-secondary hidden">No transactions found.</div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="internal-tab-pane" role="tabpanel">
+                        <div class="text-center py-5" id="internal-loader"><div class="spinner-border text-accent" role="status"></div></div>
+                        <div id="internal-content" class="hidden">
+                            <div class="table-responsive"><table class="table table-hover align-middle"><thead><tr><th>Parent Hash</th><th>From</th><th>To</th><th>Value</th><th>Time</th></tr></thead><tbody id="internal-tx-table-body"></tbody></table></div>
+                            <div id="internal-empty" class="text-center py-4 text-secondary hidden">No internal transactions found.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section class="main-section" id="what-to-do-section">
+            <h2><i class="fas fa-exclamation-triangle me-2"></i>What To Do If You've Been Scammed</h2>
+            <p class="text-secondary">If you suspect you have been a victim, act quickly. Time is critical.</p>
+            <div class="accordion mt-4" id="stepsAccordion">
+                <div class="accordion-item"><h2 class="accordion-header"><button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne"><i class="fas fa-shield-alt me-3"></i> 1. Secure Your Remaining Assets</button></h2><div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#stepsAccordion"><div class="accordion-body">Immediately transfer any remaining funds from the compromised wallet to a new, secure wallet that you have created. Ensure this new wallet's seed phrase has never been exposed online or stored digitally.</div></div></div>
+                <div class="accordion-item"><h2 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo"><i class="fas fa-user-slash me-3"></i> 2. Revoke Token Approvals</button></h2><div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#stepsAccordion"><div class="accordion-body">Go to a trusted token approval checker tool (like Etherscan's Token Approval Checker for Ethereum, or BscScan for BSC) and revoke any suspicious or unlimited token approvals for the compromised wallet. This prevents scammers from draining other tokens you own.</div></div></div>
+                <div class="accordion-item"><h2 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree"><i class="fas fa-folder-open me-3"></i> 3. Gather All Evidence</button></h2><div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#stepsAccordion"><div class="accordion-body">Collect all possible information about the scam. This includes: the scammer's wallet address(es), transaction IDs (hashes), screenshots of conversations, websites, and the URL of the fraudulent site or profile.</div></div></div>
+            </div>
+        </section>
+
+        <section class="main-section" id="know-your-enemy-section">
+            <h2><i class="fas fa-book-dead me-2"></i>Know The Enemy: Common Scams</h2>
+            <p class="text-secondary">Recognizing a scam is the first step to avoiding one. Here are the most common types.</p>
+            <div class="row g-4 mt-3">
+                <div class="col-lg-6 mb-4"><div class="info-card"><div class="icon"><i class="fas fa-fish"></i></div><h4>Phishing Scams</h4><p class="text-secondary">Fake websites, emails, or messages that look official, designed to trick you into revealing your private keys or seed phrase.</p></div></div>
+                <div class="col-lg-6 mb-4"><div class="info-card"><div class="icon"><i class="fas fa-gift"></i></div><h4>Giveaway Scams</h4><p class="text-secondary">Promises to multiply your crypto if you send some to their address first. They impersonate influencers or projects to appear legitimate.</p></div></div>
+                <div class="col-lg-6 mb-4"><div class="info-card"><div class="icon"><i class="fas fa-running"></i></div><h4>Rug Pulls</h4><p class="text-secondary">Developers create a token, hype it up to attract investors, then abandon the project and run away with all the funds.</p></div></div>
+                <div class="col-lg-6 mb-4"><div class="info-card"><div class="icon"><i class="fas fa-parachute-box"></i></div><h4>Malicious Airdrops</h4><p class="text-secondary">Unsolicited tokens appear in your wallet. When you try to swap or sell them, a malicious contract drains your other assets.</p></div></div>
+            </div>
+            <div id="scam-checklist" class="mt-4">
+                <h3 class="mt-4">Interactive Scam Checklist</h3>
+                <p class="text-secondary">Unsure if an offer is legitimate? Answer the questions below.</p>
+                <form id="checklist-form" class="mt-4">
+                    <div class="form-check mb-3 fs-5"><input class="form-check-input" type="checkbox" value="" id="q1"><label class="form-check-label" for="q1">Are you being promised **guaranteed** or unrealistically high returns?</label></div>
+                    <div class="form-check mb-3 fs-5"><input class="form-check-input" type="checkbox" value="" id="q2"><label class="form-check-label" for="q2">Is someone asking for your **seed phrase** or private keys?</label></div>
+                    <div class="form-check mb-3 fs-5"><input class="form-check-input" type="checkbox" value="" id="q3"><label class="form-check-label" for="q3">Are you being pressured to **act immediately** or risk missing out?</label></div>
+                    <div class="form-check mb-3 fs-5"><input class="form-check-input" type="checkbox" value="" id="q4"><label class="form-check-label" for="q4">Did someone you don't know contact you first with an unsolicited offer?</label></div>
+                    <div class="form-check mb-3 fs-5"><input class="form-check-input" type="checkbox" value="" id="q5"><label class="form-check-label" for="q5">Do you have to send crypto to an address to receive more crypto in return?</label></div>
+                    <button type="submit" class="btn btn-accent mt-3">Check My Risk Level</button>
+                </form>
+                <div id="checklist-results" class="mt-4">
+                    <div id="result-safe" class="alert alert-success hidden"><h4><i class="fas fa-check-circle me-2"></i>Low Risk</h4><p>Based on your answers, this situation does not show common signs of a scam. However, always remain vigilant and do your own research.</p></div>
+                    <div id="result-warning" class="alert alert-warning hidden"><h4><i class="fas fa-exclamation-triangle me-2"></i>Caution Advised</h4><p>This situation has one or more red flags. Proceed with extreme caution. Double-check everything and consider seeking a second opinion before committing any funds.</p></div>
+                    <div id="result-danger" class="alert alert-danger hidden"><h4><i class="fas fa-times-circle me-2"></i>High Risk of Scam</h4><p>This situation shows multiple critical signs of a scam. It is highly recommended that you **do not proceed**.</p></div>
+                </div>
+            </div>
+        </section>
+
+        <section class="main-section" id="best-practices-section">
+            <h2><i class="fas fa-check-circle me-2"></i>Best Practices For Staying Safe</h2>
+            <p class="text-secondary">Adopt these habits to significantly reduce your risk in the crypto space.</p>
+            <div class="accordion mt-4" id="practicesAccordion">
+                <div class="accordion-item"><h2 class="accordion-header"><button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#practiceOne" aria-expanded="true" aria-controls="practiceOne"><i class="fas fa-key me-3"></i> Never Share Your Seed Phrase</button></h2><div id="practiceOne" class="accordion-collapse collapse show" data-bs-parent="#practicesAccordion"><div class="accordion-body">Your 12 or 24-word seed phrase is the master key to all your crypto. Write it down, store it offline in a secure place, and NEVER share it with anyone or enter it on a website.</div></div></div>
+                <div class="accordion-item"><h2 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#practiceTwo" aria-expanded="false" aria-controls="practiceTwo"><i class="fas fa-hdd me-3"></i> Use a Hardware Wallet</button></h2><div id="practiceTwo" class="accordion-collapse collapse" data-bs-parent="#practicesAccordion"><div class="accordion-body">For significant amounts of crypto, a hardware wallet (like Ledger or Trezor) is the gold standard. It keeps your private keys completely offline, making it impossible for hackers to access them.</div></div></div>
+                <div class="accordion-item"><h2 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#practiceThree" aria-expanded="false" aria-controls="practiceThree"><i class="fas fa-bookmark me-3"></i> Bookmark Official Sites</button></h2><div id="practiceThree" class="accordion-collapse collapse" data-bs-parent="#practicesAccordion"><div class="accordion-body">Never click on links from emails or DMs. Always navigate to official websites using your own bookmarks to avoid phishing attacks.</div></div></div>
+                <div class="accordion-item"><h2 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#practiceFour" aria-expanded="false" aria-controls="practiceFour"><i class="fas fa-mobile-alt me-3"></i> Enable Two-Factor Authentication (2FA)</button></h2><div id="practiceFour" class="accordion-collapse collapse" data-bs-parent="#practicesAccordion"><div class="accordion-body">Secure all your exchange accounts with 2FA, preferably using an authenticator app (like Google Authenticator) rather than SMS, which is less secure.</div></div></div>
+            </div>
+        </section>
+    </div>
+</main>
+
+<footer class="text-bg-dark">
+  <div class="container py-5">
+    <div class="row g-5">
+      
+      <div class="col-lg-4 col-md-6">
+        <h4 class="footer-heading mb-4 text-uppercase text-warning">FOX24Coin</h4>
+        <p class="text-secondary mb-3">Bridging Trust and Technology</p>
+        <div class="d-flex pt-2 gap-2">
+          <a href="https://t.me/fox24coin" target="_blank" class="btn btn-social" aria-label="Telegram">
+            <i class="fab fa-telegram"></i>
+          </a>
+          <a href="https://x.com/fox24coin" target="_blank" class="btn btn-social" aria-label="Twitter">
+            <i class="fab fa-twitter"></i>
+          </a>
+          <a href="https://www.facebook.com/profile.php?id=61575920820740" target="_blank" class="btn btn-social" aria-label="Facebook">
+            <i class="fab fa-facebook-f"></i>
+          </a>
+          <a href="https://discord.com/channels/1415882766930677774/1415883138810511451" target="_blank" class="btn btn-social" aria-label="Discord">
+            <i class="fab fa-discord"></i>
+          </a>
+        </div>
+      </div>
+
+      <div class="col-lg-2 col-md-6">
+        <h4 class="footer-heading mb-4 text-uppercase text-warning">Links</h4>
+        <ul class="list-unstyled mb-0">
+          <li><a class="link-secondary d-block mb-2" href="roadmap.html">Roadmap</a></li>
+          <li><a class="link-secondary d-block mb-2" href="team2.html">Our Team</a></li>
+          <li><a class="link-secondary d-block mb-2" href="index.html#contact">Contact Us</a></li>
+          <li><a class="link-secondary d-block mb-2" href="widget.html">Widget</a></li>
+          <li><a class="link-secondary d-block mb-2" href="market.html">Crypto Market</a></li>
+          <li><a class="link-secondary d-block" href="scam-protection.html">Scam Protection</a></li>
+          <li><a class="link-secondary d-block" href="index.html">Home</a></li>
+          <li><a class="link-secondary d-block" href="vision.html">Fox24 Vision</a></li>
+
+        </ul>
+      </div>
+
+      <div class="col-lg-3 col-md-6">
+        <h4 class="footer-heading mb-4 text-uppercase text-warning">Resources</h4>
+        <ul class="list-unstyled mb-0">
+          <li><a class="link-secondary d-block mb-2" href="tokenomics.html">Tokenomics</a></li>
+          <li><a class="link-secondary d-block mb-2" href="whitepaper.pdf" target="_blank">Whitepaper</a></li>
+          <li><a class="link-secondary d-block mb-2" href="index.html#hero">Join Presale</a></li>
+          <li><a class="link-secondary d-block mb-2" href="https://fox24coin-1.dexkit.app/">DEX Exchange</a></li>
+          <li><a class="link-secondary d-block mb-2" href="https://www.coingecko.com">Coingecko</a></li>
+          <li><a class="link-secondary d-block mb-2" href="https://coinmarketcap.com">Coinmarketcap</a></li>
+          <li><a class="link-secondary d-block" href="https://etherscan.io">Etherscan</a></li>
+        </ul>
+      </div>
+
+      <div class="col-lg-3 col-md-6">
+        <h4 class="footer-heading mb-4 text-uppercase text-warning">Contact Info</h4>
+        <ul class="list-unstyled text-secondary mb-0">
+          <li class="d-flex mb-3">
+            <i class="fa fa-map-marker-alt me-3 pt-1 text-warning"></i>
+            Henryka Sienkiewicza 85/87/lok. 1,<br>90-057 Łódź
+          </li>
+          <li class="d-flex mb-3">
+            <i class="fa fa-phone-alt me-3 pt-1 text-warning"></i>+48 698 000 441
+          </li>
+          <li class="d-flex">
+            <i class="fa fa-envelope me-3 pt-1 text-warning"></i>support@fox24coin.com
+          </li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="container border-top border-secondary py-4">
+    <div class="row align-items-center">
+      <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+        &copy; <a class="fw-bold text-warning text-decoration-none" href="#">Fox24Coin</a>, All Rights Reserved.
+      </div>
+      <div class="col-md-6 text-center text-md-end">
+        <a href="Privacy-Policy-and-Cookies-Policy.html" class="link-secondary text-decoration-none">Privacy & Cookies Policy</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<a href="#" id="scrollTopBtn" aria-label="Scroll to top">
+    <i class="fa fa-arrow-up"></i>
+</a>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    const pagePreloader = document.getElementById('page-preloader');
+    if (pagePreloader) {
+        pagePreloader.classList.add('hidden');
+    }
+
+    const scanForm = document.getElementById('scan-form');
+    const addressInput = document.getElementById('address-input');
+    const scanButton = document.getElementById('scan-button');
+    const mainLoader = document.getElementById('scan-loader');
+    const errorDiv = document.getElementById('scan-error');
+    const resultsContainer = document.getElementById('scan-results-container');
+    
+    // !!! UWAGA: PUBLICZNE UMIESZCZANIE KLUCZY API JEST NIEBEZPIECZNE !!!
+    const ETHERSCAN_API_KEY = 'MCGDEP3KKNK33IU3VBQMCP3QS86WMFPQE6'; // Wstaw swój klucz Etherscan API
+    
+    // ## KOREKTA 1: Zaktualizowano URL do V2 API ##
+    const ETHERSCAN_API_URL = 'https://api.etherscan.io/v2/api';
+    const TRM_API_URL = 'https://api.trmlabs.com/public/v1/sanctions/screening';
+
+    const showError = (message) => {
+        errorDiv.textContent = `Error: ${message}`;
+        errorDiv.classList.remove('hidden');
+        mainLoader.classList.add('hidden');
+        resultsContainer.classList.add('hidden');
+    };
+
+    // ## KOREKTA 2: Dodano parametr `chainid` do każdego zapytania ##
+    const callEtherscanApi = async (params) => {
+        const queryParams = new URLSearchParams({
+            chainid: 1, // ID 1 oznacza sieć Ethereum Mainnet
+            apikey: ETHERSCAN_API_KEY,
+            ...params
+        });
+        
+        const response = await fetch(`${ETHERSCAN_API_URL}?${queryParams.toString()}`);
+
+        if (!response.ok) {
+            throw new Error(`Network error calling Etherscan API: ${response.statusText}`);
+        }
+
+        const data = await response.json();
+
+        // Obsługa błędów specyficznych dla V2
+        if (data.status === '0' && data.message !== 'No transactions found' && data.message !== 'No records found') {
+            if (data.message === 'NOTOK' && data.result) {
+                 throw new Error(`Etherscan API Error: ${data.result}`);
+            }
+            throw new Error(`Etherscan API Error: ${data.message || 'Unknown error'}`);
+        }
+        return data.result;
+    };
+    
+    const formatBalance = (rawBalance, decimals) => (Number(BigInt(rawBalance)) / Math.pow(10, decimals || 18)).toLocaleString('en-US', { maximumFractionDigits: 4 });
+    const formatEthValue = (wei) => (Number(BigInt(wei)) / 1e18).toLocaleString('en-US', { maximumFractionDigits: 6 });
+    const formatUnixTimestamp = (unix) => new Date(unix * 1000).toLocaleString();
+    const truncate = (str) => str ? `${str.slice(0, 6)}...${str.slice(-4)}` : 'N/A';
+
+    const resetUI = () => {
+        errorDiv.classList.add('hidden');
+        resultsContainer.classList.add('hidden');
+        ['summary', 'tokens', 'txhistory', 'internal'].forEach(tab => {
+            document.getElementById(`${tab}-loader`)?.classList.remove('hidden');
+            document.getElementById(`${tab}-content`)?.classList.add('hidden');
+        });
+        ['token-balances-table-body', 'txhistory-table-body', 'internal-tx-table-body'].forEach(id => {
+            document.getElementById(id).innerHTML = '';
+        });
+        ['tokens-empty', 'txhistory-empty', 'internal-empty'].forEach(id => {
+            document.getElementById(id).classList.add('hidden');
+        });
+        document.getElementById('summary-contract-name-wrapper').classList.add('hidden');
+        document.getElementById('summary-verification-wrapper').classList.add('hidden');
+        document.getElementById('summary-sanctions-wrapper').classList.add('hidden');
+    };
+    
+    const backToTopBtn = document.getElementById("scrollTopBtn");
+    if(backToTopBtn) {
+        window.onscroll = () => {
+            if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
+                backToTopBtn.classList.add('show');
+            } else {
+                backToTopBtn.classList.remove('show');
+            }
+        };
+        backToTopBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    }
+
+    if (scanForm) {
+        scanForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const address = addressInput.value.trim().toLowerCase();
+            if (!/^0x[a-fA-F0-9]{40}$/.test(address)) {
+                return showError('Invalid Ethereum address format.');
+            }
+            
+            resetUI();
+            mainLoader.classList.remove('hidden');
+            scanButton.disabled = true;
+
+            try {
+                resultsContainer.classList.remove('hidden');
+                
+                const [code, balance, nonce, contractInfo, firstTxData, sanctionsData] = await Promise.all([
+                    callEtherscanApi({ module: 'proxy', action: 'eth_getCode', address: address, tag: 'latest' }),
+                    callEtherscanApi({ module: 'account', action: 'balance', address: address, tag: 'latest' }),
+                    callEtherscanApi({ module: 'proxy', action: 'eth_getTransactionCount', address: address, tag: 'latest' }),
+                    callEtherscanApi({ module: 'contract', action: 'getsourcecode', address: address }).catch(() => null),
+                    callEtherscanApi({ module: 'account', action: 'txlist', address: address, sort: 'asc', page: 1, offset: 1 }).catch(() => []),
+                    fetch(TRM_API_URL, {
+                        method: 'POST',
+                        headers: {'Content-Type': 'application/json'},
+                        body: JSON.stringify([{ address: address }])
+                    }).then(res => res.ok ? res.json() : null).catch(() => null)
+                ]);
+                
+                const isContract = code !== '0x' && code !== null;
+                document.getElementById('summary-type').textContent = isContract ? 'Smart Contract' : 'Wallet (EOA)';
+                document.getElementById('summary-eth-balance').textContent = `${formatEthValue(balance)} ETH`;
+                document.getElementById('summary-nonce').textContent = parseInt(nonce, 16);
+                document.getElementById('summary-etherscan-link').href = `https://etherscan.io/address/${address}`;
+                document.getElementById('summary-first-tx').textContent = firstTxData?.[0] ? formatUnixTimestamp(firstTxData[0].timeStamp) : 'N/A';
+                
+                if (isContract && contractInfo?.[0]) {
+                    document.getElementById('summary-contract-name').textContent = contractInfo[0].ContractName || 'N/A';
+                    const verificationEl = document.getElementById('summary-verification');
+                    if (contractInfo[0].SourceCode) {
+                        verificationEl.textContent = 'Verified ✔️';
+                        verificationEl.style.color = '#28a745';
+                    } else {
+                        verificationEl.textContent = 'Not Verified ❌';
+                        verificationEl.style.color = '#dc3545';
+                    }
+                    document.getElementById('summary-contract-name-wrapper').classList.remove('hidden');
+                    document.getElementById('summary-verification-wrapper').classList.remove('hidden');
+                }
+
+                const sanctionsEl = document.getElementById('summary-sanctions');
+                if (sanctionsData?.[0]) {
+                    if (sanctionsData[0].isSanctioned) {
+                        sanctionsEl.textContent = 'Sanctioned ⚠️';
+                        sanctionsEl.style.color = '#dc3545';
+                    } else {
+                        sanctionsEl.textContent = 'Clear ✅';
+                        sanctionsEl.style.color = '#28a745';
+                    }
+                } else {
+                    sanctionsEl.textContent = 'Unknown';
+                    sanctionsEl.style.color = '#6c757d';
+                }
+                document.getElementById('summary-sanctions-wrapper').classList.remove('hidden');
+                document.getElementById('summary-loader').classList.add('hidden');
+                document.getElementById('summary-content').classList.remove('hidden');
+                
+                document.getElementById('etherscan-approval-link').href = `https://etherscan.io/tokenapprovalchecker?address=${address}`;
+
+                (async () => {
+                    try {
+                        const tokenTxs = await callEtherscanApi({ module: 'account', action: 'tokentx', address: address, page: 1, offset: 1000, sort: 'desc' });
+                        if (!tokenTxs || !Array.isArray(tokenTxs) || tokenTxs.length === 0) {
+                           document.getElementById('tokens-empty').classList.remove('hidden');
+                            return;
+                        }
+
+                        const uniqueTokens = new Map();
+                        tokenTxs.forEach(tx => {
+                            if (!uniqueTokens.has(tx.contractAddress)) {
+                                uniqueTokens.set(tx.contractAddress, {
+                                    name: tx.tokenName,
+                                    symbol: tx.tokenSymbol,
+                                    decimals: tx.tokenDecimal
+                                });
+                            }
+                        });
+
+                        const balancePromises = Array.from(uniqueTokens.keys()).map(contractAddr =>
+                            callEtherscanApi({
+                                module: 'account',
+                                action: 'tokenbalance',
+                                contractaddress: contractAddr,
+                                address: address,
+                                tag: 'latest'
+                            }).then(balance => ({ contractAddress: contractAddr, balance }))
+                        );
+
+                        const balances = await Promise.all(balancePromises);
+                        let tokensHtml = '';
+                        balances.forEach(item => {
+                            if (item.balance !== '0') {
+                                const info = uniqueTokens.get(item.contractAddress);
+                                tokensHtml += `<tr><td>${info.name || 'Unknown'}</td><td>${info.symbol || 'N/A'}</td><td>${formatBalance(item.balance, info.decimals)}</td></tr>`;
+                            }
+                        });
+
+                        if (tokensHtml) {
+                            document.getElementById('token-balances-table-body').innerHTML = tokensHtml;
+                        } else {
+                            document.getElementById('tokens-empty').classList.remove('hidden');
+                        }
+                    } catch(err) {
+                        console.error("Error fetching token balances:", err);
+                        document.getElementById('tokens-empty').textContent = 'Could not load token balances.';
+                        document.getElementById('tokens-empty').classList.remove('hidden');
+                    } finally {
+                        document.getElementById('tokens-loader').classList.add('hidden');
+                        document.getElementById('tokens-content').classList.remove('hidden');
+                    }
+                })();
+
+                (async () => {
+                    const [normalTxs, internalTxs] = await Promise.all([
+                        callEtherscanApi({ module: 'account', action: 'txlist', address: address, sort: 'desc', page: 1, offset: 100 }).catch(() => []),
+                        callEtherscanApi({ module: 'account', action: 'txlistinternal', address: address, sort: 'desc', page: 1, offset: 100 }).catch(() => [])
+                    ]);
+                    
+                    if (!normalTxs || !Array.isArray(normalTxs) || !normalTxs.length) {
+                        document.getElementById('txhistory-empty').classList.remove('hidden');
+                    } else {
+                        let txHistoryHtml = normalTxs.map(tx => {
+                            let typeBadge;
+                            if (tx.to === "" || tx.to === null) {
+                               typeBadge = '<span class="badge tx-type-badge badge-contract">Creation</span>';
+                            } else if (tx.to.toLowerCase() === address) {
+                                 typeBadge = '<span class="badge tx-type-badge badge-in">IN</span>';
+                            } else {
+                                 typeBadge = '<span class="badge tx-type-badge badge-out">OUT</span>';
+                            }
+                            return `<tr>
+                                <td><a href="https://etherscan.io/tx/${tx.hash}" target="_blank" class="etherscan-link">${truncate(tx.hash)}</a></td>
+                                <td>${typeBadge}</td>
+                                <td><a href="https://etherscan.io/address/${tx.from}" target="_blank" class="etherscan-link">${truncate(tx.from)}</a></td>
+                                <td><a href="https://etherscan.io/address/${tx.to}" target="_blank" class="etherscan-link">${truncate(tx.to)}</a></td>
+                                <td>${formatEthValue(tx.value)} ETH</td>
+                                <td>${formatUnixTimestamp(tx.timeStamp)}</td>
+                            </tr>`;
+                        }).join('');
+                        document.getElementById('txhistory-table-body').innerHTML = txHistoryHtml;
+                    }
+                    document.getElementById('txhistory-loader').classList.add('hidden');
+                    document.getElementById('txhistory-content').classList.remove('hidden');
+
+                    if (!internalTxs || !Array.isArray(internalTxs) || !internalTxs.length) {
+                        document.getElementById('internal-empty').classList.remove('hidden');
+                    } else {
+                        let internalHtml = internalTxs.map(tx => `<tr>
+                            <td><a href="https://etherscan.io/tx/${tx.hash}" target="_blank" class="etherscan-link">${truncate(tx.hash)}</a></td>
+                            <td><a href="https://etherscan.io/address/${tx.from}" target="_blank" class="etherscan-link">${truncate(tx.from)}</a></td>
+                            <td><a href="https://etherscan.io/address/${tx.to}" target="_blank" class="etherscan-link">${truncate(tx.to)}</a></td>
+                            <td>${formatEthValue(tx.value)} ETH</td>
+                            <td>${formatUnixTimestamp(tx.timeStamp)}</td>
+                        </tr>`).join('');
+                        document.getElementById('internal-tx-table-body').innerHTML = internalHtml;
+                    }
+                    document.getElementById('internal-loader').classList.add('hidden');
+                    document.getElementById('internal-content').classList.remove('hidden');
+                })();
+
+            } catch (err) {
+                console.error(err);
+                showError(err.message);
+            } finally {
+                mainLoader.classList.add('hidden');
+                scanButton.disabled = false;
+            }
+        });
+    }
+
+    const checklistForm = document.getElementById('checklist-form');
+    if (checklistForm) {
+        checklistForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const answers = {
+                q1: document.getElementById('q1').checked,
+                q2: document.getElementById('q2').checked,
+                q3: document.getElementById('q3').checked,
+                q4: document.getElementById('q4').checked,
+                q5: document.getElementById('q5').checked,
+            };
+            
+            document.getElementById('result-safe').classList.add('hidden');
+            document.getElementById('result-warning').classList.add('hidden');
+            document.getElementById('result-danger').classList.add('hidden');
+
+            let score = 0;
+            if (answers.q1) score++;
+            if (answers.q2) score += 3; // Critical
+            if (answers.q3) score++;
+            if (answers.q4) score++;
+            if (answers.q5) score += 2; // Very high risk
+            
+            if (score >= 3) {
+                document.getElementById('result-danger').classList.remove('hidden');
+            } else if (score > 0) {
+                document.getElementById('result-warning').classList.remove('hidden');
+            } else {
+                document.getElementById('result-safe').classList.remove('hidden');
+            }
+        });
+    }
+});
+</script>
+
+
+
+
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+
+    // ===================================================
+    // 1. PRELOADER - Ukrywa animację ładowania
+    // ===================================================
+    const preloader = document.getElementById('page-preloader');
+    
+    // Używamy eventu 'load' zamiast 'DOMContentLoaded', aby mieć pewność, 
+    // że wszystkie zasoby (jak obrazki i style) są już w pełni załadowane.
+    window.addEventListener('load', () => {
+        // Sprawdzamy, czy element preloadera istnieje na stronie
+        if (preloader) {
+            // Dodajemy klasę, która go ukryje (np. przez display: none;)
+            preloader.classList.add('hidden');
+        }
+    });
+
+    // ===================================================
+    // 2. PRZEŁĄCZNIK MOTYWU (Jasny / Ciemny)
+    // ===================================================
+    // Znajdujemy wszystkie przyciski do zmiany motywu (dla wersji desktop i mobile)
+    const themeToggles = document.querySelectorAll('#theme-toggle, #theme-toggle-mobile');
+    const htmlElement = document.documentElement; // Odniesienie do tagu <html>
+
+    /**
+     * Centralna funkcja do aktualizacji motywu.
+     * @param {string} theme - Nazwa motywu ('light' lub 'dark').
+     */
+    const updateTheme = (theme) => {
+        // Dodaje lub usuwa klasę 'light-mode' na tagu <html> w zależności od motywu
+        htmlElement.classList.toggle('light-mode', theme === 'light');
+        
+        // Aktualizuje ikony na wszystkich przyciskach
+        themeToggles.forEach(button => {
+            const icon = button.querySelector('i');
+            if (icon) {
+                // Używamy .toggle(), aby dynamicznie przełączać klasy ikon
+                icon.classList.toggle('fa-sun', theme === 'dark');
+                icon.classList.toggle('fa-moon', theme === 'light');
+            }
+        });
+    };
+    
+    // Sprawdzamy, czy motyw jest zapisany w pamięci przeglądarki; jeśli nie, domyślnie ustawiamy 'dark'
+    const savedTheme = localStorage.getItem('theme') || 'dark';
+    // Stosujemy zapisany motyw od razu po załadowaniu strony
+    updateTheme(savedTheme);
+
+    // Dodajemy nasłuchiwanie kliknięcia do każdego przycisku zmiany motywu
+    themeToggles.forEach(button => {
+        button.addEventListener('click', () => {
+            // Sprawdzamy aktualny motyw i ustawiamy nowy (odwrotny)
+            const newTheme = htmlElement.classList.contains('light-mode') ? 'dark' : 'light';
+            // Zapisujemy nowy motyw w localStorage
+            localStorage.setItem('theme', newTheme);
+            // Aktualizujemy wygląd strony
+            updateTheme(newTheme);
+        });
+    });
+
+    // ===================================================
+    // 3. PRZYCISK "SCROLL TO TOP"
+    // ===================================================
+    const scrollTopBtn = document.getElementById('scrollTopBtn');
+
+    // Uruchamiamy kod tylko jeśli przycisk istnieje na stronie
+    if (scrollTopBtn) {
+        // Nasłuchujemy zdarzenia przewijania strony
+        window.addEventListener('scroll', () => {
+            // Pokazujemy przycisk, jeśli użytkownik przewinął stronę o więcej niż 300px
+            scrollTopBtn.classList.toggle('show', window.scrollY > 300);
+        });
+
+        // Nasłuchujemy kliknięcia na przycisk
+        scrollTopBtn.addEventListener('click', (e) => {
+            e.preventDefault(); // Zapobiegamy domyślnej akcji linku (np. dodaniu '#' do URL)
+            // Płynnie przewijamy stronę na samą górę
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+    }
+
+});
+</script>
+
+
+</body>
+</html>

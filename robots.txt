@@ -1,0 +1,44 @@
+# BEGIN Custom robots.txt for fox24coin.com
+
+# General rules: allow indexing and AI usage for OpenAI, block known unwanted bots
+# Cloudflare comment: This section configures AI and search access via Content-Signals
+
+User-agent: *
+# Content signals for all compliant bots: allow search indexing and AI usage including training
+Content-signal: search=yes,ai-input=yes,ai-train=yes
+Allow: /
+
+# GPTBot (OpenAI) permission – full access to indexing and AI training
+# Cloudflare comment: GPTBot is explicitly allowed and can use site content for AI purposes
+User-agent: GPTBot
+Content-signal: search=yes,ai-input=yes,ai-train=yes
+Allow: /
+
+# Blocking known unwanted / spammy bots
+# Cloudflare comment: These bots are disallowed to prevent scraping or resource abuse
+User-agent: Amazonbot
+Disallow: /
+
+User-agent: Applebot-Extended
+Disallow: /
+
+User-agent: Bytespider
+Disallow: /
+
+User-agent: CCBot
+Disallow: /
+
+User-agent: ClaudeBot
+Disallow: /
+
+User-agent: Google-Extended
+Disallow: /
+
+User-agent: meta-externalagent
+Disallow: /
+
+# Sitemap
+# Cloudflare comment: Points crawlers to the sitemap for proper indexing
+Sitemap: https://fox24coin.com/sitemap.xml
+
+# END Custom robots.txt

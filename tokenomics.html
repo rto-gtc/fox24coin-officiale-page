@@ -1,0 +1,1192 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fox24Coin Tokenomics</title>
+    <meta name="description" content="An overview of the Fox24Coin (FOX24) tokenomics, including total supply, locked tokens, and on-chain holder distribution.">
+    <meta name="keywords" content="Fox24Coin, FOX24, tokenomics, ERC-20, smart contract, Ethereum, Base network, token distribution">
+    <meta name="author" content="Michał Rzepczyński">
+    <link rel="canonical" href="https://fox24coin.com/tokenomics.html">
+    <link rel="icon" type="image/png" href="https://fox24coin.com/fox24.png">
+    <link rel="apple-touch-icon" href="https://fox24coin.com/fox24.png">
+
+    <meta property="og:title" content="Fox24Coin Tokenomics">
+    <meta property="og:description" content="An overview of the Fox24Coin (FOX24) token's on-chain metrics and distribution.">
+    <meta property="og:image" content="https://fox24coin.com/tlohome.png">
+    <meta property="og:url" content="https://fox24coin.com/tokenomics.html">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Fox24Coin Tokenomics">
+    <meta name="twitter:description" content="An overview of the Fox24Coin (FOX24) token's on-chain metrics and distribution.">
+    <meta name="twitter:image" content="https://fox24coin.com/tlohome.png">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/style2.css">
+
+<style>
+/* ==============================================
+    1. GLOBAL STYLES & THEME VARIABLES
+============================================== */
+
+/* ----------------------------------------------
+ * 1.1. THEME VARIABLES
+ * ------------------------------------------- */
+:root {
+    /* Main Colors */
+    --gold-color: #ffd700;
+    --blue-color: #0d6efd;
+
+    /* Default (Dark Mode) Accent Color */
+    --accent-color: var(--gold-color);
+    --accent-color-hover: #e6c200;
+
+    /* Backgrounds */
+    --primary-bg: #121212;
+    --secondary-bg: #1a1a1a;
+    --card-bg: #222;
+    --navbar-bg: rgba(18, 18, 18, 0.85);
+    --footer-bg: #0a0a0a;
+
+    /* Text */
+    --primary-text: #e0e0e0;
+    --secondary-text: #b3b3b3;
+    --heading-text: #ffffff;
+
+    /* Borders & Tables */
+    --border-color: #333;
+    --table-header-bg: #333;
+
+    /* Shadows & Filters */
+    --light-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+    --glow-color: rgba(255, 215, 0, 0.5);
+    --accordion-button-filter: invert(1);
+}
+
+html.light-mode {
+    /* Light Mode Accent Color (Blue) */
+    --accent-color: var(--blue-color);
+    --accent-color-hover: #0b5ed7;
+    --glow-color: rgba(13, 110, 253, 0.4);
+
+    /* Backgrounds */
+    --primary-bg: #f8f9fa;
+    --secondary-bg: #ffffff;
+    --card-bg: #ffffff;
+    --navbar-bg: rgba(255, 255, 255, 0.85);
+    --footer-bg: #e9ecef;
+
+    /* Text */
+    --primary-text: #343a40;
+    --secondary-text: #6c757d;
+    --heading-text: #212529;
+
+    /* Borders & Tables */
+    --border-color: #dee2e6;
+    --table-header-bg: #e9ecef;
+    
+    /* Filters */
+    --accordion-button-filter: none;
+}
+
+/* ----------------------------------------------
+ * 1.2. BASE & RESET STYLES
+ * ------------------------------------------- */
+html { scroll-behavior: smooth; }
+body {
+    background-color: var(--primary-bg);
+    color: var(--primary-text);
+    font-family: 'Poppins', sans-serif;
+    padding-top: 70px;
+    line-height: 1.7;
+    transition: background-color 0.3s, color 0.3s;
+    overflow-x: hidden;
+}
+h1, h2, h3, h4, h5, h6, .display-4, .section-title {
+    font-weight: 700;
+    color: var(--heading-text);
+}
+.lead {
+    font-size: 1.25rem;
+    font-weight: 300;
+    color: var(--secondary-text);
+}
+a {
+    color: var(--accent-color);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+a:hover {
+    color: var(--accent-color-hover);
+}
+.section {
+    padding: 100px 0;
+}
+.section-dark {
+    background-color: var(--secondary-bg);
+}
+.text-gold, .text-warning {
+    color: var(--accent-color) !important;
+}
+html.light-mode .text-white-50 {
+    color: var(--secondary-text) !important;
+}
+
+
+
+
+/* ----------------------------------------------
+ * TOKEN METRICS TABLE ONLY
+ * ------------------------------------------- */
+#token-metrics {
+    width: 100%; /* pełna szerokość */
+    border-radius: 12px;
+    transition: background-color 0.4s ease, color 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
+}
+
+#token-metrics .table {
+    width: 100%;
+    background-color: var(--primary-bg);
+    color: var(--primary-text);
+    border-color: var(--border-color);
+    border-radius: 12px;
+}
+
+#token-metrics .fw-bold,
+#token-metrics .address-col,
+#token-metrics .fas,
+#token-metrics .spinner-border,
+#token-metrics .text-decoration-none,
+#total-supply-val,
+#circulating-supply-val,
+#locked-tokens-val {
+    color: var(--accent-color);
+}
+
+/* Badge Overrides for Dark Mode */
+html:not(.light-mode) #token-metrics .bg-success { background-color: #28a745 !important; }
+html:not(.light-mode) #token-metrics .bg-danger { background-color: #dc3545 !important; }
+html:not(.light-mode) #token-metrics .bg-info { background-color: #17a2b8 !important; color: #fff !important; }
+html:not(.light-mode) #token-metrics .bg-secondary { background-color: #6c757d !important; }
+
+/* Badge Overrides for Light Mode */
+html.light-mode #token-metrics .badge.bg-success { background-color: #198754 !important; color: #fff !important; }
+html.light-mode #token-metrics .badge.bg-danger { background-color: #dc3545 !important; color: #fff !important; }
+html.light-mode #token-metrics .badge.bg-info {
+    background-color: #cfe2ff !important;
+    color: #052c65 !important;
+}
+html.light-mode #token-metrics .badge.bg-info.text-dark {
+    color: #052c65 !important;
+}
+html.light-mode #token-metrics .badge.bg-secondary {
+    background-color: #e2e3e5 !important;
+    color: var(--accent-color) !important;
+}
+
+
+
+
+
+/* ==============================================
+    2. COMPONENTS
+============================================== */
+
+/* --- Section Title --- */
+.section-title {
+    font-size: 2.8rem;
+    margin-bottom: 4rem;
+    position: relative;
+    display: inline-block;
+}
+.section-title::after {
+    content: '';
+    position: absolute;
+    bottom: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 70px;
+    height: 4px;
+    background: var(--accent-color);
+    border-radius: 2px;
+}
+
+/* --- Navigation --- */
+.navbar.fixed-top {
+    background-color: var(--navbar-bg);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--border-color);
+    transition: background-color 0.3s, border-color 0.3s;
+}
+
+.navbar-brand {
+    font-weight: 700;
+    color: var(--heading-text); /* Usunięto !important na rzecz specyficzności */
+}
+
+.nav-link {
+    color: var(--secondary-text);
+    transition: color 0.2s ease-in-out; /* Dodano płynne przejście */
+}
+
+.nav-link:hover, .nav-link:focus {
+    color: var(--heading-text);
+}
+
+/* NOWOŚĆ: Styl dla aktywnego linku (bieżąca strona) */
+.nav-link.active {
+    color: var(--accent-color) !important;
+    font-weight: 500;
+}
+
+/* NOWOŚĆ: Poprawki dla ikony menu mobilnego */
+.navbar-toggler {
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+.navbar-toggler-icon {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(255, 255, 255, 0.7)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+}
+
+/* Ikona menu mobilnego w trybie jasnym */
+html.light-mode .navbar-toggler-icon {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(33, 37, 41, 0.7)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+}
+html.light-mode .navbar-toggler {
+    border-color: rgba(0, 0, 0, 0.1);
+}
+
+
+/* --- Dropdown Menu --- */
+.dropdown-menu {
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    padding: 0.5rem 0; /* Lepsze odstępy */
+}
+
+.dropdown-item {
+    color: var(--secondary-text);
+    transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out; /* Dodano płynne przejście */
+    padding: 0.5rem 1.25rem; /* Lepsze odstępy wewnątrz */
+}
+
+/* Poprawka dla ciemnego motywu */
+.dropdown-item:hover, .dropdown-item:focus {
+    background-color: var(--accent-color);
+    color: #111 !important; /* Lepszy kontrast na złotym tle */
+}
+
+/* Poprawka dla jasnego motywu */
+html.light-mode .dropdown-item:hover, 
+html.light-mode .dropdown-item:focus {
+    background-color: var(--accent-color);
+    color: #fff !important; /* Lepszy kontrast na niebieskim tle */
+}
+/* --- Buttons --- */
+.btn {
+    font-weight: 600;
+    transition: all 0.3s ease;
+    border-radius: 0.375rem;
+}
+.btn-warning, .btn-gold {
+    background: linear-gradient(45deg, var(--accent-color), var(--accent-color-hover));
+    border: none;
+    color: #111;
+}
+html.light-mode .btn-warning, html.light-mode .btn-gold {
+    color: #fff;
+}
+.btn-warning:hover, .btn-gold:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px var(--glow-color);
+}
+.btn-outline-gold {
+    color: var(--accent-color);
+    border-color: var(--accent-color);
+    border-width: 2px;
+}
+.btn-outline-gold:hover {
+    background-color: var(--accent-color);
+    border-color: var(--accent-color);
+    color: #111;
+}
+html.light-mode .btn-outline-gold:hover {
+    color: #fff;
+}
+
+/* --- Cards & Containers --- */
+.page-hero {
+    background-color: var(--primary-bg);
+    padding: 100px 0;
+}
+.liquidity-card, .allocation-chart, .accordion-item {
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+    padding: 2.5rem;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+    height: 100%;
+}
+html.light-mode .liquidity-card, html.light-mode .allocation-chart, html.light-mode .accordion-item {
+    box-shadow: var(--light-shadow);
+}
+.liquidity-card:hover, .allocation-chart:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 0 25px var(--glow-color);
+}
+
+/* --- Accordion (FAQ) --- */
+.accordion-item:hover {
+    border-color: var(--accent-color);
+    box-shadow: 0 0 12px var(--glow-color);
+}
+.accordion-button {
+    background-color: transparent;
+    color: var(--heading-text);
+    font-weight: 600;
+    padding: 1.25rem;
+    transition: all 0.3s ease;
+}
+.accordion-button:not(.collapsed) {
+    background-color: transparent;
+    color: var(--accent-color);
+    box-shadow: inset 3px 0 0 0 var(--accent-color);
+}
+.accordion-button:focus {
+    box-shadow: 0 0 0 0.25rem var(--glow-color);
+    border-color: var(--accent-color);
+    outline: none;
+}
+.accordion-button::after {
+    filter: var(--accordion-button-filter);
+    transition: transform 0.3s ease;
+}
+.accordion-button:not(.collapsed)::after {
+    transform: rotate(-180deg);
+}
+.accordion-body {
+    background-color: var(--secondary-bg);
+    color: var(--secondary-text);
+    border-top: 1px solid var(--border-color);
+    padding: 1.25rem;
+}
+html.light-mode .accordion-body {
+    background-color: #f8f9fa;
+}
+
+/* --- Footer --- */
+footer {
+    background-color: var(--footer-bg);
+    color: var(--secondary-text);
+    padding: 4rem 0;
+    border-top: 1px solid var(--border-color);
+}
+.footer-heading {
+    color: var(--heading-text);
+    font-weight: 700;
+    text-transform: uppercase;
+}
+.btn-social {
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* --- Scroll to Top Button --- */
+#scrollTopBtn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 100;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: var(--accent-color);
+    color: #111;
+    border: none;
+    opacity: 0;
+    visibility: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: opacity 0.3s, visibility 0.3s, transform 0.3s, background-color 0.3s;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+#scrollTopBtn.show {
+    opacity: 1;
+    visibility: visible;
+}
+#scrollTopBtn:hover {
+    transform: translateY(-5px);
+    background-color: var(--accent-color-hover);
+}
+html.light-mode #scrollTopBtn {
+    color: #fff;
+}
+
+/* ==============================================
+    3. PAGE-SPECIFIC STYLES
+============================================== */
+
+
+
+/* ----------------------------------------------
+ * 3.2. LIQUIDITY POOL SECTION
+ * ------------------------------------------- */
+ .lp-pool-container {
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--card-bg);
+    color: var(--primary-text);
+    border: 2px solid var(--accent-color);
+    border-radius: 20px;
+    padding: 2.5rem;
+    max-width: 450px;
+    margin: 0 auto;
+    box-shadow: 0 0 30px -5px var(--glow-color);
+    transition: all 0.3s ease;
+}
+html.light-mode .lp-pool-container {
+    box-shadow: var(--light-shadow);
+}
+.lp-pool-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 1rem;
+    margin-bottom: 1.5rem;
+}
+.lp-pool-header h2, .lp-pool-header .fas {
+    color: var(--accent-color);
+    margin: 0;
+}
+.lp-pool-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.25rem;
+    font-size: 1.1rem;
+}
+.lp-pool-row:last-child {
+    margin-bottom: 0;
+}
+.lp-pool-row .label {
+    display: flex;
+    align-items: center;
+    color: var(--secondary-text);
+}
+.lp-pool-row .label .fas,
+.lp-pool-row .label .fab {
+    color: var(--accent-color);
+    margin-right: 15px;
+    width: 20px;
+    text-align: center;
+}
+.lp-pool-row .value {
+    font-weight: 600;
+    color: var(--heading-text);
+}
+.liquidity-card .list-unstyled li {
+    display: flex;
+    align-items: flex-start;
+    font-size: 1.1rem;
+}
+.liquidity-card .list-unstyled .fas, .liquidity-card .list-unstyled .fab {
+    color: var(--accent-color);
+    width: 25px;
+    padding-top: 5px;
+}
+
+
+/* ----------------------------------------------
+ * 3.3. TOKEN DISTRIBUTION & ALLOCATION LIST
+ * ------------------------------------------- */
+.allocation-list li {
+    position: relative;
+    padding-left: 25px;
+    margin-bottom: 0.5rem;
+}
+.allocation-list li::before {
+    content: ''; 
+    width: 15px; 
+    height: 15px; 
+    border-radius: 50%;
+    position: absolute; 
+    left: 0; 
+    top: 0.4em;
+}
+.allocation-list .presale::before   { background-color: #ffd700; }
+.allocation-list .liquidity::before { background-color: #4CAF50; }
+.allocation-list .team::before      { background-color: #f44336; }
+.allocation-list .marketing::before { background-color: #2196F3; }
+.allocation-list .ecosystem::before { background-color: #9c27b0; }
+.allocation-list .reserve::before   { background-color: #ff9800; }
+
+
+
+
+
+/* --- Stopka --- */
+footer {
+  background-color: var(--footer-bg);
+  padding: 5rem 2rem 2rem;
+  font-size: 0.95rem;
+  border-top: 1px solid var(--border-color);
+}
+.footer-heading {
+  font-weight: 700; color: var(--heading-text); position: relative;
+  padding-bottom: 10px; margin-bottom: 1.5rem; text-transform: uppercase;
+}
+.footer-heading::after {
+  content: ''; position: absolute; bottom: 0; left: 0;
+  width: 40px; height: 3px; background: var(--accent-color); border-radius: 2px;
+}
+footer .list-unstyled .link-secondary {
+  color: var(--secondary-text); text-decoration: none !important;
+  transition: all 0.3s ease; padding: 5px 0; display: inline-block;
+}
+footer .list-unstyled .link-secondary:hover { color: var(--accent-color); transform: translateX(5px); }
+footer .d-flex .fa { color: var(--accent-color); margin-right: 12px; font-size: 1.1rem; width: 20px; text-align: center; }
+footer .border-top.border-secondary { border-color: var(--border-color) !important; }
+footer .py-4 a { color: var(--accent-color); text-decoration: none !important; transition: color 0.3s ease; }
+footer .py-4 a:hover { color: #fff; }
+body.light-mode footer .py-4 a:hover { color: var(--heading-text); }
+
+/* --- Ikony Społecznościowe w Stopce --- */
+footer .btn-social {
+    width: 40px; height: 40px; border-radius: 50%;
+    display: inline-flex; align-items: center; justify-content: center;
+    border: 1px solid var(--border-color); color: var(--secondary-text);
+    background-color: transparent;
+    transition: all 0.3s ease;
+}
+footer .btn-social:hover {
+  transform: scale(1.1);
+  background-color: var(--accent-color);
+  border-color: var(--accent-color);
+}
+body:not(.light-mode) footer .btn-social:hover {
+  color: #111 !important;
+}
+body.light-mode footer .btn-social:hover {
+  color: #fff !important;
+}
+
+
+
+
+
+
+</style>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+    <div class="container">
+        <a class="navbar-brand" href="index.html">Fox24<span class="text-gold">Coin</span></a>
+
+        <div class="d-flex align-items-center d-lg-none">
+            <button id="theme-toggle-mobile" class="btn btn-sm btn-outline-gold me-2" aria-label="Toggle theme">
+                <i class="fas fa-sun"></i>
+            </button>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        </div>
+
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto align-items-lg-center">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="homeDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Home</a>
+                    <ul class="dropdown-menu" aria-labelledby="homeDropdown">
+                        <li><a class="dropdown-item" href="index.html">Home</a></li>
+                        <li><a class="dropdown-item" href="widget.html">Widget</a></li>
+                        <li><a class="dropdown-item" href="market.html">Crypto Market</a></li>
+                        <li><a class="dropdown-item" href="https://fox24coin.com/scam-protection.html">Scam protection</a></li>
+                        <li><a class="dropdown-item" href="vision.html">Fox24 Vision</a></li>
+                        <li><a class="dropdown-item" href="audit.html">Community audit <span class="badge bg-primary rounded-pill" style="font-size: 0.6em; vertical-align: middle; margin-left: 4px;">NEW</span></a></li>
+                    </ul>
+                </li>
+                <li class="nav-item"><a class="nav-link" href="tokenomics.html">Tokenomics</a></li>
+                <li class="nav-item"><a class="nav-link" href="roadmap.html">Roadmap</a></li>
+                <li class="nav-item"><a class="nav-link" href="team2.html">Team</a></li>
+                <li class="nav-item"><a class="nav-link" href="blog.php">Blog</a></li>
+                <li class="nav-item"><a class="nav-link" href="index.html#contact">Contact</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://fox24coin.com/uniswap.html">Price on Uniswap</a></li>
+                
+                <li class="nav-item ms-lg-3">
+                    <a class="nav-link" href="https://github.com/rto-gtc/0xED9114c614aD6b948a1EA21f062F6e1D0b4e8308" target="_blank" aria-label="GitHub Repository" style="padding-top: 0.5rem; padding-bottom: 0.5rem;">
+                        <i class="fab fa-github fa-lg"></i>
+                    </a>
+                </li>
+
+                <li class="nav-item d-none d-lg-flex align-items-center ms-lg-2">
+                    <button id="theme-toggle" class="btn btn-sm btn-outline-gold" aria-label="Toggle theme">
+                        <i class="fas fa-sun"></i>
+                    </button>
+                </li>
+                
+                <li class="nav-item ms-lg-3">
+                    <a class="btn btn-warning" href="whitepaper.pdf" target="_blank">Whitepaper</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<header class="page-hero">
+    <div class="container">
+        <div class="row align-items-center g-5 text-center text-lg-start">
+            <div class="col-lg-7">
+                <h1 class="display-4">Transparent On-Chain <span class="text-gold">Tokenomics</span></h1>
+                <p class="lead">
+                    Explore the foundational economic model of Fox24Coin. Our tokenomics are designed for clarity and long-term sustainability, with all key metrics like supply, locks, and distribution publicly verifiable on the blockchain.
+                </p>
+                <a href="#token-metrics" class="btn btn-warning btn-lg mt-3">
+                    <i class="fas fa-chart-line me-2"></i> Explore Token Metrics
+                </a>
+            </div>
+            <div class="col-lg-5 text-center">
+                <div class="d-flex align-items-center justify-content-center h-100">
+                    <img src="https://fox24coin.com/fox24coin.png" alt="Fox24Coin Token" class="img-fluid">
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<section style="background-color: transparent;" id="token-metrics">
+    <div style="background-color: transparent;" class="container text-center">
+        <h2 class="section-title">Token Key Metrics</h2>
+        <div style="background-color: transparent;" class="row g-4 justify-content-center">
+            <div class="col-lg-10">
+                <div class="table-responsive">
+                    <table class="table table-dark table-striped table-bordered text-start align-middle mb-0">
+                        <thead>
+                            <tr>
+                                <th scope="col"><i class="fas fa-chart-bar me-2"></i>Metric</th>
+                                <th scope="col"><i class="fas fa-tachometer-alt me-2"></i>Value</th>
+                                <th scope="col"><i class="fas fa-info-circle me-2"></i>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="fw-bold">Total Supply</td>
+                                <td id="total-supply-val"><span class="spinner-border spinner-border-sm"></span></td>
+                                <td><span class="badge bg-success">Fixed</span></td>
+                            </tr>
+                            <tr>
+                                <td class="fw-bold">Circulating Supply</td>
+                                <td id="circulating-supply-val"><span class="spinner-border spinner-border-sm"></span></td>
+                                <td><span class="badge bg-success">Live Data</span></td>
+                            </tr>
+                            <tr>
+                                <td class="fw-bold">Locked Tokens</td>
+                                <td id="locked-tokens-val"><span class="spinner-border spinner-border-sm"></span></td>
+                                <td><span class="badge bg-danger">Live Data</span></td>
+                            </tr>
+                            <tr>
+                                <td class="fw-bold">Token Holders</td>
+                                <td colspan="2">
+                                    <a href="https://etherscan.io/token/0xED9114c614aD6b948a1EA21f062F6e1D0b4e8308#balances" target="_blank" class="text-warning text-decoration-none">
+                                        View on Etherscan <i class="fas fa-external-link-alt ms-1"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="fw-bold">Minting Function</td>
+                                <td>N/A</td>
+                                <td><span class="badge bg-danger">Disabled</span></td>
+                            </tr>
+                            <tr>
+                                <td class="fw-bold">Smart Contract</td>
+                                <td class="address-col">0xED9114c614aD6b948a1EA21f062F6e1D0b4e8308</td>
+                                <td><span class="badge bg-info text-dark">Audited & Verified</span></td>
+                            </tr>
+                            <tr>
+                                <td class="fw-bold">Networks</td>
+                                <td>Ethereum</td>
+                                <td><span class="badge bg-secondary">Mainnet</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="liquidity-pool" class="section">
+    <div class="container text-center">
+        <h2 class="section-title">Liquidity Pool</h2>
+        <div class="row g-5 align-items-center justify-content-center">
+            <div class="col-lg-6 d-flex justify-content-center">
+                <div class="lp-pool-container">
+                    <div class="lp-pool-header">
+                        <h2>WETH-Fox24 LP Pool</h2>
+                        <i class="fas fa-coins fa-2x"></i>
+                    </div>
+
+                    <div class="lp-pool-row">
+                        <div class="label">
+                            <i class="fas fa-dollar-sign"></i>
+                            <span>Total Liquidity:</span>
+                        </div>
+                        <div class="value">$17.06</div>
+                    </div>
+
+                    <div class="lp-pool-row">
+                        <div class="label">
+                            <i class="fab fa-ethereum"></i>
+                            <span>WETH in Pool:</span>
+                        </div>
+                        <div class="value">0.003794</div>
+                    </div>
+                    
+                    <div class="lp-pool-row">
+                        <div class="label">
+                            <i class="fas fa-money-bill-wave"></i>
+                            <span>FOX24 in APR:</span>
+                        </div>
+                        <div class="value">0.39%</div>
+                    </div>
+                    
+                    <div class="lp-pool-row">
+                        <div class="label">
+                            <i class="fas fa-share-alt"></i>
+                            <span>Your share in pool:</span>
+                        </div>
+                        <div class="value">100.00%</div>
+                    </div>
+                </div>
+                </div>
+            <div class="col-lg-6 text-start">
+                <div class="liquidity-card">
+                    <h4 class="mb-4"><i class="fas fa-coins me-2"></i>WETH-Fox24 LP Pool</h4>
+                    <ul class="list-unstyled">
+                        <li class="mb-2">
+                            <strong><i class="fas fa-dollar-sign me-2"></i>Total Liquidity:</strong> $17.06
+                        </li>
+                        <li class="mb-2">
+                            <strong><i class="fab fa-ethereum me-2"></i>WETH in Pool:</strong> 0.003794
+                        </li>
+                        <li class="mb-2">
+                            <strong><i class="fas fa-money-bill me-2"></i>FOX24 in Pool:</strong> 0.3794
+                        </li>
+                        <li class="mb-2">
+                            <strong><i class="fas fa-percent me-2"></i>LP Reward APR:</strong> 0.00%
+                        </li>
+                        <li class="mb-2">
+                            <strong><i class="fas fa-share-alt me-2"></i>Your share in pool:</strong> 100.00%
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section id="token-distribution" class="section section-dark">
+    <div class="container text-center">
+        <h2 class="section-title">Token Distribution <span class="badge bg-secondary">Planned</span></h2>
+        <p class="lead text-white-50">This is a planned distribution to ensure a balanced ecosystem and prevent concentration in a few hands.</p>
+        <div class="row g-5 align-items-center">
+            <div class="col-lg-6">
+                <div class="allocation-chart">
+                    <img src="https://static.wixstatic.com/media/e0bdea_6cb06d8205b44b678417f92d0a6d2d3a~mv2.png" alt="Token distribution pie chart" class="img-fluid rounded-circle">
+                </div>
+            </div>
+            <div class="col-lg-6 text-start">
+                <h4 class="mb-4">Allocation Breakdown</h4>
+                <ul class="list-unstyled fw-bold allocation-list fs-5">
+                    <li class="presale mb-2"><i class="fas fa-fire me-2"></i>Presale: 10% <span class="text-white-50 small">(10,000 FOX24)</span></li>
+                    <li class="liquidity mb-2"><i class="fas fa-water me-2"></i>Liquidity & DEX: 25% <span class="text-white-50 small">(25,000 FOX24)</span></li>
+                    <li class="team mb-2"><i class="fas fa-user-tie me-2"></i>Team & Advisors: 15% <span class="text-white-50 small">(15,000 FOX24)</span></li>
+                    <li class="marketing mb-2"><i class="fas fa-bullhorn me-2"></i>Marketing & Community: 10% <span class="text-white-50 small">(10,000 FOX24)</span></li>
+                    <li class="ecosystem mb-2"><i class="fas fa-cogs me-2"></i>Ecosystem & Development: 5% <span class="text-white-50 small">(5,000 FOX24)</span></li>
+                    <li class="reserve mb-2"><i class="fas fa-piggy-bank me-2"></i>Treasury & Reserve: 5% <span class="text-white-50 small">(5,000 FOX24)</span></li>
+                </ul>
+                <p class="text-white-50 mt-4">
+                    The allocation is designed to support the project's long-term growth while ensuring fair market access and preventing large-scale token dumps.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="vesting-schedule" class="section">
+    <div class="container text-center">
+        <h2 class="section-title">Vesting & Lock-up Schedule <span class="badge bg-secondary">Planned</span></h2>
+        <div class="row g-5 align-items-center">
+            <div class="col-lg-6 text-start">
+                <h4 class="mb-3">A Responsible Release Model</h4>
+                <p class="text-white-50">
+                    To protect early investors and ensure price stability, a significant portion of the token supply is subject to a vesting schedule. This means that tokens are released gradually over time, preventing sudden influxes to the market.
+                </p>
+                <ul class="list-unstyled text-white-50">
+                    <li class="mb-2"><i class="fas fa-calendar-check me-2 text-gold"></i> **Team & Advisors:** 15% of tokens are planned to be locked and will be released linearly over 24 months, starting 6 months after the public sale.</li>
+                    <li class="mb-2"><i class="fas fa-lock me-2 text-gold"></i> **Ecosystem & Development:** 5% of tokens are planned to be locked and released over 36 months to fund future project development and partnerships.</li>
+                    <li class="mb-2"><i class="fas fa-bullhorn me-2 text-gold"></i> **Marketing:** 10% of tokens are planned to be reserved for marketing campaigns and community rewards, with a controlled release over 18 months.</li>
+                </ul>
+                <a href="#" class="btn btn-outline-gold mt-3 disabled">
+                    View Vesting Contract on Etherscan (Soon)
+                </a>
+            </div>
+            <div class="col-lg-6">
+                <div class="allocation-chart">
+                    <img src="https://static.wixstatic.com/media/e0bdea_04a2de98d70b411ba982dd7fd0bfab26~mv2.png" alt="Vesting schedule timeline" class="img-fluid rounded-3">
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section id="faq-tokenomics" class="section section-dark">
+    <div class="container text-center">
+        <h2 class="section-title">Understanding Our Tokenomics</h2>
+        <p class="lead mb-5">Here you'll find answers to key questions about our token's economy.</p>
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="accordion faq-accordion" id="faqTokenomicsAccordion">
+
+                    <div class="accordion-item mb-3">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-tokenomics-1">
+                                <i class="fas fa-chart-pie me-2"></i> What is the difference between Total and Circulating Supply?
+                            </button>
+                        </h2>
+                        <div id="faq-tokenomics-1" class="accordion-collapse collapse" data-bs-parent="#faqTokenomicsAccordion">
+                            <div class="accordion-body text-start">
+                                Imagine a birthday cake. 🎂<br><br>
+                                <ul>
+                                    <li><strong>Total Supply</strong> is the entire cake – the total number of tokens that has ever been created. This number can decrease if tokens are "burned," but it will never increase beyond its original amount.</li>
+                                    <li><strong>Circulating Supply</strong> represents the slices of cake that have already been served to guests and are being eaten (i.e., tokens that are publicly available and actively traded on the market).</li>
+                                    <li><strong>Max Supply</strong> is a guarantee that no more tokens than the amount defined in the smart contract will ever be created. For many projects, including Bitcoin, the Total Supply equals the Max Supply.</li>
+                                </ul>
+                                The difference between total and circulating supply usually comes from <strong>locked</strong> tokens—for example, those held for the team, staking rewards, or the project treasury. These are released into circulation gradually over time.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item mb-3">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-tokenomics-2">
+                                <i class="fas fa-gem me-2"></i> Why is a fixed (capped) supply important?
+                            </button>
+                        </h2>
+                        <div id="faq-tokenomics-2" class="accordion-collapse collapse" data-bs-parent="#faqTokenomicsAccordion">
+                            <div class="accordion-body text-start">
+                                A capped supply introduces a fundamental economic principle: <strong>scarcity</strong>. Unlike traditional fiat currencies (like the USD or EUR), which central banks can print indefinitely, causing inflation and reducing purchasing power, a token with a fixed supply is immune to this.
+                                <br><br>
+                                It functions similarly to precious metals like gold. We know there's a finite amount of gold on Earth, which makes it valuable. Likewise, when a token's supply is fixed and demand for it increases (as the project grows and gains more users), it can naturally lead to an increase in the value of each token. This is a mechanism that protects long-term value for holders.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item mb-3">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-tokenomics-3">
+                                <i class="fas fa-hourglass-half me-2"></i> What is token vesting and what is its purpose?
+                            </button>
+                        </h2>
+                        <div id="faq-tokenomics-3" class="accordion-collapse collapse" data-bs-parent="#faqTokenomicsAccordion">
+                            <div class="accordion-body text-start">
+                                <strong>Vesting</strong> is the process of gradually releasing locked tokens to the project team and early investors over a specific period. Its main purpose is to ensure their long-term commitment and protect the market from a sudden sell-off.
+                                <br><br>
+                                How does it work in practice?
+                                <ul>
+                                    <li><strong>Cliff:</strong> This is an initial period (e.g., 1 year) during which no tokens are released. If a team member leaves before the cliff, they receive nothing.</li>
+                                    <li><strong>Vesting Period:</strong> After the cliff, tokens begin to unlock in batches, for example, monthly over the next 3 years.</li>
+                                </ul>
+                                Vesting motivates the team to work on the project's development for years, not just for a quick profit. This builds community trust and helps stabilize the token's price.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item mb-3">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-tokenomics-4">
+                                <i class="fas fa-screwdriver-wrench me-2"></i> What is the utility of our token?
+                            </button>
+                        </h2>
+                        <div id="faq-tokenomics-4" class="accordion-collapse collapse" data-bs-parent="#faqTokenomicsAccordion">
+                            <div class="accordion-body text-start">
+                                "Utility" answers the question: "What can I actually do with this token?" A token without real use cases has purely speculative value. Our token has several key utilities:
+                                <br><br>
+                                <ul>
+                                    <li><strong>Governance:</strong> Token holders can vote on proposals that shape the project's future, such as protocol changes or treasury spending.</li>
+                                    <li><strong>Staking:</strong> You can lock up your tokens (stake them) to help secure the network and, in return, earn rewards in the form of more tokens.</li>
+                                    <li><strong>Transaction Fees:</strong> The token is used to pay for fees for various operations within our ecosystem.</li>
+                                    <li><strong>Access to Premium Features:</strong> Holding a certain number of tokens grants access to exclusive tools or services on our platform.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="accordion-item mb-3">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-tokenomics-5">
+                                <i class="fas fa-fire-flame-curved me-2"></i> What is a "token burn"?
+                            </button>
+                        </h2>
+                        <div id="faq-tokenomics-5" class="accordion-collapse collapse" data-bs-parent="#faqTokenomicsAccordion">
+                            <div class="accordion-body text-start">
+                                A <strong>token burn</strong> is a mechanism for permanently removing a portion of tokens from circulation. This is done by sending them to a "burn address"—a wallet with no known private keys. Once sent, these tokens can never be recovered. 🔥
+                                <br><br>
+                                Why do projects do this?
+                                <ul>
+                                    <li><strong>To Increase Scarcity:</strong> Reducing the circulating supply makes the remaining tokens rarer.</li>
+                                    <li><strong>As a Deflationary Mechanism:</strong> Regularly burning a portion of transaction fees counteracts inflation and can support long-term value growth.</li>
+                                    <li><strong>To Signal Commitment:</strong> It shows that the project is committed to creating value for its holders.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="accordion-item mb-3">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-tokenomics-6">
+                                <i class="fas fa-sitemap me-2"></i> How is the token allocation distributed?
+                            </button>
+                        </h2>
+                        <div id="faq-tokenomics-6" class="accordion-collapse collapse" data-bs-parent="#faqTokenomicsAccordion">
+                            <div class="accordion-body text-start">
+                                Token allocation defines how the initial supply was distributed among different stakeholders. A transparent allocation is crucial for building trust. Our distribution is as follows:
+                                <br><br>
+                                
+                                <ul>
+                                    <li><strong>Public Sale: 40%</strong> - Funds allocated to the community to ensure wide distribution.</li>
+                                    <li><strong>Team: 15%</strong> - Locked under a 4-year vesting schedule with a 1-year cliff.</li>
+                                    <li><strong>Ecosystem Fund: 25%</strong> - Funds for development, developer grants, and strategic partnerships.</li>
+                                    <li><strong>Liquidity: 10%</strong> - To provide liquidity on decentralized exchanges (DEXs).</li>
+                                    <li><strong>Marketing & Advisors: 10%</strong> - For project promotion and advisor compensation.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<footer class="text-bg-dark">
+  <div class="container py-5">
+    <div class="row g-5">
+      
+      <div class="col-lg-4 col-md-6">
+        <h4 class="footer-heading mb-4 text-uppercase text-warning">FOX24Coin</h4>
+        <p class="text-secondary mb-3">Bridging Trust and Technology</p>
+        <div class="d-flex pt-2 gap-2">
+          <a href="https://t.me/fox24coin" target="_blank" class="btn btn-social" aria-label="Telegram">
+            <i class="fab fa-telegram"></i>
+          </a>
+          <a href="https://x.com/fox24coin" target="_blank" class="btn btn-social" aria-label="Twitter">
+            <i class="fab fa-twitter"></i>
+          </a>
+          <a href="https://www.facebook.com/profile.php?id=61575920820740" target="_blank" class="btn btn-social" aria-label="Facebook">
+            <i class="fab fa-facebook-f"></i>
+          </a>
+          <a href="https://discord.com/channels/1415882766930677774/1415883138810511451" target="_blank" class="btn btn-social" aria-label="Discord">
+            <i class="fab fa-discord"></i>
+          </a>
+        </div>
+      </div>
+
+      <div class="col-lg-2 col-md-6">
+        <h4 class="footer-heading mb-4 text-uppercase text-warning">Links</h4>
+        <ul class="list-unstyled mb-0">
+          <li><a class="link-secondary d-block mb-2" href="roadmap.html">Roadmap</a></li>
+          <li><a class="link-secondary d-block mb-2" href="team2.html">Our Team</a></li>
+          <li><a class="link-secondary d-block mb-2" href="index.html#contact">Contact Us</a></li>
+          <li><a class="link-secondary d-block mb-2" href="widget.html">Widget</a></li>
+          <li><a class="link-secondary d-block mb-2" href="market.html">Crypto Market</a></li>
+          <li><a class="link-secondary d-block" href="scam-protection.html">Scam Protection</a></li>
+          <li><a class="link-secondary d-block" href="index.html">Home</a></li>
+          <li><a class="link-secondary d-block" href="vision.html">Fox24 Vision</a></li>
+
+        </ul>
+      </div>
+
+      <div class="col-lg-3 col-md-6">
+        <h4 class="footer-heading mb-4 text-uppercase text-warning">Resources</h4>
+        <ul class="list-unstyled mb-0">
+          <li><a class="link-secondary d-block mb-2" href="tokenomics.html">Tokenomics</a></li>
+          <li><a class="link-secondary d-block mb-2" href="whitepaper.pdf" target="_blank">Whitepaper</a></li>
+          <li><a class="link-secondary d-block mb-2" href="index.html#hero">Join Presale</a></li>
+          <li><a class="link-secondary d-block mb-2" href="https://fox24coin-1.dexkit.app/">DEX Exchange</a></li>
+          <li><a class="link-secondary d-block mb-2" href="https://www.coingecko.com">Coingecko</a></li>
+          <li><a class="link-secondary d-block mb-2" href="https://coinmarketcap.com">Coinmarketcap</a></li>
+          <li><a class="link-secondary d-block" href="https://etherscan.io">Etherscan</a></li>
+        </ul>
+      </div>
+
+      <div class="col-lg-3 col-md-6">
+        <h4 class="footer-heading mb-4 text-uppercase text-warning">Contact Info</h4>
+        <ul class="list-unstyled text-secondary mb-0">
+          <li class="d-flex mb-3">
+            <i class="fa fa-map-marker-alt me-3 pt-1 text-warning"></i>
+            Henryka Sienkiewicza 85/87/lok. 1,<br>90-057 Łódź
+          </li>
+          <li class="d-flex mb-3">
+            <i class="fa fa-phone-alt me-3 pt-1 text-warning"></i>+48 698 000 441
+          </li>
+          <li class="d-flex">
+            <i class="fa fa-envelope me-3 pt-1 text-warning"></i>support@fox24coin.com
+          </li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="container border-top border-secondary py-4">
+    <div class="row align-items-center">
+      <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+        &copy; <a class="fw-bold text-warning text-decoration-none" href="#">Fox24Coin</a>, All Rights Reserved.
+      </div>
+      <div class="col-md-6 text-center text-md-end">
+        <a href="Privacy-Policy-and-Cookies-Policy.html" class="link-secondary text-decoration-none">Privacy & Cookies Policy</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<button id="scrollTopBtn">
+    <i class="fa fa-arrow-up"></i>
+</button>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous" defer></script>
+<script type="text/javascript" src="https://cdn.weglot.com/weglot.min.js" defer></script>
+<script id="cookieyes" type="text/javascript" src="https://cdn-cookieyes.com/client_data/aedd32d83985c8837fb144ce/script.js" defer></script>
+
+
+<script>
+document.addEventListener('DOMContentLoaded', async () => {
+
+    // ===================================================
+    // THEME TOGGLE (POPRAWIONY DLA DESKTOP I MOBILE)
+    // ===================================================
+    const themeToggles = document.querySelectorAll('#theme-toggle, #theme-toggle-mobile');
+    const htmlEl = document.documentElement;
+
+    const updateThemeIcons = (theme) => {
+        themeToggles.forEach(btn => {
+            const icon = btn.querySelector('i');
+            if (icon) {
+                icon.classList.toggle('fa-sun', theme === 'dark');
+                icon.classList.toggle('fa-moon', theme === 'light');
+            }
+        });
+    };
+    
+    const savedTheme = localStorage.getItem('theme') || 'dark';
+    htmlEl.classList.toggle('light-mode', savedTheme === 'light');
+    updateThemeIcons(savedTheme);
+
+    themeToggles.forEach(btn => {
+        btn.addEventListener('click', () => {
+            const isCurrentlyLight = htmlEl.classList.contains('light-mode');
+            const newTheme = isCurrentlyLight ? 'dark' : 'light';
+            
+            htmlEl.classList.toggle('light-mode');
+            localStorage.setItem('theme', newTheme);
+            updateThemeIcons(newTheme);
+        });
+    });
+
+    // =========================
+    // SCROLL TO TOP BUTTON
+    // =========================
+    const scrollTopBtn = document.getElementById('scrollTopBtn');
+    if (scrollTopBtn) {
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) {
+                scrollTopBtn.classList.add('show');
+            } else {
+                scrollTopBtn.classList.remove('show');
+            }
+        });
+
+        scrollTopBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    }
+
+    // =========================
+    // Weglot (opcjonalnie)
+    // =========================
+    if (typeof Weglot !== 'undefined') {
+        Weglot.initialize({ api_key: 'wg_132345f3d55989005b2dce0f8d1b79593' });
+    }
+
+    // =========================
+    // ETHERSCAN API - TOKENOMICS
+    // =========================
+    const updateTokenMetrics = async () => {
+        const API_KEY = '5ZIWFGTWN6MDNI3BS92461VN56GE5TVT6S';
+        const API_BASE_URL = 'https://api.etherscan.io/api'; // Usunięto /v2 z URL
+        const TOKEN_CONTRACT_ADDRESS = '0xED9114c614aD6b948a1EA21f062F6e1D0b4e8308';
+        const TOKEN_DECIMALS = 18;
+        const LOCKED_ADDRESSES = [/* WSTAW ADRESY TUTAJ */];
+
+        const totalSupplyEl = document.getElementById('total-supply-val');
+        const circulatingSupplyEl = document.getElementById('circulating-supply-val');
+        const lockedTokensEl = document.getElementById('locked-tokens-val');
+        
+        // Sprawdź, czy elementy istnieją na stronie, zanim zaczniesz działać
+        if (!totalSupplyEl || !circulatingSupplyEl || !lockedTokensEl) {
+            console.log('Tokenomics elements not found on this page.');
+            return;
+        }
+
+        const formatNumber = (num) => parseFloat(num).toLocaleString('en-US', { maximumFractionDigits: 2 });
+
+        try {
+            const totalSupplyResponse = await fetch(`${API_BASE_URL}?module=stats&action=tokensupply&contractaddress=${TOKEN_CONTRACT_ADDRESS}&apikey=${API_KEY}`);
+            const totalSupplyData = await totalSupplyResponse.json();
+            if (totalSupplyData.status !== '1') throw new Error('Could not fetch Total Supply');
+            
+            const totalSupply = parseFloat(totalSupplyData.result) / (10 ** TOKEN_DECIMALS);
+            totalSupplyEl.textContent = `${formatNumber(totalSupply)} FOX24`;
+
+            let totalLocked = 0;
+            if (LOCKED_ADDRESSES.length > 0) {
+                 for (const address of LOCKED_ADDRESSES) {
+                    const balanceResponse = await fetch(`${API_BASE_URL}?module=account&action=tokenbalance&contractaddress=${TOKEN_CONTRACT_ADDRESS}&address=${address}&tag=latest&apikey=${API_KEY}`);
+                    const balanceData = await balanceResponse.json();
+                    if (balanceData.status === '1') {
+                        totalLocked += parseFloat(balanceData.result) / (10 ** TOKEN_DECIMALS);
+                    }
+                }
+            }
+            lockedTokensEl.textContent = `${formatNumber(totalLocked)} FOX24`;
+
+            const circulatingSupply = totalSupply - totalLocked;
+            circulatingSupplyEl.textContent = `${formatNumber(circulatingSupply)} FOX24`;
+
+        } catch (error) {
+            console.error('Error fetching token metrics:', error);
+            const errorMsg = 'API Error';
+            totalSupplyEl.textContent = errorMsg;
+            circulatingSupplyEl.textContent = errorMsg;
+            lockedTokensEl.textContent = errorMsg;
+        }
+    };
+
+    // Uruchom funkcję pobierającą dane
+    updateTokenMetrics();
+});
+</script>
+
+</body>
+</html>
